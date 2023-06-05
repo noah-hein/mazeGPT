@@ -1,5 +1,4 @@
 import abc
-import numpy as np
 from numpy.random import shuffle
 
 
@@ -19,7 +18,7 @@ class MazeGenAlgo:
 
     """ 
     All of the methods below this are helper methods,
-    common to many maze-generating algorithms.
+    common to many mazelib-generating algorithms.
     """
 
     def _find_neighbors(self, r, c, grid, is_wall=False):
@@ -28,7 +27,7 @@ class MazeGenAlgo:
         Args:
             r (int): row of cell of interest
             c (int): column of cell of interest
-            grid (np.array): 2D maze grid
+            grid (np.array): 2D mazelib grid
             is_wall (bool): Are we looking for neighbors that are walls, or open cells?
         Returns:
             list: all neighboring cells that match our request

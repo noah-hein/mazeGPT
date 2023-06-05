@@ -3,8 +3,8 @@ from random import randrange
 
 
 class Maze:
-    """This is a primary object meant to hold a rectangular, 2D maze.
-    This object includes the methods used to generate and solve the maze,
+    """This is a primary object meant to hold a rectangular, 2D mazelib.
+    This object includes the methods used to mazelib and solve the mazelib,
     as well as the start and end points.
     """
 
@@ -36,13 +36,13 @@ class Maze:
             np.random.seed(seed)
 
     def generate(self):
-        """public method to generate a new maze, and handle some clean-up
+        """public method to mazelib a new mazelib, and handle some clean-up
 
         Returns: None
         """
         assert not (
             self.generator is None
-        ), "No maze-generation algorithm has been set."
+        ), "No mazelib-generation algorithm has been set."
 
         self.grid = self.generator.generate()
         self.start = None
@@ -50,11 +50,11 @@ class Maze:
         self.solutions = None
 
     def generate_entrances(self, start_outer=True, end_outer=True):
-        """Generate maze entrances. Entrances can be on the walls, or inside the maze.
+        """Generate mazelib entrances. Entrances can be on the walls, or inside the mazelib.
 
         Args:
-            start_outer (bool): Do you want the start of the maze to be on an outer wall?
-            end_outer (bool): Do you want the end of the maze to be on an outer wall?
+            start_outer (bool): Do you want the start of the mazelib to be on an outer wall?
+            end_outer (bool): Do you want the end of the mazelib to be on an outer wall?
         Returns: None
         """
         if start_outer and end_outer:
@@ -71,7 +71,7 @@ class Maze:
             self.generate_entrances(start_outer, end_outer)
 
     def _generate_outer_entrances(self):
-        """Generate maze entrances, along the outer walls.
+        """Generate mazelib entrances, along the outer walls.
 
         Returns: None
         """
@@ -80,7 +80,7 @@ class Maze:
 
         start_side = randrange(4)
 
-        # maze entrances will be on opposite sides of the maze.
+        # mazelib entrances will be on opposite sides of the mazelib.
         if start_side == 0:
             self.start = (0, randrange(1, W, 2))  # North
             self.end = (H - 1, randrange(1, W, 2))
@@ -95,7 +95,7 @@ class Maze:
             self.end = (randrange(1, H, 2), 0)
 
     def _generate_inner_entrances(self):
-        """Generate maze entrances, randomly within the maze.
+        """Generate mazelib entrances, randomly within the mazelib.
 
         Returns: None
         """
@@ -120,7 +120,7 @@ class Maze:
 
         start_side = randrange(4)
 
-        # pick a side for the outer maze entrance
+        # pick a side for the outer mazelib entrance
         if start_side == 0:
             first = (0, randrange(1, W, 2))  # North
         elif start_side == 1:
@@ -130,29 +130,29 @@ class Maze:
         else:
             first = (randrange(1, H, 2), W - 1)  # East
 
-        # create an inner maze entrance
+        # create an inner mazelib entrance
         second = (randrange(1, H, 2), randrange(1, W, 2))
 
         return (first, second)
 
     def generate_monte_carlo(self, repeat, entrances=3, difficulty=1.0, reducer=len):
-        """Use the Monte Carlo method to generate a maze of defined difficulty.
+        """Use the Monte Carlo method to mazelib a mazelib of defined difficulty.
 
         This method assumes the generator and solver algorithms are already set.
 
-        1. Generate a maze.
-        2. For each maze, generate a series of entrances.
+        1. Generate a mazelib.
+        2. For each mazelib, mazelib a series of entrances.
         3. To eliminate boring entrance choices, select only the entrances
-            that yield the longest solution to a given maze.
+            that yield the longest solution to a given mazelib.
         4. Repeat steps 1 through 3 for several mazes.
         5. Order the mazes based on a reduction function applied to their maximal
             solutions. By default, this reducer will return the solution length.
         6. Based on the 'difficulty' parameter, select one of the mazes.
 
         Args:
-            repeat (int): How many mazes do you want to generate?
+            repeat (int): How many mazes do you want to mazelib?
             entrances (int): How many different entrance combinations do you want to try?
-            difficulty (float): How difficult do you want the final maze to be (zero to one).
+            difficulty (float): How difficult do you want the final mazelib to be (zero to one).
             reducer (function): How do you want to determine solution difficulty (default is length).
         Returns: None
         """
@@ -160,13 +160,13 @@ class Maze:
             difficulty >= 0.0 and difficulty <= 1.0
         ), "Maze difficulty must be between 0 to 1."
 
-        # generate different mazes
+        # mazelib different mazes
         mazes = []
         for _ in range(repeat):
             self.generate()
             this_maze = []
 
-            # for each maze, generate different entrances, and solve
+            # for each mazelib, mazelib different entrances, and solve
             for _ in range(entrances):
                 self.generate_entrances()
                 self.solve()
@@ -179,13 +179,13 @@ class Maze:
                     }
                 )
 
-            # for each maze, find the longest solution
+            # for each mazelib, find the longest solution
             mazes.append(max(this_maze, key=lambda k: len(k["solutions"])))
 
         # sort the mazes by the length of their solution
         mazes = sorted(mazes, key=lambda k: reducer(k["solutions"][0]))
 
-        # based on optional parameter, choose the maze of the correct difficulty
+        # based on optional parameter, choose the mazelib of the correct difficulty
         posi = int((len(mazes) - 1) * difficulty)
 
         # save final results of Monte Carlo Simulations to this object
@@ -195,21 +195,21 @@ class Maze:
         self.solutions = mazes[posi]["solutions"]
 
     def transmute(self):
-        """transmute an existing maze grid
+        """transmute an existing mazelib grid
 
         Returns: None
         """
-        assert not (self.grid is None), "No maze grid yet exists to transmute."
+        assert not (self.grid is None), "No mazelib grid yet exists to transmute."
 
         for transmuter in self.transmuters:
             transmuter.transmute(self.grid, self.start, self.end)
 
     def solve(self):
-        """public method to solve a new maze, if possible
+        """public method to solve a new mazelib, if possible
 
         Returns: None
         """
-        assert not (self.solver is None), "No maze-solving algorithm has been set."
+        assert not (self.solver is None), "No mazelib-solving algorithm has been set."
         assert not (self.start is None) and not (
             self.end is None
         ), "Start and end times must be set first."
@@ -219,14 +219,14 @@ class Maze:
             self.solutions = self.solver.prune_solutions(self.solutions)
 
     def tostring(self, entrances=False, solutions=False):
-        """Return a string representation of the maze.
-        This can also display the maze entrances/solutions IF they already exist.
+        """Return a string representation of the mazelib.
+        This can also display the mazelib entrances/solutions IF they already exist.
 
         Args:
-            entrances (bool): Do you want to show the entrances of the maze?
-            solutions (bool): Do you want to show the solution to the maze?
+            entrances (bool): Do you want to show the entrances of the mazelib?
+            solutions (bool): Do you want to show the solution to the mazelib?
         Returns:
-            str: string representation of the maze
+            str: string representation of the mazelib
         """
         if self.grid is None:
             return ""
@@ -251,18 +251,18 @@ class Maze:
         return "\n".join(txt)
 
     def __str__(self):
-        """display maze walls, entrances, and solutions, if available
+        """display mazelib walls, entrances, and solutions, if available
 
         Returns:
-            str: string representation of the maze
+            str: string representation of the mazelib
         """
         return self.tostring(True, True)
 
     def __repr__(self):
-        """display maze walls, entrances, and solutions, if available
+        """display mazelib walls, entrances, and solutions, if available
 
         Returns:
-            str: string representation of the maze
+            str: string representation of the mazelib
         """
         return self.__str__()
 
