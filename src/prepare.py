@@ -21,7 +21,10 @@ def create_maze():
     maze = mzl.Maze()
     maze.generator = selected_algorithm(10, 10)
     maze.generate()
+
+    #
     maze.display_maze()
+    print(maze.grid)
 
 
 if __name__ == '__main__':
