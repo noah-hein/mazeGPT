@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import re
 from random import randrange
 
 
@@ -224,7 +225,7 @@ class Maze:
         plt.xticks([]), plt.yticks([])
         plt.show()
 
-    def tostring(self, entrances=False, solutions=False):
+    def to_visualized_string(self, entrances=False, solutions=False):
         """Return a string representation of the mazelib.
         This can also display the mazelib entrances/solutions IF they already exist.
 
@@ -255,6 +256,20 @@ class Maze:
                 txt[r] = txt[r][:c] + "+" + txt[r][c + 1 :]
 
         return "\n".join(txt)
+
+    def string_to_maze(self, string: str):
+        """
+        Takes a string representation of a given maze and
+        converts and applies its contents to this.
+        """
+        string = string.replace("<start>", "").replace("<end>", "")
+        lines = string.splitlines()
+        grid = []
+        for line in lines:
+            if line:
+                grid.append(list(map(int, line)))
+        self.grid = grid
+
 
     def __str__(self):
         string_rep = "<start>\n"

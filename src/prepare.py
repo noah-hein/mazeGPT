@@ -49,9 +49,8 @@ def create_maze():
     maze.generate()
 
     #
+    maze.string_to_maze(decode(encode(maze.__str__())))
     maze.display_maze()
-    print(maze.__str__())
-    print(decode(encode(maze.__str__())))
 
 
 if __name__ == '__main__':
