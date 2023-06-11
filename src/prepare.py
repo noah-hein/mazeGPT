@@ -1,29 +1,47 @@
+import re
 import random
 import mazelib as mzl
 import array
 import numpy as np
 
+TOKENS = [
+    "0",
+    "1",
+    "\n",
+    "<start>",
+    "<end>"
+]
+
 algorithms = mzl.algorithms
-allowed_algorithms = [
+ALLOWED_ALGORITHMS = [
     algorithms.Prims,
     algorithms.AldousBroder,
     algorithms.BacktrackingGenerator,
     algorithms.BinaryTree,
 ]
 
-tokens = [
-    "<start>",
-    "<end>",
-    "1",
-    "0",
-    "\n"
-]
 
+def encode(s: str):
+    """
+    Creates a mapping of tokens to their int representations.
+    Int representation is provided from the position in the TOKENS list.
+    """
+    for i, token in enumerate(TOKENS):
+        s = s.replace(token, i.__str__())
+    return list(map(int, list(s)))
+
+
+def decode(tokens: list[TOKENS]):
+    """
+    Decodes the given list of int tokens into actual string representation.
+    """
+    decoded_tokens = [TOKENS[token] for token in tokens]
+    return ''.join(decoded_tokens)
 
 def create_maze():
     # Select a random algorithm
-    algorithm_index = random.randint(0, len(allowed_algorithms) - 1)
-    selected_algorithm = allowed_algorithms[algorithm_index]
+    algorithm_index = random.randint(0, len(ALLOWED_ALGORITHMS) - 1)
+    selected_algorithm = ALLOWED_ALGORITHMS[algorithm_index]
 
     # Create the Maze
     maze = mzl.Maze()
@@ -33,6 +51,7 @@ def create_maze():
     #
     maze.display_maze()
     print(maze.__str__())
+    print(decode(encode(maze.__str__())))
 
 
 if __name__ == '__main__':
