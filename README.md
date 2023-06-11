@@ -8,9 +8,15 @@ The idea is to generate thousands of mazes with a variety of algorithms and make
 By doing this the model will be able to make original maze incorporating a variety of algorithms.
 This would hopefully take the best of all algorithms and mimic a more human like design pattern.
 
+## The Problem
+
+
 ## Representing a Maze
 The easiest approach to representing a maze is with graph theory!
 For storage purposes we will represent the structure as a two-dimensional matrix.
+Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
+
+### Encoding
 Luckily the structure of a maze can be represented with a handful of digits.
 The encoding will be baked into the maze datatype.
 
@@ -18,19 +24,13 @@ Encoding:
 - 0 = path
 - 1 = wall
 - \n = newline
-- \<start> = newline
-- \<end> = start
+- \<start> = start of maze
+- \<end> = end of maze
 
-Below is the acutal array storing the tokens and their position
-```python
-TOKENS = [
-    "0",
-    "1",
-    "\n",
-    "<start>",
-    "<end>"
-]
-```
+Since this is a very simple recurrent neural network, 
+it operates via a linear fashion (Instead of in a higher dimension).
+In the future it would be cool to somehow devise a way to spit out a vector representing the new nodes' location
+or add another token to represent empty space, this way mazes of different shapes could be created.
 
 ## TODO (Priority)
 - [x] Obtain maze generation algorithms
