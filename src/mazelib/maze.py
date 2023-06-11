@@ -218,45 +218,52 @@ class Maze:
         if self.prune:
             self.solutions = self.solver.prune_solutions(self.solutions)
 
-    def tostring(self, entrances=False, solutions=False):
-        """Return a string representation of the mazelib.
-        This can also display the mazelib entrances/solutions IF they already exist.
+    def display_maze(self):
+        plt.figure(figsize=(10, 5))
+        plt.imshow(self.grid, cmap=plt.cm.binary, interpolation='nearest')
+        plt.xticks([]), plt.yticks([])
+        plt.show()
 
-        Args:
-            entrances (bool): Do you want to show the entrances of the mazelib?
-            solutions (bool): Do you want to show the solution to the mazelib?
-        Returns:
-            str: string representation of the mazelib
-        """
-        if self.grid is None:
-            return ""
-
-        # build the walls of the grid
-        txt = []
-        for row in self.grid:
-            txt.append("".join(["#" if cell else " " for cell in row]))
-
-        # insert the start and end points
-        if entrances and self.start and self.end:
-            r, c = self.start
-            txt[r] = txt[r][:c] + "S" + txt[r][c + 1 :]
-            r, c = self.end
-            txt[r] = txt[r][:c] + "E" + txt[r][c + 1 :]
-
-        # if extant, insert the solution path
-        if solutions and self.solutions:
-            for r, c in self.solutions[0]:
-                txt[r] = txt[r][:c] + "+" + txt[r][c + 1 :]
-
-        return "\n".join(txt)
+    # def tostring(self, entrances=False, solutions=False):
+    #     """Return a string representation of the mazelib.
+    #     This can also display the mazelib entrances/solutions IF they already exist.
+    #
+    #     Args:
+    #         entrances (bool): Do you want to show the entrances of the mazelib?
+    #         solutions (bool): Do you want to show the solution to the mazelib?
+    #     Returns:
+    #         str: string representation of the mazelib
+    #     """
+    #     if self.grid is None:
+    #         return ""
+    #
+    #     # build the walls of the grid
+    #     txt = []
+    #     for row in self.grid:
+    #         txt.append("".join(["#" if cell else " " for cell in row]))
+    #
+    #     # insert the start and end points
+    #     if entrances and self.start and self.end:
+    #         r, c = self.start
+    #         txt[r] = txt[r][:c] + "S" + txt[r][c + 1 :]
+    #         r, c = self.end
+    #         txt[r] = txt[r][:c] + "E" + txt[r][c + 1 :]
+    #
+    #     # if extant, insert the solution path
+    #     if solutions and self.solutions:
+    #         for r, c in self.solutions[0]:
+    #             txt[r] = txt[r][:c] + "+" + txt[r][c + 1 :]
+    #
+    #     return "\n".join(txt)
 
     def __str__(self):
-        """display mazelib walls, entrances, and solutions, if available
-
-        Returns:
-            str: string representation of the mazelib
-        """
-        return self.tostring(True, True)
+        string = "<start>\n"
+        for row in self.grid:
+            row_string = "".join(map(str, row))
+            row_string += "\n"
+            string += row_string
+        string += "<stop>"
+        return string
 
     def __repr__(self):
         """display mazelib walls, entrances, and solutions, if available
@@ -265,9 +272,3 @@ class Maze:
             str: string representation of the mazelib
         """
         return self.__str__()
-
-    def display_maze(self):
-        plt.figure(figsize=(10, 5))
-        plt.imshow(self.grid, cmap=plt.cm.binary, interpolation='nearest')
-        plt.xticks([]), plt.yticks([])
-        plt.show()

@@ -1,38 +1,45 @@
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
+import math
+
+import torch
+import torch.nn as nn
+
+def new_gelu(x):
+    """
+    Implementation of the GELU activation function currently in Google BERT repo (identical to OpenAI GPT).
+    Reference: Gaussian Error Linear Units (GELU) paper: https://arxiv.org/abs/1606.08415
+    """
+    return 0.5 * x * (1.0 + torch.tanh(math.sqrt(2.0 / math.pi) * (x + 0.044715 * torch.pow(x, 3.0))))
 
 
-def create_transformer_model(input_vocab_size, target_vocab_size, num_layers, d_model, num_heads, dff, dropout_rate):
-    # Input layers
-    input = layers.Input(shape=(None,))
-    target = layers.Input(shape=(None,))
 
-    # Embedding layers
-    input_embedding = layers.Embedding(input_vocab_size, d_model)(input)
-    target_embedding = layers.Embedding(target_vocab_size, d_model)(target)
 
-    # Encoder layers
-    encoder_output = input_embedding
-    for _ in range(num_layers):
-        encoder_output = layers.MultiHeadAttention(num_heads, d_model)([encoder_output, encoder_output])
-        encoder_output = layers.Dropout(dropout_rate)(encoder_output)
-        encoder_output = layers.LayerNormalization(epsilon=1e-6)(encoder_output + input_embedding)
 
-    # Decoder layers
-    decoder_output = target_embedding
-    for _ in range(num_layers):
-        decoder_output = layers.MultiHeadAttention(num_heads, d_model)([decoder_output, decoder_output])
-        decoder_output = layers.Dropout(dropout_rate)(decoder_output)
-        decoder_output = layers.LayerNormalization(epsilon=1e-6)(decoder_output + target_embedding)
 
-        decoder_output = layers.MultiHeadAttention(num_heads, d_model)([decoder_output, encoder_output])
-        decoder_output = layers.Dropout(dropout_rate)(decoder_output)
-        decoder_output = layers.LayerNormalization(epsilon=1e-6)(decoder_output + encoder_output)
 
-    # Output layer
-    output = layers.Dense(target_vocab_size, activation='softmax')(decoder_output)
 
-    # Model
-    model = keras.Model(inputs=[input, target], outputs=output)
-    return model
+
+# class Transformer(tf.keras.Model):
+#     def __init__(self, input_vocab_size, output_vocab_size, hidden_size, num_layers, num_heads, max_sequence_length):
+#         super(Transformer, self).__init__()
+#         self.hidden_size = hidden_size
+#         self.embedding = Embedding(input_vocab_size, hidden_size)
+#         self.positional_encoding = self.create_positional_encoding(hidden_size, max_sequence_length)
+#         self.encoder_layer = tf.keras.layers.TransformerEncoderLayer(hidden_size, num_heads)
+#         self.encoder = tf.keras.layers.TransformerEncoder(self.encoder_layer, num_layers)
+#         self.decoder = Dense(output_vocab_size)
+#
+#     def create_positional_encoding(self, hidden_size, max_sequence_length):
+#         position = tf.range(max_sequence_length, dtype=tf.float32)[:, tf.newaxis]
+#         div_term = tf.exp(tf.range(0, hidden_size, 2, dtype=tf.float32) * -(tf.math.log(10000.0) / hidden_size))
+#         pe = tf.zeros([max_sequence_length, hidden_size], dtype=tf.float32)
+#         pe[:, 0::2] = tf.sin(position * div_term)
+#         pe[:, 1::2] = tf.cos(position * div_term)
+#         return pe[tf.newaxis, ...]
+#
+#     def call(self, src, training=True):
+#         embedded = self.embedding(src) * tf.math.sqrt(tf.cast(self.hidden_size, tf.float32))
+#         src_with_pe = embedded + self.positional_encoding[:, :src.shape[1], :]
+#         encoded = self.encoder(src_with_pe, training=training)
+#         output = self.decoder(encoded)
+#         return output
+

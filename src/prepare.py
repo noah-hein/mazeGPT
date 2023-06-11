@@ -11,6 +11,14 @@ allowed_algorithms = [
     algorithms.BinaryTree,
 ]
 
+tokens = [
+    "<start>",
+    "<end>",
+    "1",
+    "0",
+    "\n"
+]
+
 
 def create_maze():
     # Select a random algorithm
@@ -24,7 +32,7 @@ def create_maze():
 
     #
     maze.display_maze()
-    print(maze.grid)
+    print(maze.__str__())
 
 
 if __name__ == '__main__':
