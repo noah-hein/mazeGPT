@@ -36,8 +36,8 @@ TOKENS = [
 - [x] Obtain maze generation algorithms
 - [x] Determine shape of maze data
 - [x] Create encoder and decoder
-- [ ] Generate a bunch of training and validation mazes
-- [ ] Place training and validation mazes into bin files
+- [x] Generate a bunch of training and validation mazes
+- [x] Place training and validation mazes into bin files
 - [ ] Create transformer model
 - [ ] Build train script for training the transformer
 - [ ] Store model as a file for reuse
