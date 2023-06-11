@@ -1,6 +1,6 @@
 import numpy as np
 from random import choice, randrange
-from src.mazelib import MazeGenAlgo
+from mazelib import MazeGenAlgo
 
 
 class AldousBroder(MazeGenAlgo):
