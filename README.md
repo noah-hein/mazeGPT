@@ -15,10 +15,38 @@ Luckily the structure of a maze can be represented with a handful of digits.
 The encoding will be baked into the maze datatype.
 
 Encoding:
-- 0 = empty space
+- 0 = path
 - 1 = wall
-- 2 = path
-- 3 = newline
-- 4 = start
-- 5 = end
+- \n = newline
+- \<start> = newline
+- \<end> = start
+
+Below is the acutal array storing the tokens and their position
+```python
+TOKENS = [
+    "0",
+    "1",
+    "\n",
+    "<start>",
+    "<end>"
+]
+```
+
+## TODO (Priority)
+- [x] Obtain maze generation algorithms
+- [x] Determine shape of maze data
+- [x] Create encoder and decoder
+- [ ] Generate a bunch of training and validation mazes
+- [ ] Place training and validation mazes into bin files
+- [ ] Create transformer model
+- [ ] Build train script for training the transformer
+- [ ] Store model as a file for reuse
+- [ ] Test blank maze generation with start token
+
+## TODO (Later)
+- [ ] Add CUDA support
+- [ ] Create animated graphic to visualize maze generation
+- [ ] Improve documentation / Add images
+
+
 
