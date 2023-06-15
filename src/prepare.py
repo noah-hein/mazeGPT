@@ -2,7 +2,7 @@ import os
 import pathlib
 import random
 import mazelib as mzl
-import mazelib.algorithms as algorithms
+import mazelib as algorithms
 import numpy as np
 
 TOKENS = [
