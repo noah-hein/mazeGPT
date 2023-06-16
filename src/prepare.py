@@ -20,10 +20,10 @@ ALLOWED_ALGORITHMS = [
     algorithms.BinaryTree,
 ]
 
-NUMBER_OF_MAZES = 10
+NUMBER_OF_MAZES = 1000
 TRAINING_PERCENT = 0.9
 
-OUTPUT_DIRECTORY = "train"
+OUTPUT_DIRECTORY = "../train"
 TRAIN_FILENAME = "train.bin"
 VALIDATION_FILENAME = "validation.bin"
 
@@ -59,12 +59,25 @@ def create_maze_string():
     maze = mzl.Maze(seed)
     maze.generator = selected_algorithm(height, width)
     maze.generate()
+
+    # Generate build log and return
+    maze_description = "| {: >10} | {: >25} | {: >20} |"
+    maze_description = maze_description.format(
+        width.__str__() + "x" + height.__str__(),
+        selected_algorithm.__name__,
+        seed
+    )
+    print(maze_description)
     return maze.__str__()
 
 def create_mazes_string():
     return "".join(create_maze_string() for _ in range(NUMBER_OF_MAZES))
 
 if __name__ == '__main__':
+    table_header = "| {: >10} | {: >25} | {: >20} |".format("dimensions", "algorithm", "seed")
+    print(table_header)
+    print(len(table_header) * "-")
+
     # Create training data
     data = create_mazes_string()
     data_length = len(data)
