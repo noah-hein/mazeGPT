@@ -23,7 +23,12 @@ ALLOWED_ALGORITHMS = [
 NUMBER_OF_MAZES = 1000
 TRAINING_PERCENT = 0.9
 
-OUTPUT_DIRECTORY = "../train"
+MIN_HEIGHT = 10
+MAX_HEIGHT = 10
+MIN_WIDTH = 10
+MAX_WIDTH = 10
+
+OUTPUT_DIRECTORY = "../data"
 TRAIN_FILENAME = "train.bin"
 VALIDATION_FILENAME = "validation.bin"
 
@@ -47,8 +52,8 @@ def decode(tokens: list[TOKENS]):
 
 def create_maze_string():
     # Maze parameters
-    height = 10
-    width = 10
+    height = random.randint(MIN_HEIGHT, MAX_HEIGHT)
+    width = random.randint(MIN_WIDTH, MAX_WIDTH)
     seed = random.randint(0, 10000)
 
     # Select a random algorithm
@@ -71,13 +76,12 @@ def create_maze_string():
     return maze.__str__()
 
 def create_mazes_string():
-    return "".join(create_maze_string() for _ in range(NUMBER_OF_MAZES))
-
-if __name__ == '__main__':
     table_header = "| {: >10} | {: >25} | {: >20} |".format("dimensions", "algorithm", "seed")
     print(table_header)
     print(len(table_header) * "-")
+    return "".join(create_maze_string() for _ in range(NUMBER_OF_MAZES))
 
+if __name__ == '__main__':
     # Create training data
     data = create_mazes_string()
     data_length = len(data)

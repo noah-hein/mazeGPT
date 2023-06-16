@@ -63,6 +63,7 @@ if __name__ == '__main__':
     (train_images, train_labels) = fashion_data[0]
     (test_images, test_labels) = fashion_data[1]
 
+    print(len(train_images))
     print(test_labels.size)
 
     class_names = [
