@@ -1,17 +1,13 @@
 import os
 import pathlib
 import random
-
-from tokenizers.implementations import SentencePieceBPETokenizer
-from transformers import PreTrainedTokenizerFast
-
 import mazelib as mzl
 import mazelib as algorithms
 
-TOKENS = [
-    "0",
-    "1",
-    "<br>"
+from src.mazelib import Maze
+from tokenizers.implementations import SentencePieceBPETokenizer
+
+SPECIAL_TOKENS = [
     "<start>",
     "<end>"
 ]
@@ -32,11 +28,12 @@ MIN_WIDTH = 10
 MAX_WIDTH = 10
 
 OUTPUT_DIRECTORY = "../data"
-TRAIN_FILENAME = "train.bin"
-VALIDATION_FILENAME = "validation.bin"
+TRAIN_FILENAME = "train.txt"
+VALIDATION_FILENAME = "validation.txt"
+TOKENIZER_FILENAME = "tokenizer.json"
 
 
-def generate_maze():
+def generate_maze(index: int):
     # Maze parameters
     height = random.randint(MIN_HEIGHT, MAX_HEIGHT)
     width = random.randint(MIN_WIDTH, MAX_WIDTH)
@@ -52,8 +49,9 @@ def generate_maze():
     maze.generate()
 
     # Generate build log and return
-    maze_description = "| {: >10} | {: >25} | {: >20} |"
+    maze_description = "| {: >10} | {: >10} | {: >25} | {: >20} |"
     maze_description = maze_description.format(
+        index.__str__(),
         width.__str__() + "x" + height.__str__(),
         selected_algorithm.__name__,
         seed
@@ -63,10 +61,35 @@ def generate_maze():
 
 
 def generate_mazes():
-    table_header = "| {: >10} | {: >25} | {: >20} |".format("dimensions", "algorithm", "seed")
+    print("Generating mazes")
+    table_header = "| {: >10} | {: >10} | {: >25} | {: >20} |".format("i", "dimensions", "algorithm", "seed")
     print(table_header)
     print(len(table_header) * "-")
-    return [generate_maze() for _ in range(NUMBER_OF_MAZES)]
+    mazes = [generate_maze(i) for i in range(NUMBER_OF_MAZES)]
+    return mazes
+
+
+def build_dataset(mazes: list[Maze]):
+    # Combine all mazes into a string
+    data = "".join(str(maze) for maze in mazes)
+    data_length = len(data)
+
+    # Split off some percent of training data for validation
+    print("Splitting training and validation datasets")
+    training_data = data[:int(data_length * TRAINING_PERCENT)]
+    validation_data = data[int(data_length * TRAINING_PERCENT):]
+
+    # Create output locations
+    pathlib.Path(OUTPUT_DIRECTORY).mkdir(parents=True, exist_ok=True)
+    output_directory = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
+    train_file_path = os.path.join(output_directory, TRAIN_FILENAME)
+    validation_file_path = os.path.join(output_directory, VALIDATION_FILENAME)
+
+    # Save training and validation data to files
+    print("Saving training data to " + TRAIN_FILENAME)
+    print("saving validation data to " + VALIDATION_FILENAME)
+    print(training_data, file=open(train_file_path, "w"))
+    print(validation_data, file=open(validation_file_path, "w"))
 
 
 def get_tokenizer_data(tokenizer_data):
@@ -74,47 +97,34 @@ def get_tokenizer_data(tokenizer_data):
         yield ''.join(str(_) for _ in tokenizer_data[i: i + 5])
 
 
-def build_tokenizer(tokenizer_data):
+def build_tokenizer(mazes: list[Maze]):
     # Use Uni-gram sentence piece model
+    print("Creating the tokenizer...")
     sp_tokenizer = SentencePieceBPETokenizer()
     sp_tokenizer.train_from_iterator(
-        tokenizer_data,
+        get_tokenizer_data(mazes),
         vocab_size=30000,
         min_frequency=5,
-        show_progress=True,
+        show_progress=False,
         limit_alphabet=500,
-        special_tokens=["<start>", "<end>"]
+        special_tokens=SPECIAL_TOKENS
     )
 
     # Save model definition to file
-    tokenizer_path = os.path.join(OUTPUT_DIRECTORY, "tokenizer.json")
+    print("Saving tokenizer at " + TOKENIZER_FILENAME)
+    tokenizer_path = os.path.join(OUTPUT_DIRECTORY, TOKENIZER_FILENAME)
     sp_tokenizer.save(tokenizer_path)
     return sp_tokenizer
 
 
 if __name__ == '__main__':
-    # Create training data
-    mazes = generate_mazes()
-    data = "".join(str(maze) for maze in mazes)
-    data_length = len(data)
-
-    # Split off some percent of training data for validation
-    training_data = data[:int(data_length * TRAINING_PERCENT)]
-    validation_data = data[int(data_length * TRAINING_PERCENT):]
-
-    # Create tokenizer
-    tokenizer = build_tokenizer(get_tokenizer_data(mazes))
+    generated_mazes = generate_mazes()
+    build_dataset(generated_mazes)
+    build_tokenizer(generated_mazes)
 
     # Encode training and validation data
-    enc = tokenizer.encode(mazes[0].__str__())
-    train_ids = tokenizer.encode(training_data).ids
-    validation_ids = tokenizer.encode(validation_data).ids
-
-    # # Create output locations
-    pathlib.Path(OUTPUT_DIRECTORY).mkdir(parents=True, exist_ok=True)
-    output_directory = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
-    train_file_path = os.path.join(output_directory, TRAIN_FILENAME)
-    validation_file_path = os.path.join(output_directory, VALIDATION_FILENAME)
+    # training_ids = tokenizer.encode(training_data)
+    # validation_ids = tokenizer.encode(validation_data)
 
     # Save training and validation data to files
     #train_ids.tofile(train_file_path)
