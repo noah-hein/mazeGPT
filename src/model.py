@@ -70,6 +70,7 @@ if __name__ == '__main__':
         per_device_eval_batch_size=8,
         gradient_accumulation_steps=32,
 
+        save_total_limit=3,
         optim="adamw_torch",
     )
 
