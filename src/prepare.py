@@ -28,8 +28,7 @@ MIN_WIDTH = 10
 MAX_WIDTH = 10
 
 OUTPUT_DIRECTORY = "../data"
-TRAIN_FILENAME = "train.txt"
-VALIDATION_FILENAME = "validation.txt"
+DATA_FILENAME = "dataset.txt"
 TOKENIZER_FILENAME = "tokenizer.json"
 
 
@@ -72,24 +71,15 @@ def generate_mazes():
 def build_dataset(mazes: list[Maze]):
     # Combine all mazes into a string
     data = "".join(str(maze) for maze in mazes)
-    data_length = len(data)
 
-    # Split off some percent of training data for validation
-    print("Splitting training and validation datasets")
-    training_data = data[:int(data_length * TRAINING_PERCENT)]
-    validation_data = data[int(data_length * TRAINING_PERCENT):]
-
-    # Create output locations
+    # Create output for file
     pathlib.Path(OUTPUT_DIRECTORY).mkdir(parents=True, exist_ok=True)
     output_directory = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
-    train_file_path = os.path.join(output_directory, TRAIN_FILENAME)
-    validation_file_path = os.path.join(output_directory, VALIDATION_FILENAME)
+    data_file_path = os.path.join(output_directory, DATA_FILENAME)
 
     # Save training and validation data to files
-    print("Saving training data to " + TRAIN_FILENAME)
-    print("saving validation data to " + VALIDATION_FILENAME)
-    print(training_data, file=open(train_file_path, "w"))
-    print(validation_data, file=open(validation_file_path, "w"))
+    print("Saving dataset data to " + DATA_FILENAME)
+    print(data, file=open(data_file_path, "w"))
 
 
 def get_tokenizer_data(tokenizer_data):
@@ -114,18 +104,9 @@ def build_tokenizer(mazes: list[Maze]):
     print("Saving tokenizer at " + TOKENIZER_FILENAME)
     tokenizer_path = os.path.join(OUTPUT_DIRECTORY, TOKENIZER_FILENAME)
     sp_tokenizer.save(tokenizer_path)
-    return sp_tokenizer
 
 
 if __name__ == '__main__':
     generated_mazes = generate_mazes()
     build_dataset(generated_mazes)
     build_tokenizer(generated_mazes)
-
-    # Encode training and validation data
-    # training_ids = tokenizer.encode(training_data)
-    # validation_ids = tokenizer.encode(validation_data)
-
-    # Save training and validation data to files
-    #train_ids.tofile(train_file_path)
-    #validation_ids.tofile(validation_file_path)
