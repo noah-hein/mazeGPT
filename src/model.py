@@ -7,7 +7,7 @@ from transformers import \
     BertForMaskedLM, \
     DataCollatorForLanguageModeling, \
     TrainingArguments, \
-    Trainer
+    Trainer, GPT2Config, GPT2Model, AutoConfig, GPT2LMHeadModel
 
 
 def encode(unencoded_dataset):
@@ -49,8 +49,13 @@ if __name__ == '__main__':
     cuda.empty_cache()
     print("Using your (" + device + ") to train")
 
-    model_config = BertConfig()
-    model = BertForMaskedLM(config=model_config).to(device)
+    model_config = AutoConfig.from_pretrained(
+        "gpt2",
+        vocab_size=len(tokenizer),
+        bos_token_id=tokenizer.bos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+    )
+    model = GPT2LMHeadModel(model_config)
 
     training_args = TrainingArguments(
         output_dir="../temp",
