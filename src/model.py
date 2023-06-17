@@ -3,11 +3,9 @@ from pynvml import *
 from torch import cuda
 from transformers import \
     PreTrainedTokenizerFast, \
-    BertConfig, \
-    BertForMaskedLM, \
     DataCollatorForLanguageModeling, \
     TrainingArguments, \
-    Trainer, GPT2Config, GPT2Model, AutoConfig, GPT2LMHeadModel
+    Trainer, AutoConfig, GPT2LMHeadModel
 
 
 def encode(unencoded_dataset):

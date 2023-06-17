@@ -272,11 +272,11 @@ class Maze:
 
 
     def __str__(self):
-        string_rep = "<start> \n"
+        string_rep = "<start> "
         for row in self.grid:
-            row_string = " ".join(map(str, row)) + " 2 \n"
+            row_string = " ".join(map(str, row)) + " 2 "
             string_rep += row_string
-        string_rep += "<end> \n"
+        string_rep += "<end>\n"
         return string_rep
 
     def __repr__(self):
