@@ -1,6 +1,6 @@
 import numpy as np
 from random import randrange
-from mazelib import MazeGenAlgo
+from src.mazelib import MazeGenAlgo
 
 
 class Prims(MazeGenAlgo):

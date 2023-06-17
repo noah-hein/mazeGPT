@@ -9,7 +9,9 @@ from tokenizers.implementations import SentencePieceBPETokenizer
 
 SPECIAL_TOKENS = [
     "<start>",
-    "<end>"
+    "<end>",
+    "[PAD]",
+    "[MASK]"
 ]
 
 ALLOWED_ALGORITHMS = [
@@ -93,7 +95,7 @@ def build_tokenizer(mazes: list[Maze]):
     sp_tokenizer = SentencePieceBPETokenizer()
     sp_tokenizer.train_from_iterator(
         get_tokenizer_data(mazes),
-        vocab_size=30000,
+        vocab_size=100,
         min_frequency=5,
         show_progress=False,
         limit_alphabet=500,
