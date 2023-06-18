@@ -49,9 +49,10 @@ def build_dataset(mazes: list[Maze]):
     data = "".join(str(maze) for maze in mazes)
 
     # Create output for file
-    pathlib.Path(config.OUTPUT_DIRECTORY).mkdir(parents=True, exist_ok=True)
     output_directory = os.path.join(os.path.dirname(__file__), config.OUTPUT_DIRECTORY)
-    data_file_path = os.path.join(output_directory, config.DATA_FILENAME)
+    data_directory = os.path.join(output_directory, "data")
+    data_file_path = os.path.join(data_directory, config.DATA_FILENAME)
+    pathlib.Path(data_directory).mkdir(parents=True, exist_ok=True)
 
     # Save training and validation data to files
     print("Saving dataset data to " + config.DATA_FILENAME)
@@ -75,10 +76,6 @@ def build_tokenizer(mazes: list[Maze]):
         limit_alphabet=500,
         special_tokens=config.SPECIAL_TOKENS
     )
-
-    # Set up special tokens
-    sp_tokenizer.pad_token = "[PAD]"
-    sp_tokenizer.mask_token = "[MASK]"
 
     # Save model definition to file
     print("Saving tokenizer at " + config.TOKENIZER_FILENAME)

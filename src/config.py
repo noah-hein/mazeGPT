@@ -22,6 +22,6 @@ MAX_HEIGHT = 3
 MIN_WIDTH = 3
 MAX_WIDTH = 3
 
-OUTPUT_DIRECTORY = "../data"
+OUTPUT_DIRECTORY = "../out"
 DATA_FILENAME = "dataset.txt"
 TOKENIZER_FILENAME = "tokenizer.json"
