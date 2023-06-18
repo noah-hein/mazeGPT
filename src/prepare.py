@@ -76,6 +76,10 @@ def build_tokenizer(mazes: list[Maze]):
         special_tokens=config.SPECIAL_TOKENS
     )
 
+    # Set up special tokens
+    sp_tokenizer.pad_token = "[PAD]"
+    sp_tokenizer.mask_token = "[MASK]"
+
     # Save model definition to file
     print("Saving tokenizer at " + config.TOKENIZER_FILENAME)
     tokenizer_path = os.path.join(config.OUTPUT_DIRECTORY, config.TOKENIZER_FILENAME)

@@ -1,5 +1,4 @@
 from datasets import load_dataset
-from pynvml import *
 from torch import cuda
 from transformers import \
     PreTrainedTokenizerFast, \
@@ -17,19 +16,6 @@ def encode(unencoded_dataset):
     )
 
 
-def print_gpu_utilization():
-    nvmlInit()
-    handle = nvmlDeviceGetHandleByIndex(0)
-    info = nvmlDeviceGetMemoryInfo(handle)
-    print(f"GPU memory occupied: {info.used//1024**2} MB.")
-
-
-def print_summary(result):
-    print(f"Time: {result.metrics['train_runtime']:.2f}")
-    print(f"Samples/second: {result.metrics['train_samples_per_second']:.2f}")
-    print_gpu_utilization()
-
-
 if __name__ == '__main__':
     # Load data set and tokenizer
     dataset = load_dataset("../data", data_files=["dataset.txt"], split='train')
@@ -40,6 +26,7 @@ if __name__ == '__main__':
     tokenizer.pad_token = "[PAD]"
     tokenizer.mask_token = "[MASK]"
 
+    # Encode the datasets
     train_dataset = dataset["train"].map(encode, batched=True)
     test_dataset = dataset["test"].map(encode, batched=True)
 
