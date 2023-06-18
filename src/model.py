@@ -1,73 +1,22 @@
-from datasets import load_dataset
-from torch import cuda
+import os
+from src import config
 from transformers import \
     PreTrainedTokenizerFast, \
-    DataCollatorForLanguageModeling, \
-    TrainingArguments, \
-    Trainer, AutoConfig, GPT2LMHeadModel
+    AutoConfig, GPT2LMHeadModel
 
+# Find the tokenizer
+tokenizer_json_path = os.path.join(config.OUTPUT_DIRECTORY, config.TOKENIZER_FILENAME)
 
-def encode(unencoded_dataset):
-    return tokenizer(
-        unencoded_dataset["text"],
-        truncation=True,
-        max_length=512,
-        return_special_tokens_mask=True
-    )
+# Load in the pretrained tokenizer
+tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_json_path)
+tokenizer.pad_token = "[PAD]"
+tokenizer.mask_token = "[MASK]"
 
-
-if __name__ == '__main__':
-    # Load data set and tokenizer
-    dataset = load_dataset("../data", data_files=["dataset.txt"], split='train')
-    dataset = dataset.train_test_split(test_size=0.1)
-
-    # Load in the pretrained tokenizer
-    tokenizer = PreTrainedTokenizerFast(tokenizer_file="../data/tokenizer.json")
-    tokenizer.pad_token = "[PAD]"
-    tokenizer.mask_token = "[MASK]"
-
-    # Encode the datasets
-    train_dataset = dataset["train"].map(encode, batched=True)
-    test_dataset = dataset["test"].map(encode, batched=True)
-
-    device = "cuda" if cuda.is_available() else "cpu"
-    cuda.empty_cache()
-    print("Using your (" + device + ") to train")
-
-    model_config = AutoConfig.from_pretrained(
-        "gpt2",
-        vocab_size=len(tokenizer),
-        bos_token_id=tokenizer.bos_token_id,
-        eos_token_id=tokenizer.eos_token_id,
-    )
-    model = GPT2LMHeadModel(model_config)
-
-    training_args = TrainingArguments(
-        output_dir="../temp",
-        evaluation_strategy="steps",
-        overwrite_output_dir=True,
-        num_train_epochs=10,
-        save_steps=10,
-        logging_steps=10,
-        logging_strategy="steps",
-
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
-        gradient_accumulation_steps=32,
-
-        save_total_limit=3,
-        optim="adamw_torch",
-    )
-
-    data_collator = DataCollatorForLanguageModeling(
-        tokenizer=tokenizer, mlm=True, mlm_probability=0.2
-    )
-
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        data_collator=data_collator,
-        train_dataset=train_dataset,
-        eval_dataset=test_dataset
-    )
-    trainer.train()
+# Define the model
+model_config = AutoConfig.from_pretrained(
+    "gpt2",
+    vocab_size=len(tokenizer),
+    bos_token_id=tokenizer.bos_token_id,
+    eos_token_id=tokenizer.eos_token_id,
+)
+model = GPT2LMHeadModel(model_config)
