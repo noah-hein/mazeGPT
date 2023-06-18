@@ -2,8 +2,10 @@ import os
 from mazelib.algorithms import *
 
 SPECIAL_TOKENS = [
-    "<start>",
-    "<end>",
+    "0",
+    "1",
+    "2",
+    "3",
     "[PAD]",
     "[MASK]"
 ]
@@ -15,7 +17,7 @@ ALLOWED_ALGORITHMS = [
     BinaryTree,
 ]
 
-NUMBER_OF_MAZES = 1000
+NUMBER_OF_MAZES = 10000
 TRAINING_PERCENT = 0.9
 
 MIN_HEIGHT = 3
@@ -30,7 +32,7 @@ TOKENIZER_FILENAME = "tokenizer.json"
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
 
 MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, "models")
-MODEL_PATH = os.path.join(MODEL_DIRECTORY, "checkpoint-140")
+MODEL_PATH = os.path.join(MODEL_DIRECTORY, "checkpoint-230")
 
 DATA_DIRECTORY = os.path.join(OUTPUT_PATH, "data")
 DATA_FILE_PATH = os.path.join(DATA_DIRECTORY, DATA_FILENAME)

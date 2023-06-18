@@ -263,18 +263,18 @@ class Maze:
         Takes a string representation of a given maze and
         converts and applies its contents to this.
         """
-        string = string.replace("<start>", "").replace("<end>", "")
+        string = string.replace("3", "").replace("3", "")
         rows = string.split("2")
         grid = np.array([list(map(int, row.replace(" ", ""))) for row in rows if row.strip()])
         self.grid = grid
 
 
     def __str__(self):
-        string_rep = "<start> "
+        string_rep = "3 "
         for row in self.grid:
             row_string = " ".join(map(str, row)) + " 2 "
             string_rep += row_string
-        string_rep += "<end> \n"
+        string_rep += "3 \n"
         return string_rep
 
     def __repr__(self):

@@ -1,6 +1,7 @@
 import os.path
+import random
 
-from transformers import PreTrainedTokenizerFast, pipeline, GPT2LMHeadModel
+from transformers import PreTrainedTokenizerFast, pipeline, GPT2LMHeadModel, set_seed
 
 import config
 from mazelib import Maze, Prims
@@ -11,17 +12,19 @@ if __name__ == '__main__':
     # model = GPT2LMHeadModel.from_pretrained(config.MODEL_PATH, local_files_only=True)
     #
     # generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
-    # test = generator("<start>", max_length=300)
-
+    # set_seed(random.randint(0, 100000))
+    # test = generator(
+    #     "<start>",
+    #     max_length=200
+    #     # num_beams=5,
+    #     # no_repeat_ngram_size=2,
+    #     # num_return_sequences=5,
+    #     # early_stopping=True
+    # )
+    #
     # print(test)
 
-    # test_maze = Maze()
-    # test_maze.generator = Prims(3, 3)
-    # test_maze.generate()
-    # test_maze.display_maze()
-    # print(test_maze.grid)
-
     maze = Maze()
-    maze.string_to_maze("<start> 1 1 1 1 1 1 1 2 1 0 0 0 0 0 1 2 1 0 1 0 1 0 1 2 1 0 1 0 0 0 1 2 1 0 1 1 1 0 1 2 1 0 0 0 0 0 1 2 1 1 1 1 1 1 1 2 <end>")
+    maze.string_to_maze("<start> 1 1 1 1 1 1 1 2 1 0 0 0 0 0 1 2 1 0 1 0 1 0 1 2 1 0 0 0 1 0 1 2 1 0 1 0 1 0 1 2 1 0 0 0 0 0 1 2 1 1 1 1 1 1 1 2 <stop>")
     maze.display_maze()
 
