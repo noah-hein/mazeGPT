@@ -38,13 +38,13 @@ or add another token to represent empty space, this way mazes of different shape
 - [x] Create encoder and decoder
 - [x] Generate a bunch of training and validation mazes
 - [x] Place training and validation mazes into bin files
-- [ ] Create transformer model
-- [ ] Build train script for training the transformer
-- [ ] Store model as a file for reuse
-- [ ] Test blank maze generation with start token
+- [x] Create transformer model
+- [x] Build train script for training the transformer
+- [x] Store model as a file for reuse
+- [x] Test blank maze generation with start token
 
 ## TODO (Later)
-- [ ] Add CUDA support
+- [x] Add CUDA support
 - [ ] Create animated graphic to visualize maze generation
 - [ ] Improve documentation / Add images
 

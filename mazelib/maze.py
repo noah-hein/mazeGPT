@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import re
 from random import randrange
 
+import numpy as np
+
 
 class Maze:
     """This is a primary object meant to hold a rectangular, 2D mazelib.
@@ -133,8 +135,7 @@ class Maze:
 
         # create an inner mazelib entrance
         second = (randrange(1, H, 2), randrange(1, W, 2))
-
-        return (first, second)
+        return first, second
 
     def generate_monte_carlo(self, repeat, entrances=3, difficulty=1.0, reducer=len):
         """Use the Monte Carlo method to mazelib a mazelib of defined difficulty.
@@ -158,7 +159,7 @@ class Maze:
         Returns: None
         """
         assert (
-            difficulty >= 0.0 and difficulty <= 1.0
+                0.0 <= difficulty <= 1.0
         ), "Maze difficulty must be between 0 to 1."
 
         # mazelib different mazes
@@ -263,11 +264,8 @@ class Maze:
         converts and applies its contents to this.
         """
         string = string.replace("<start>", "").replace("<end>", "")
-        lines = string.splitlines()
-        grid = []
-        for line in lines:
-            if line:
-                grid.append(list(map(int, line)))
+        rows = string.split("2")
+        grid = np.array([list(map(int, row.replace(" ", ""))) for row in rows if row.strip()])
         self.grid = grid
 
 
@@ -276,7 +274,7 @@ class Maze:
         for row in self.grid:
             row_string = " ".join(map(str, row)) + " 2 "
             string_rep += row_string
-        string_rep += "<end>\n"
+        string_rep += "<end> \n"
         return string_rep
 
     def __repr__(self):

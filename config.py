@@ -28,7 +28,10 @@ DATA_FILENAME = "dataset.txt"
 TOKENIZER_FILENAME = "tokenizer.json"
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
+
 MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, "models")
+MODEL_PATH = os.path.join(MODEL_DIRECTORY, "checkpoint-140")
+
 DATA_DIRECTORY = os.path.join(OUTPUT_PATH, "data")
 DATA_FILE_PATH = os.path.join(DATA_DIRECTORY, DATA_FILENAME)
 TOKENIZER_FILE_PATH = os.path.join(OUTPUT_DIRECTORY, TOKENIZER_FILENAME)
