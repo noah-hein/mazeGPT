@@ -2,10 +2,6 @@ import os
 from mazelib.algorithms import *
 
 SPECIAL_TOKENS = [
-    "0",
-    "1",
-    "2",
-    "3",
     "[PAD]",
     "[MASK]"
 ]
@@ -32,7 +28,7 @@ TOKENIZER_FILENAME = "tokenizer.json"
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), OUTPUT_DIRECTORY)
 
 MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, "models")
-MODEL_PATH = os.path.join(MODEL_DIRECTORY, "checkpoint-230")
+MODEL_PATH = os.path.join(MODEL_DIRECTORY, "checkpoint-700")
 
 DATA_DIRECTORY = os.path.join(OUTPUT_PATH, "data")
 DATA_FILE_PATH = os.path.join(DATA_DIRECTORY, DATA_FILENAME)

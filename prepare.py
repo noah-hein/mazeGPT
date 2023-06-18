@@ -1,9 +1,12 @@
 import os
 import pathlib
 import random
+
+from transformers import GPT2Tokenizer
+
 import mazelib as mzl
 
-from tokenizers.implementations import SentencePieceBPETokenizer
+from tokenizers.implementations import SentencePieceBPETokenizer, ByteLevelBPETokenizer
 import config
 
 
@@ -63,13 +66,12 @@ def get_tokenizer_data(tokenizer_data):
 def build_tokenizer(mazes: list[mzl.Maze]):
     # Use Uni-gram sentence piece model
     print("Creating the tokenizer...")
-    sp_tokenizer = SentencePieceBPETokenizer()
+    sp_tokenizer = ByteLevelBPETokenizer()
     sp_tokenizer.train_from_iterator(
         get_tokenizer_data(mazes),
-        vocab_size=100,
+        vocab_size=10,
         min_frequency=5,
         show_progress=False,
-        limit_alphabet=500,
         special_tokens=config.SPECIAL_TOKENS
     )
 
