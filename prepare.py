@@ -2,10 +2,9 @@ import os
 import pathlib
 import random
 import mazelib as mzl
-import src.config as config
 
-from src.mazelib import Maze
 from tokenizers.implementations import SentencePieceBPETokenizer
+import config
 
 
 def generate_maze(index: int):
@@ -44,7 +43,7 @@ def generate_mazes():
     return mazes
 
 
-def build_dataset(mazes: list[Maze]):
+def build_dataset(mazes: list[mzl.Maze]):
     # Combine all mazes into a string
     data = "".join(str(maze) for maze in mazes)
 
@@ -61,7 +60,7 @@ def get_tokenizer_data(tokenizer_data):
         yield ''.join(str(_) for _ in tokenizer_data[i: i + 5])
 
 
-def build_tokenizer(mazes: list[Maze]):
+def build_tokenizer(mazes: list[mzl.Maze]):
     # Use Uni-gram sentence piece model
     print("Creating the tokenizer...")
     sp_tokenizer = SentencePieceBPETokenizer()

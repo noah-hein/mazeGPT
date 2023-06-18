@@ -1,9 +1,9 @@
 import numpy as np
 from random import randrange
-from src.mazelib import MazeGenAlgo
+from mazelib import maze_gen_algo
 
 
-class BacktrackingGenerator(MazeGenAlgo):
+class BacktrackingGenerator(maze_gen_algo.MazeGenAlgo):
     """
     1. Randomly choose a starting cell.
     2. Randomly choose a wall at the current cell and open a passage through to any random adjacent

@@ -1,6 +1,5 @@
 import os
-
-from src.mazelib import algorithms
+from mazelib.algorithms import *
 
 SPECIAL_TOKENS = [
     "<start>",
@@ -10,10 +9,10 @@ SPECIAL_TOKENS = [
 ]
 
 ALLOWED_ALGORITHMS = [
-    algorithms.Prims,
-    algorithms.AldousBroder,
-    algorithms.BacktrackingGenerator,
-    algorithms.BinaryTree,
+    Prims,
+    AldousBroder,
+    BacktrackingGenerator,
+    BinaryTree,
 ]
 
 NUMBER_OF_MAZES = 1000
@@ -24,7 +23,7 @@ MAX_HEIGHT = 3
 MIN_WIDTH = 3
 MAX_WIDTH = 3
 
-OUTPUT_DIRECTORY = "../out"
+OUTPUT_DIRECTORY = "out"
 DATA_FILENAME = "dataset.txt"
 TOKENIZER_FILENAME = "tokenizer.json"
 

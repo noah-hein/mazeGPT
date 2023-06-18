@@ -1,9 +1,9 @@
 import numpy as np
 from random import randrange
-from src.mazelib import MazeGenAlgo
+from mazelib import maze_gen_algo
 
 
-class Prims(MazeGenAlgo):
+class Prims(maze_gen_algo.MazeGenAlgo):
     """
     The Algorithm
 

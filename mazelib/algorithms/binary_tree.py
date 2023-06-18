@@ -1,9 +1,9 @@
 import numpy as np
 from random import choice
-from src.mazelib import MazeGenAlgo
+from mazelib import maze_gen_algo
 
 
-class BinaryTree(MazeGenAlgo):
+class BinaryTree(maze_gen_algo.MazeGenAlgo):
     """For every cell in the grid, knock down a wall either North or West."""
 
     def __init__(self, w, h, skew=None):

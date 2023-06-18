@@ -1,9 +1,9 @@
 import numpy as np
 from random import choice, randrange
-from src.mazelib import MazeGenAlgo
+from mazelib import maze_gen_algo
 
 
-class AldousBroder(MazeGenAlgo):
+class AldousBroder(maze_gen_algo.MazeGenAlgo):
     """
     1. Choose a random cell.
     2. Choose a random neighbor of the current cell and visit it. If the neighbor has not

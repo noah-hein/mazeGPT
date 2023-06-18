@@ -1,5 +1,5 @@
-from src import config
-from src.model import model
+import config
+from model import model
 from datasets import load_dataset
 from torch import cuda
 from transformers import \
