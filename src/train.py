@@ -1,3 +1,4 @@
+from src import config
 from src.model import model
 from datasets import load_dataset
 from torch import cuda
@@ -19,11 +20,11 @@ def encode(unencoded_dataset):
 
 if __name__ == '__main__':
     # Load data set and tokenizer
-    dataset = load_dataset("../out/data", data_files=["dataset.txt"], split='train')
+    dataset = load_dataset(config.DATA_DIRECTORY, data_files=["dataset.txt"], split='train')
     dataset = dataset.train_test_split(test_size=0.1)
 
     # Load in the pretrained tokenizer
-    tokenizer = PreTrainedTokenizerFast(tokenizer_file="../out/tokenizer.json")
+    tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
     tokenizer.pad_token = "[PAD]"
     tokenizer.mask_token = "[MASK]"
 
@@ -31,12 +32,16 @@ if __name__ == '__main__':
     train_dataset = dataset["train"].map(encode, batched=True)
     test_dataset = dataset["test"].map(encode, batched=True)
 
+    # Is GPU available?
     device = "cuda" if cuda.is_available() else "cpu"
     cuda.empty_cache()
     print("Using your (" + device + ") to train")
 
+    data_collator = DataCollatorForLanguageModeling(
+        tokenizer=tokenizer, mlm=True, mlm_probability=0.2
+    )
     training_args = TrainingArguments(
-        output_dir="../temp",
+        output_dir=config.MODEL_DIRECTORY,
         evaluation_strategy="steps",
         overwrite_output_dir=True,
         num_train_epochs=10,
@@ -50,10 +55,6 @@ if __name__ == '__main__':
 
         save_total_limit=3,
         optim="adamw_torch",
-    )
-
-    data_collator = DataCollatorForLanguageModeling(
-        tokenizer=tokenizer, mlm=True, mlm_probability=0.2
     )
 
     trainer = Trainer(

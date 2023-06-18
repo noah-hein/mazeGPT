@@ -49,14 +49,11 @@ def build_dataset(mazes: list[Maze]):
     data = "".join(str(maze) for maze in mazes)
 
     # Create output for file
-    output_directory = os.path.join(os.path.dirname(__file__), config.OUTPUT_DIRECTORY)
-    data_directory = os.path.join(output_directory, "data")
-    data_file_path = os.path.join(data_directory, config.DATA_FILENAME)
-    pathlib.Path(data_directory).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(config.DATA_DIRECTORY).mkdir(parents=True, exist_ok=True)
 
     # Save training and validation data to files
     print("Saving dataset data to " + config.DATA_FILENAME)
-    print(data, file=open(data_file_path, "w"))
+    print(data, file=open(config.DATA_FILE_PATH, "w"))
 
 
 def get_tokenizer_data(tokenizer_data):

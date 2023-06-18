@@ -4,11 +4,8 @@ from transformers import \
     PreTrainedTokenizerFast, \
     AutoConfig, GPT2LMHeadModel
 
-# Find the tokenizer
-tokenizer_json_path = os.path.join(config.OUTPUT_DIRECTORY, config.TOKENIZER_FILENAME)
-
 # Load in the pretrained tokenizer
-tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_json_path)
+tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
 tokenizer.pad_token = "[PAD]"
 tokenizer.mask_token = "[MASK]"
 
