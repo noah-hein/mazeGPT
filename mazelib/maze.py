@@ -3,6 +3,7 @@ import re
 from random import randrange
 
 import numpy as np
+from matplotlib.animation import FuncAnimation
 
 
 class Maze:
@@ -226,6 +227,15 @@ class Maze:
         plt.xticks([]), plt.yticks([])
         plt.show()
 
+    def display_maze_animated(self):
+        fig, ax = plt.subplots()
+        def update(i):
+            im_normed = self.grid
+            ax.imshow(im_normed)
+            ax.set_axis_off()
+        anim = FuncAnimation(fig, update, frames=2, interval=1)
+        plt.show()
+
     def to_visualized_string(self, entrances=False, solutions=False):
         """Return a string representation of the mazelib.
         This can also display the mazelib entrances/solutions IF they already exist.
@@ -263,18 +273,16 @@ class Maze:
         Takes a string representation of a given maze and
         converts and applies its contents to this.
         """
-        string = string.replace("3", "").replace("3", "")
         rows = string.split("2")
         grid = np.array([list(map(int, row.replace(" ", ""))) for row in rows if row.strip()])
         self.grid = grid
 
-
     def __str__(self):
-        string_rep = "3 "
+        string_rep = ""
         for row in self.grid:
             row_string = " ".join(map(str, row)) + " 2 "
             string_rep += row_string
-        string_rep += "3 \n"
+        string_rep += "\n"
         return string_rep
 
     def __repr__(self):
