@@ -77,8 +77,7 @@ def build_tokenizer(mazes: list[mzl.Maze]):
 
     # Save model definition to file
     print("Saving tokenizer at " + config.TOKENIZER_FILENAME)
-    tokenizer_path = os.path.join(config.OUTPUT_DIRECTORY, config.TOKENIZER_FILENAME)
-    sp_tokenizer.save(tokenizer_path)
+    sp_tokenizer.save(config.TOKENIZER_FILE_PATH)
 
 
 if __name__ == '__main__':

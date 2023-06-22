@@ -227,14 +227,14 @@ class Maze:
         plt.xticks([]), plt.yticks([])
         plt.show()
 
-    def display_maze_animated(self):
-        fig, ax = plt.subplots()
-        def update(i):
-            im_normed = self.grid
-            ax.imshow(im_normed)
-            ax.set_axis_off()
-        anim = FuncAnimation(fig, update, frames=2, interval=1)
-        plt.show()
+    # def display_maze_animated(self):
+    #     fig, ax = plt.subplots()
+    #     def update(i):
+    #         im_normed = self.grid
+    #         ax.imshow(im_normed)
+    #         ax.set_axis_off()
+    #     anim = FuncAnimation(fig, update, frames=2, interval=1)
+    #     plt.show()
 
     def to_visualized_string(self, entrances=False, solutions=False):
         """Return a string representation of the mazelib.
@@ -280,7 +280,7 @@ class Maze:
     def __str__(self):
         string_rep = ""
         for row in self.grid:
-            row_string = " ".join(map(str, row)) + " 2 "
+            row_string = "".join(map(str, row)) + "2"
             string_rep += row_string
         string_rep += "\n"
         return string_rep
