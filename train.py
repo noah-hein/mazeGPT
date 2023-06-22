@@ -49,9 +49,9 @@ if __name__ == '__main__':
         logging_steps=10,
         logging_strategy="steps",
 
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
-        gradient_accumulation_steps=16,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
+        gradient_accumulation_steps=1,
 
         save_total_limit=3,
         optim="adamw_torch",

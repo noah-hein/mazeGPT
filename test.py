@@ -17,12 +17,11 @@ if __name__ == '__main__':
     generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
     set_seed(random.randint(0, 100000))
 
-    max_length = (config.MAX_WIDTH * 2 + 1) * (config.MAX_HEIGHT * 2 + 1)
-    print(max_length)
+
     maze_string = generator(
-        "3",
-        max_length=max_length,
-        # num_beams=5,
+        "1 1 1 1 1 1 1 1 1 1 1 2",
+        max_length=263,
+        # num_beams=10,
         # no_repeat_ngram_size=2,
         # num_return_sequences=5,
         # early_stopping=True
