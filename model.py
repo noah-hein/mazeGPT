@@ -5,8 +5,8 @@ from transformers import \
 
 # Load in the pretrained tokenizer
 tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
-tokenizer.pad_token = "[PAD]"
-tokenizer.mask_token = "[MASK]"
+tokenizer.pad_token = config.PAD_TOKEN
+tokenizer.mask_token = config.MASK_TOKEN
 
 # Define the model
 model_config = AutoConfig.from_pretrained(
