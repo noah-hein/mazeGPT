@@ -37,7 +37,7 @@ SPECIAL_TOKENS = [
 # ======================================================================================================================
 
 OUTPUT_DIRECTORY_NAME = "out"
-MODEL_DIRECTORY_NAME = "model"
+MODEL_DIRECTORY_NAME = "models"
 DATA_DIRECTORY_NAME = "data"
 
 DATA_FILENAME = "dataset.txt"
