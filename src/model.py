@@ -1,4 +1,4 @@
-from src import config
+import config
 from transformers import \
     PreTrainedTokenizerFast, \
     AutoConfig, GPT2LMHeadModel

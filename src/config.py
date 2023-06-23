@@ -15,10 +15,10 @@ ALLOWED_ALGORITHMS = [
 NUMBER_OF_MAZES = 50000
 TRAINING_PERCENT = 0.9
 
-MIN_HEIGHT = 4
-MAX_HEIGHT = 4
-MIN_WIDTH = 4
-MAX_WIDTH = 4
+MIN_HEIGHT = 3
+MAX_HEIGHT = 3
+MIN_WIDTH = 3
+MAX_WIDTH = 3
 
 # ======================================================================================================================
 #       Tokenizer
