@@ -1,4 +1,4 @@
-from .mazelib import *
+from .maze import *
 from .config import *
 from .model import *
 from .prepare import *

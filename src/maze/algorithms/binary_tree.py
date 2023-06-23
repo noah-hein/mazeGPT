@@ -1,6 +1,6 @@
 import numpy as np
 from random import choice
-from mazelib.maze_gen_algo import MazeGenAlgo
+from maze.maze_gen_algo import MazeGenAlgo
 
 
 class BinaryTree(MazeGenAlgo):
@@ -21,7 +21,7 @@ class BinaryTree(MazeGenAlgo):
             self.skew = skewes[key]
 
     def generate(self):
-        """highest-level method that implements the mazelib-generating algorithm
+        """highest-level method that implements the maze-generating algorithm
 
         Returns:
             np.array: returned matrix

@@ -1,5 +1,5 @@
 import os
-from mazelib.algorithms import *
+from maze.algorithms import *
 
 # ======================================================================================================================
 #       Maze Settings

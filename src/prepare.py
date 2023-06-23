@@ -1,7 +1,7 @@
 import pathlib
 import random
 import config
-import mazelib as mzl
+import maze
 
 from tokenizers.implementations import ByteLevelBPETokenizer
 
@@ -17,9 +17,9 @@ def generate_maze(index: int):
     selected_algorithm = config.ALLOWED_ALGORITHMS[algorithm_index]
 
     # Create the Maze
-    maze = mzl.Maze(seed)
-    maze.generator = selected_algorithm(height, width)
-    maze.generate()
+    new_maze = maze.Maze(seed)
+    new_maze.generator = selected_algorithm(height, width)
+    new_maze.generate()
 
     # Generate build log and return
     maze_description = "| {: >10} | {: >10} | {: >25} | {: >20} |"
@@ -30,7 +30,7 @@ def generate_maze(index: int):
         seed
     )
     print(maze_description)
-    return maze
+    return new_maze
 
 
 def generate_mazes():
@@ -42,9 +42,9 @@ def generate_mazes():
     return mazes
 
 
-def build_dataset(mazes: list[mzl.Maze]):
+def build_dataset(mazes: list[maze.Maze]):
     # Combine all mazes into a string
-    data = "".join(str(maze) for maze in mazes)
+    data = "".join(str(m) for m in mazes)
 
     # Create output for file
     pathlib.Path(config.DATA_DIRECTORY).mkdir(parents=True, exist_ok=True)
@@ -59,7 +59,7 @@ def get_tokenizer_data(tokenizer_data):
         yield ''.join(str(_) for _ in tokenizer_data[i: i + 5])
 
 
-def build_tokenizer(mazes: list[mzl.Maze]):
+def build_tokenizer(mazes: list[maze.Maze]):
     # Use Uni-gram sentence piece model
     print("Creating the tokenizer...")
     sp_tokenizer = ByteLevelBPETokenizer()

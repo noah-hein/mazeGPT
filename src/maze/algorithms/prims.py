@@ -1,6 +1,6 @@
 import numpy as np
 from random import randrange
-from mazelib.maze_gen_algo import MazeGenAlgo
+from maze.maze_gen_algo import MazeGenAlgo
 
 
 class Prims(MazeGenAlgo):
@@ -19,7 +19,7 @@ class Prims(MazeGenAlgo):
         super(Prims, self).__init__(h, w)
 
     def generate(self):
-        """highest-level method that implements the mazelib-generating algorithm
+        """highest-level method that implements the maze-generating algorithm
 
         Returns:
             np.array: returned matrix
