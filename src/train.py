@@ -49,6 +49,8 @@ if __name__ == '__main__':
         logging_steps=10,
         logging_strategy="steps",
 
+        # learning_rate=5e-5,
+        # weight_decay=0.1,
         gradient_accumulation_steps=8,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=16,

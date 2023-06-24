@@ -42,7 +42,7 @@ DATA_DIRECTORY_NAME = "data"
 
 DATA_FILENAME = "dataset.txt"
 TOKENIZER_FILENAME = "tokenizer.json"
-SELECTED_MODEL = "checkpoint-11260"
+SELECTED_MODEL = "checkpoint-7030"
 
 # ======================================================================================================================
 #       Paths

@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
-import re
-from random import randrange
-
 import numpy as np
-from matplotlib.animation import FuncAnimation
+from random import randrange
 
 
 class Maze:
+    # ==================================================================================================================
+    #       Constructor
+    # ==================================================================================================================
+
     """This is a primary object meant to hold a rectangular, 2D maze.
     This object includes the methods used to maze and solve the maze,
     as well as the start and end points.
@@ -22,6 +23,10 @@ class Maze:
         self.solutions = None
         self.prune = True
         Maze.set_seed(seed)
+
+    # ==================================================================================================================
+    #       Public Methods
+    # ==================================================================================================================
 
     @staticmethod
     def set_seed(seed):
@@ -45,7 +50,7 @@ class Maze:
         Returns: None
         """
         assert not (
-            self.generator is None
+                self.generator is None
         ), "No maze-generation algorithm has been set."
 
         self.grid = self.generator.generate()
@@ -73,70 +78,6 @@ class Maze:
         # the start and end shouldn't be right next to each other
         if abs(self.start[0] - self.end[0]) + abs(self.start[1] - self.end[1]) < 2:
             self.generate_entrances(start_outer, end_outer)
-
-    def _generate_outer_entrances(self):
-        """Generate maze entrances, along the outer walls.
-
-        Returns: None
-        """
-        H = self.grid.shape[0]
-        W = self.grid.shape[1]
-
-        start_side = randrange(4)
-
-        # maze entrances will be on opposite sides of the maze.
-        if start_side == 0:
-            self.start = (0, randrange(1, W, 2))  # North
-            self.end = (H - 1, randrange(1, W, 2))
-        elif start_side == 1:
-            self.start = (H - 1, randrange(1, W, 2))  # South
-            self.end = (0, randrange(1, W, 2))
-        elif start_side == 2:
-            self.start = (randrange(1, H, 2), 0)  # West
-            self.end = (randrange(1, H, 2), W - 1)
-        else:
-            self.start = (randrange(1, H, 2), W - 1)  # East
-            self.end = (randrange(1, H, 2), 0)
-
-    def _generate_inner_entrances(self):
-        """Generate maze entrances, randomly within the maze.
-
-        Returns: None
-        """
-        H, W = self.grid.shape
-
-        self.start = (randrange(1, H, 2), randrange(1, W, 2))
-        end = (randrange(1, H, 2), randrange(1, W, 2))
-
-        # make certain the start and end points aren't the same
-        while end == self.start:
-            end = (randrange(1, H, 2), randrange(1, W, 2))
-
-        self.end = end
-
-    def _generate_opposite_entrances(self):
-        """Generate one inner and one outer entrance.
-
-        Returns:
-            tuple: start cell, end cell
-        """
-        H, W = self.grid.shape
-
-        start_side = randrange(4)
-
-        # pick a side for the outer maze entrance
-        if start_side == 0:
-            first = (0, randrange(1, W, 2))  # North
-        elif start_side == 1:
-            first = (H - 1, randrange(1, W, 2))  # South
-        elif start_side == 2:
-            first = (randrange(1, H, 2), 0)  # West
-        else:
-            first = (randrange(1, H, 2), W - 1)  # East
-
-        # create an inner maze entrance
-        second = (randrange(1, H, 2), randrange(1, W, 2))
-        return first, second
 
     def generate_monte_carlo(self, repeat, entrances=3, difficulty=1.0, reducer=len):
         """Use the Monte Carlo method to maze a maze of defined difficulty.
@@ -214,7 +155,7 @@ class Maze:
         """
         assert not (self.solver is None), "No maze-solving algorithm has been set."
         assert not (self.start is None) and not (
-            self.end is None
+                self.end is None
         ), "Start and end times must be set first."
 
         self.solutions = self.solver.solve(self.grid, self.start, self.end)
@@ -226,15 +167,6 @@ class Maze:
         plt.imshow(self.grid, cmap=plt.cm.binary, interpolation='nearest')
         plt.xticks([]), plt.yticks([])
         plt.show()
-
-    # def display_maze_animated(self):
-    #     fig, ax = plt.subplots()
-    #     def update(i):
-    #         im_normed = self.grid
-    #         ax.imshow(im_normed)
-    #         ax.set_axis_off()
-    #     anim = FuncAnimation(fig, update, frames=2, interval=1)
-    #     plt.show()
 
     def to_visualized_string(self, entrances=False, solutions=False):
         """Return a string representation of the maze.
@@ -257,14 +189,14 @@ class Maze:
         # insert the start and end points
         if entrances and self.start and self.end:
             r, c = self.start
-            txt[r] = txt[r][:c] + "S" + txt[r][c + 1 :]
+            txt[r] = txt[r][:c] + "S" + txt[r][c + 1:]
             r, c = self.end
-            txt[r] = txt[r][:c] + "E" + txt[r][c + 1 :]
+            txt[r] = txt[r][:c] + "E" + txt[r][c + 1:]
 
         # if extant, insert the solution path
         if solutions and self.solutions:
             for r, c in self.solutions[0]:
-                txt[r] = txt[r][:c] + "+" + txt[r][c + 1 :]
+                txt[r] = txt[r][:c] + "+" + txt[r][c + 1:]
 
         return "\n".join(txt)
 
@@ -276,11 +208,24 @@ class Maze:
         rows = string.split("2")
         grid = []
         for row in rows:
-            print(row)
-            grid.append(row.split())
-        print(grid)
-        # grid = np.array([list(map(int, row.replace(" ", ""))) for row in rows if row.strip()])
-        # self.grid = grid
+            if len(row) > 0:
+                grid.append(list(map(int, row.replace(" ", ""))))
+        grid = np.array(grid)
+        self.grid = grid
+
+    def find_max_length(self):
+        """
+        Determine how many characters to generate
+        """
+        rows = len(self.grid)
+        columns = len(self.grid[0])
+        width_length = (rows * 2 + 1)
+        height_length = (columns * 2 + 1)
+        return width_length * height_length + height_length
+
+    # ==================================================================================================================
+    #       Class Methods
+    # ==================================================================================================================
 
     def __str__(self):
         string_rep = ""
@@ -291,9 +236,77 @@ class Maze:
         return string_rep
 
     def __repr__(self):
-        """display maze walls, entrances, and solutions, if available
-
-        Returns:
+        """
+        display maze walls, entrances, and solutions, if available
+        returns:
             str: string representation of the maze
         """
-        return self.__str__()
+        return self.to_visualized_string()
+
+    # ==================================================================================================================
+    #       Private Methods
+    # ==================================================================================================================
+
+    def _generate_outer_entrances(self):
+        """Generate maze entrances, along the outer walls.
+
+        Returns: None
+        """
+        H = self.grid.shape[0]
+        W = self.grid.shape[1]
+
+        start_side = randrange(4)
+
+        # maze entrances will be on opposite sides of the maze.
+        if start_side == 0:
+            self.start = (0, randrange(1, W, 2))  # North
+            self.end = (H - 1, randrange(1, W, 2))
+        elif start_side == 1:
+            self.start = (H - 1, randrange(1, W, 2))  # South
+            self.end = (0, randrange(1, W, 2))
+        elif start_side == 2:
+            self.start = (randrange(1, H, 2), 0)  # West
+            self.end = (randrange(1, H, 2), W - 1)
+        else:
+            self.start = (randrange(1, H, 2), W - 1)  # East
+            self.end = (randrange(1, H, 2), 0)
+
+    def _generate_inner_entrances(self):
+        """Generate maze entrances, randomly within the maze.
+
+        Returns: None
+        """
+        H, W = self.grid.shape
+
+        self.start = (randrange(1, H, 2), randrange(1, W, 2))
+        end = (randrange(1, H, 2), randrange(1, W, 2))
+
+        # make certain the start and end points aren't the same
+        while end == self.start:
+            end = (randrange(1, H, 2), randrange(1, W, 2))
+
+        self.end = end
+
+    def _generate_opposite_entrances(self):
+        """Generate one inner and one outer entrance.
+
+        Returns:
+            tuple: start cell, end cell
+        """
+        H, W = self.grid.shape
+
+        start_side = randrange(4)
+
+        # pick a side for the outer maze entrance
+        if start_side == 0:
+            first = (0, randrange(1, W, 2))  # North
+        elif start_side == 1:
+            first = (H - 1, randrange(1, W, 2))  # South
+        elif start_side == 2:
+            first = (randrange(1, H, 2), 0)  # West
+        else:
+            first = (randrange(1, H, 2), W - 1)  # East
+
+        # create an inner maze entrance
+        second = (randrange(1, H, 2), randrange(1, W, 2))
+        return first, second
