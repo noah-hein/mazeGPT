@@ -220,20 +220,20 @@ class Maze:
     # ==================================================================================================================
 
     def __str__(self):
-        string_rep = ""
-        for row in self.grid:
-            row_string = "".join(map(str, row)) + "2"
-            string_rep += row_string
-        string_rep += "\n"
-        return string_rep
-
-    def __repr__(self):
         """
         display maze walls, entrances, and solutions, if available
         returns:
             str: string representation of the maze
         """
         return self.to_visualized_string()
+
+    def __repr__(self):
+        string_rep = ""
+        for row in self.grid:
+            row_string = "".join(map(str, row)) + "2"
+            string_rep += row_string
+        string_rep += "\n"
+        return string_rep
 
     # ==================================================================================================================
     #       Private Methods

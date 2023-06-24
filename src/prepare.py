@@ -2,44 +2,9 @@ import pathlib
 import random
 import config
 
-from maze import Maze
+from maze.algorithms import *
+from maze import Maze, MazeFactory
 from tokenizers.implementations import ByteLevelBPETokenizer
-
-
-def generate_maze(index: int):
-    # Maze parameters
-    height = random.randint(config.MIN_HEIGHT, config.MAX_HEIGHT)
-    width = random.randint(config.MIN_WIDTH, config.MAX_WIDTH)
-    seed = random.randint(0, 10000)
-
-    # Select a random algorithm
-    algorithm_index = random.randint(0, len(config.ALLOWED_ALGORITHMS) - 1)
-    selected_algorithm = config.ALLOWED_ALGORITHMS[algorithm_index]
-
-    # Create the Maze
-    new_maze = Maze(seed)
-    new_maze.generator = selected_algorithm(height, width)
-    new_maze.generate()
-
-    # Generate build log and return
-    maze_description = "| {: >10} | {: >10} | {: >25} | {: >20} |"
-    maze_description = maze_description.format(
-        index.__str__(),
-        width.__str__() + "x" + height.__str__(),
-        selected_algorithm.__name__,
-        seed
-    )
-    print(maze_description)
-    return new_maze
-
-
-def generate_mazes():
-    print("Generating mazes")
-    table_header = "| {: >10} | {: >10} | {: >25} | {: >20} |".format("i", "dimensions", "algorithm", "seed")
-    print(table_header)
-    print(len(table_header) * "-")
-    mazes = [generate_maze(i) for i in range(config.NUMBER_OF_MAZES)]
-    return mazes
 
 
 def build_dataset(mazes: list[Maze]):
@@ -77,6 +42,12 @@ def build_tokenizer(mazes: list[Maze]):
 
 
 if __name__ == '__main__':
-    generated_mazes = generate_mazes()
-    build_dataset(generated_mazes)
-    build_tokenizer(generated_mazes)
+    # Generate the mazes
+    mazeFactory = MazeFactory(config.MAX_HEIGHT, config.MAX_WIDTH, Prims)
+    mazes = mazeFactory.generate(5)
+
+    print(mazes[0])
+
+    # generated_mazes = generate_mazes()
+    # build_dataset(generated_mazes)
+    # build_tokenizer(generated_mazes)
