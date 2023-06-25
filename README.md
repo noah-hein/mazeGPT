@@ -22,8 +22,8 @@ In fact several already existing algorithms use this principal for generation.
 
 Perfect Maze Definition:
 - No cycles
-- All space is filled within th mazes bounds
-- Only one path from start to finish
+- No unfilled spaces (within the bounds)
+- No matter where you start / end, there should only be one path
 
 ![Perfect vs Not Perfect Maze](/media/perfect_versus_not_perfect.png)
 
@@ -43,9 +43,7 @@ The encoding will be baked into the maze datatype.
 Encoding:
 - 0 = path
 - 1 = wall
-- \n = newline
-- \<start> = start of maze
-- \<end> = end of maze
+- 2 = new line
 
 Since this is a very simple recurrent neural network, 
 it operates via a linear fashion (Instead of in a higher dimension).
