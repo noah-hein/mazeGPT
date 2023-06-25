@@ -12,13 +12,13 @@ ALLOWED_ALGORITHMS = [
     BacktrackingGenerator
 ]
 
-NUMBER_OF_MAZES = 50000
+NUMBER_OF_MAZES_PER_DIMENSION = 300
 TRAINING_PERCENT = 0.9
 
 MIN_HEIGHT = 3
-MAX_HEIGHT = 3
+MAX_HEIGHT = 4
 MIN_WIDTH = 3
-MAX_WIDTH = 3
+MAX_WIDTH = 4
 
 # ======================================================================================================================
 #       Tokenizer
@@ -55,5 +55,4 @@ MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, MODEL_DIRECTORY_NAME)
 MODEL_PATH = os.path.join(MODEL_DIRECTORY, SELECTED_MODEL)
 
 DATA_DIRECTORY = os.path.join(OUTPUT_PATH, DATA_DIRECTORY_NAME)
-DATA_FILE_PATH = os.path.join(DATA_DIRECTORY, DATA_FILENAME)
 TOKENIZER_FILE_PATH = os.path.join(OUTPUT_DIRECTORY_NAME, TOKENIZER_FILENAME)

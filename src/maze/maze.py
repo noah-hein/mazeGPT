@@ -232,7 +232,6 @@ class Maze:
         for row in self.grid:
             row_string = "".join(map(str, row)) + "2"
             string_rep += row_string
-        string_rep += "\n"
         return string_rep
 
     # ==================================================================================================================
