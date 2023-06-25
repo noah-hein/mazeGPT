@@ -1,7 +1,7 @@
 # Maze AI
 Does some maze generation and stuff. Working on this because I'm bored.
 
-![Transformer](/media/transformer.jpg)
+![Transformer](/media/transformer_maze.jpg)
 
 ## Abstract
 There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
