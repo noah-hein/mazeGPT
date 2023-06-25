@@ -7,3 +7,4 @@ from .test import *
 from .train import *
 from .util import *
 from .data import *
+from .tokenizer import *

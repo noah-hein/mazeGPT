@@ -1,27 +1,29 @@
-import config
-
-from maze import Maze
+from datasets import load_dataset
+from config import MazeAiConfig
 from tokenizers.implementations import ByteLevelBPETokenizer
 
-class MazeTokenizer:
 
+class MazeAiTokenizer:
 
-    def get_tokenizer_data(self, tokenizer_data):
-        for i in range(0, len(tokenizer_data), 5):
-            yield ''.join(str(_) for _ in tokenizer_data[i: i + 5])
+    def __init__(self, config: MazeAiConfig):
+        self.config = config
 
-    def build(self, mazes: list[Maze]):
-        # Use Uni-gram sentence piece model
+    def train(self):
+        # Load maze data
+        print("Training tokenizer from " + self.config.DATA_DIRECTORY)
+        dataset = load_dataset(self.config.DATA_DIRECTORY)
+        training_data = dataset["train"]
+
+        # Create new tokenizer
         print("Creating the tokenizer...")
-        sp_tokenizer = ByteLevelBPETokenizer()
-        sp_tokenizer.train_from_iterator(
-            self.get_tokenizer_data(mazes),
-            vocab_size=100,
-            min_frequency=5,
+        tokenizer = ByteLevelBPETokenizer()
+        tokenizer.train_from_iterator(
+            training_data,
+            vocab_size=0,
             show_progress=False,
-            special_tokens=config.SPECIAL_TOKENS
+            special_tokens=self.config.SPECIAL_TOKENS
         )
 
-        # Save model definition to file
-        print("Saving tokenizer at " + config.TOKENIZER_FILENAME)
-        sp_tokenizer.save(config.TOKENIZER_FILE_PATH)
+        # Save tokenizer model definition to file
+        print("Saving tokenizer at " + self.config.TOKENIZER_FILENAME)
+        tokenizer.save(self.config.TOKENIZER_FILE_PATH)

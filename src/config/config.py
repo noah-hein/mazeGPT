@@ -17,10 +17,10 @@ class MazeAiConfig:
     NUMBER_OF_MAZES_PER_DIMENSION = 300
     TRAINING_PERCENT = 0.9
 
-    MIN_HEIGHT = 3
-    MAX_HEIGHT = 4
-    MIN_WIDTH = 3
-    MAX_WIDTH = 4
+    MIN_HEIGHT = 5
+    MAX_HEIGHT = 5
+    MIN_WIDTH = 5
+    MAX_WIDTH = 5
 
     # ==================================================================================================================
     #       Tokenizer

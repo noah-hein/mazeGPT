@@ -33,8 +33,9 @@ class MazeAiData:
 
     def clear_data_folder(self):
         data_path = self.config.DATA_DIRECTORY
-        shutil.rmtree(data_path)
-        os.mkdir(data_path)
+        if os.path.isdir(data_path):
+            shutil.rmtree(data_path)
+        os.makedirs(data_path, exist_ok=True)
 
     def generate_maze_files(self):
         config = self.config
