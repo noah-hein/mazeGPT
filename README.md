@@ -4,17 +4,36 @@ Does some maze generation and stuff. Working on this because I'm bored.
 ![Transformer](/media/transformer.jpg)
 
 # Table of Contents
-1. [Abstract](## Abstract)
-2. [Representation](## Representing a Maze)
-3. [Problem](## The Problem)
-4. [Tokenizer](## Tokenizer)
+1. [Abstract](#abstract)
+   1. [Problem](#the-problem)
+   2. [Representation](#representing-a-maze)
+   3. [Tokenizer](#tokenizer)
+2. [Getting Started](#getting-started)
 
 ## Abstract
 Recursive language models specifically transformers are very good at generating out semi-related strings.
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
 continuous structure.
 
-## Representing a Maze
+### The Problem
+There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
+The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
+
+|                      Prims                       |                            Binary Tree                             |
+|:------------------------------------------------:|:------------------------------------------------------------------:|
+| ![Prims Maze Example 1](/media/prims/prims1.png) | ![Binary Tree Maze Example 1](/media/binary_tree/binary_tree1.png) |
+| ![Prims Maze Example 2](/media/prims/prims2.png) | ![Binary Tree Maze Example 2](/media/binary_tree/binary_tree2.png) |
+| ![Prims Maze Example 3](/media/prims/prims3.png) | ![Binary Tree Maze Example 3](/media/binary_tree/binary_tree3.png) |
+
+As you might begin to see, the used algorithms almost have a unique characteristic to them.
+To the human eye these patterns become easily aparent at a distance. I've noticed this effect still holding
+true no matter the size of the maze.
+
+The idea would be to generate and train the network on thousands of mazes.
+By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
+The end goal is to make a more human like design pattern, one without a fingerprint.
+
+### Representing a Maze
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
@@ -33,25 +52,7 @@ Perfect Maze Definition:
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
 
-## The Problem
-There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
-The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
-
-|                      Prims                       |                            Binary Tree                             |
-|:------------------------------------------------:|:------------------------------------------------------------------:|
-| ![Prims Maze Example 1](/media/prims/prims1.png) | ![Binary Tree Maze Example 1](/media/binary_tree/binary_tree1.png) |
-| ![Prims Maze Example 2](/media/prims/prims2.png) | ![Binary Tree Maze Example 2](/media/binary_tree/binary_tree2.png) |
-| ![Prims Maze Example 3](/media/prims/prims3.png) | ![Binary Tree Maze Example 3](/media/binary_tree/binary_tree3.png) |
-
-As you might begin to see, the used algorithms almost have a unique characteristic to them.
-To the human eye these patterns become easily aparent at a distance. I've noticed this effect still holding
-true no matter the size of the maze.
-
-The idea would be to generate and train the network on thousands of mazes.
-By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
-The end goal is to make a more human like design pattern, one without a fingerprint.
-
-## Tokenizer
+### Tokenizer
 So you might be asking "How the hell do you represent a graph with characters?"
 
 For the sake of simplicity I've decided to go with an approach similar to binary (for now)
@@ -72,6 +73,9 @@ or add another token to represent empty space, this way mazes of different shape
 Since this is a very simple recurrent neural network, 
 it operates in a linear fashion (Instead of in a higher dimension).
 The maze can now be interpreted as a string of tokens, nice!
+
+## Getting Started
+TODO
 
 
 
