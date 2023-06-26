@@ -5,7 +5,7 @@
 Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes.
 
-![Transformer](/media/transformer.jpg)
+![Transformer](/media/transformer_meme.jpg)
 
 ## 🔍 Table of Contents
 * 📗 [Introduction](#introduction)
