@@ -1,4 +1,7 @@
 # Maze AI
+
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
+
 Does some maze generation and stuff. Working on this because I'm bored.
 
 ![Transformer](/media/transformer.jpg)
