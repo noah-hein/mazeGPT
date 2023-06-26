@@ -6,19 +6,19 @@ Does some maze generation and stuff. Working on this because I'm bored.
 
 ![Transformer](/media/transformer.jpg)
 
-# Table of Contents
-1. [Abstract](#abstract)
-   1. [Problem](#the-problem)
-   2. [Representation](#representing-a-maze)
-   3. [Tokenizer](#tokenizer)
-2. [Getting Started](#getting-started)
+## 🔍 Table of Contents
+* 📗 [Introduction](#introduction)
+  * ⚠️ [Problem](#the-problem)
+  * 📐 [Representation](#representing-a-maze)
+  * 📤 [Tokenizer](#tokenizer)
+* 🔧 [Getting Started](#getting-started)
 
-## Abstract
+## 📗 Introduction
 Recursive language models specifically transformers are very good at generating out semi-related strings.
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
 continuous structure.
 
-### The Problem
+### ⚠️ The Problem
 There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
 The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
@@ -36,7 +36,7 @@ The idea would be to generate and train the network on thousands of mazes.
 By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
 The end goal is to make a more human like design pattern, one without a fingerprint.
 
-### Representing a Maze
+### 📐 Representing a Maze
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
@@ -55,7 +55,7 @@ Perfect Maze Definition:
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
 
-### Tokenizer
+### 📤 Tokenizer
 So you might be asking "How the hell do you represent a graph with characters?"
 
 For the sake of simplicity I've decided to go with an approach similar to binary (for now)
@@ -97,7 +97,7 @@ The maze can now be interpreted as a string of tokens, nice!
 ##### Encoding
 111111111112100000001012101011101012101000101012101110101012101010101012101010111012101010001012101010101012100010100012111111111112
 
-## Getting Started
+## 🔧 Getting Started
 TODO
 
 
