@@ -1,7 +1,3 @@
-import random
-import config
-
-from transformers import PreTrainedTokenizerFast, pipeline, GPT2LMHeadModel, set_seed
 from maze import Maze
 from maze.algorithms import *
 
@@ -12,7 +8,6 @@ if __name__ == '__main__':
     maze.generate()
 
     maze.display_maze()
-
 
     # # Import tokenizer and model
     # tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
