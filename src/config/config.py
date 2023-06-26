@@ -1,4 +1,7 @@
 import os
+
+from transformers import TrainingArguments
+
 from maze.algorithms import *
 
 
@@ -58,3 +61,28 @@ class MazeAIConfig:
 
     DATA_DIRECTORY = os.path.join(OUTPUT_PATH, DATA_DIRECTORY_NAME)
     TOKENIZER_FILE_PATH = os.path.join(OUTPUT_DIRECTORY_NAME, TOKENIZER_FILENAME)
+
+    # ==================================================================================================================
+    #       Training
+    # ==================================================================================================================
+
+    TRAINING_ARGS = TrainingArguments(
+        output_dir=MODEL_DIRECTORY,
+        evaluation_strategy="steps",
+        overwrite_output_dir=True,
+        num_train_epochs=10,
+        save_steps=10,
+        logging_steps=10,
+        logging_strategy="steps",
+
+        # learning_rate=5e-5,
+        # weight_decay=0.1,
+        gradient_accumulation_steps=8,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=16,
+        fp16=True,
+
+        # gradient_checkpointing=True,
+        save_total_limit=3,
+        optim="adamw_torch",
+    )

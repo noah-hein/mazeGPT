@@ -1,5 +1,9 @@
 from datasets import load_dataset
 from torch import cuda
+
+from config import MazeAIConfig
+from model import MazeAIModel
+from tokenizer import MazeAITokenizer
 from transformers import \
     PreTrainedTokenizerFast, \
     DataCollatorForLanguageModeling, \
@@ -7,9 +11,10 @@ from transformers import \
     Trainer
 
 
-# def MazeAITrainer():
+class MazeAITrainer(Trainer):
 
-
+    def __init__(self):
+        print("test")
 
 
 
@@ -25,16 +30,14 @@ def encode(unencoded_dataset):
     )
 
 if __name__ == '__main__':
-
+    # Choose the config
+    config = MazeAIConfig()
 
     # Load data set and tokenizer
-    dataset = load_dataset(config.DATA_DIRECTORY, data_files=["dataset.txt"], split='train')
-    dataset = dataset.train_test_split(test_size=0.1)
+    dataset = load_dataset(config.DATA_DIRECTORY, split='train').train_test_split(test_size=0.1)
 
     # Load in the pretrained tokenizer
-    tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
-    tokenizer.pad_token = "[PAD]"
-    tokenizer.mask_token = "[MASK]"
+    tokenizer = MazeAITokenizer(config).load()
 
     # Encode the datasets
     train_dataset = dataset["train"].map(encode, batched=True)
@@ -48,31 +51,10 @@ if __name__ == '__main__':
     data_collator = DataCollatorForLanguageModeling(
         tokenizer=tokenizer, mlm=True, mlm_probability=0.2
     )
-    training_args = TrainingArguments(
-        output_dir=config.MODEL_DIRECTORY,
-        evaluation_strategy="steps",
-        overwrite_output_dir=True,
-        num_train_epochs=10,
-        save_steps=10,
-        logging_steps=10,
-        logging_strategy="steps",
-
-        # learning_rate=5e-5,
-        # weight_decay=0.1,
-        gradient_accumulation_steps=8,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=16,
-        fp16=True,
-
-        # gradient_checkpointing=True,
-        save_total_limit=3,
-        optim="adamw_torch",
-    )
-
-
+    model = MazeAIModel(config)
     trainer = Trainer(
         model=model,
-        args=training_args,
+        args=config.TRAINING_ARGS,
         data_collator=data_collator,
         train_dataset=train_dataset,
         eval_dataset=test_dataset
