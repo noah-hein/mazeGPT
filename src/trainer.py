@@ -1,8 +1,8 @@
 from datasets import load_dataset
-from torch import cuda
 from config import MazeAIConfig
 from model import MazeAIModel
 from tokenizer import MazeAITokenizer
+from util import determine_train_device
 from transformers import \
     DataCollatorForLanguageModeling, \
     Trainer
@@ -15,7 +15,7 @@ class MazeAITrainer(Trainer):
         self.args = config.TRAINING_ARGS
 
         # Use CPU or GPU
-        self.determine_device()
+        determine_train_device()
 
         # Set up trainer members
         self.model = MazeAIModel(config)
@@ -28,7 +28,16 @@ class MazeAITrainer(Trainer):
             mlm=True,
             mlm_probability=0.2
         )
-        super().__init__()
+
+        # Pass arguments to trainer class
+        super().__init__(
+            args=self.args,
+            tokenizer=self.tokenizer,
+            model=self.model,
+            data_collator=self.data_collator,
+            train_dataset=self.train_dataset,
+            eval_dataset=self.eval_dataset
+        )
 
     def encode(self, unencoded_dataset):
         return self.tokenizer(
@@ -37,8 +46,3 @@ class MazeAITrainer(Trainer):
             max_length=512,
             return_special_tokens_mask=True
         )
-
-    def determine_device(self):
-        device = "cuda" if cuda.is_available() else "cpu"
-        cuda.empty_cache()
-        print("Using your (" + device + ") to train")

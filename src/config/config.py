@@ -1,13 +1,11 @@
 import os
-
 from transformers import TrainingArguments
-
 from maze.algorithms import *
 
 
 class MazeAIConfig:
     # ==================================================================================================================
-    #       Maze Settings
+    #       Maze Data
     # ==================================================================================================================
 
     ALLOWED_ALGORITHMS = [
@@ -17,7 +15,7 @@ class MazeAIConfig:
         BacktrackingGenerator
     ]
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 300
+    NUMBER_OF_MAZES_PER_DIMENSION = 100000
     TRAINING_PERCENT = 0.9
 
     MIN_HEIGHT = 5
