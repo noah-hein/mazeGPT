@@ -3,6 +3,7 @@
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 
 Does some maze generation and stuff. Working on this because I'm bored.
+All this thing knows is mazes.
 
 ![Transformer](/media/transformer.jpg)
 
