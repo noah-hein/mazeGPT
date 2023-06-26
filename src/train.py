@@ -1,4 +1,3 @@
-import config
 from datasets import load_dataset
 from torch import cuda
 from transformers import \
@@ -6,6 +5,15 @@ from transformers import \
     DataCollatorForLanguageModeling, \
     TrainingArguments, \
     Trainer
+
+
+# def MazeAITrainer():
+
+
+
+
+
+
 
 
 def encode(unencoded_dataset):
@@ -16,8 +24,9 @@ def encode(unencoded_dataset):
         return_special_tokens_mask=True
     )
 
-
 if __name__ == '__main__':
+
+
     # Load data set and tokenizer
     dataset = load_dataset(config.DATA_DIRECTORY, data_files=["dataset.txt"], split='train')
     dataset = dataset.train_test_split(test_size=0.1)

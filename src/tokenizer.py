@@ -1,29 +1,30 @@
 from datasets import load_dataset
+from transformers import PreTrainedTokenizerFast
+
 from config import MazeAIConfig
 from tokenizers.implementations import ByteLevelBPETokenizer
 
 
-class MazeAiTokenizer:
+class MazeAiTokenizer(ByteLevelBPETokenizer):
 
     def __init__(self, config: MazeAIConfig):
         self.config = config
+        self.pad_token = config.PAD_TOKEN
+        self.mask_token = config.MASK_TOKEN
+        super().__init__()
 
-    def train(self):
-        # Load maze data
-        print("Training tokenizer from " + self.config.DATA_DIRECTORY)
-        dataset = load_dataset(self.config.DATA_DIRECTORY)
-        training_data = dataset["train"]
+    def load(self):
+        return PreTrainedTokenizerFast(tokenizer_file=self.config.TOKENIZER_FILE_PATH)
 
-        # Create new tokenizer
-        print("Creating the tokenizer...")
-        tokenizer = ByteLevelBPETokenizer()
-        tokenizer.train_from_iterator(
+    def train_from_data(self, training_data):
+        print("Training the tokenizer")
+        self.train_from_iterator(
             training_data,
             vocab_size=0,
             show_progress=False,
             special_tokens=self.config.SPECIAL_TOKENS
         )
 
-        # Save tokenizer model definition to file
+    def save_to_file(self):
         print("Saving tokenizer at " + self.config.TOKENIZER_FILENAME)
-        tokenizer.save(self.config.TOKENIZER_FILE_PATH)
+        self.save(self.config.TOKENIZER_FILE_PATH)

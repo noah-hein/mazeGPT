@@ -11,5 +11,7 @@ if __name__ == '__main__':
     data.generate()
 
     # Build the tokenizer based on data
+    training_data = MazeAIData(config).load()["train"]
     tokenizer = MazeAiTokenizer(config)
-    tokenizer.train()
+    tokenizer.train_from_data(training_data)
+    tokenizer.save_to_file()
