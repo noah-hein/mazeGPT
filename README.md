@@ -31,11 +31,11 @@ Each node in the maze (excluding the metadata nodes) can be represented as a 0 o
 There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
 The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
-|                       Prims                       |                             Binary Tree                             |
-|:-------------------------------------------------:|:-------------------------------------------------------------------:|
-| ![Prims Maze Example 1](/media/prims/prims_1.png) | ![Binary Tree Maze Example 1](/media/binary_tree/binary_tree_1.png) |
-| ![Prims Maze Example 2](/media/prims/prims_2.png) | ![Binary Tree Maze Example 2](/media/binary_tree/binary_tree_2.png) |
-| ![Prims Maze Example 3](/media/prims/prims_3.png) | ![Binary Tree Maze Example 3](/media/binary_tree/binary_tree_3.png) |
+|                      Prims                       |                            Binary Tree                             |
+|:------------------------------------------------:|:------------------------------------------------------------------:|
+| ![Prims Maze Example 1](/media/prims/prims1.png) | ![Binary Tree Maze Example 1](/media/binary_tree/binary_tree1.png) |
+| ![Prims Maze Example 2](/media/prims/prims2.png) | ![Binary Tree Maze Example 2](/media/binary_tree/binary_tree2.png) |
+| ![Prims Maze Example 3](/media/prims/prims3.png) | ![Binary Tree Maze Example 3](/media/binary_tree/binary_tree3.png) |
 
 As you might begin to see, the used algorithms almost have a unique characteristic to them.
 To the human eye these patterns become easily aparent at a distance. I've noticed this effect still holding
