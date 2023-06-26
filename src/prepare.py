@@ -1,13 +1,13 @@
-from config import MazeAiConfig
-from data import MazeAiData
+from config import MazeAIConfig
+from data import MazeAIData
 from tokenizer import MazeAiTokenizer
 
 if __name__ == '__main__':
     # Choose the config
-    config = MazeAiConfig()
+    config = MazeAIConfig()
 
     # Generate the training mazes
-    data = MazeAiData(config)
+    data = MazeAIData(config)
     data.generate()
 
     # Build the tokenizer based on data

@@ -1,11 +1,11 @@
 from datasets import load_dataset
-from config import MazeAiConfig
+from config import MazeAIConfig
 from tokenizers.implementations import ByteLevelBPETokenizer
 
 
 class MazeAiTokenizer:
 
-    def __init__(self, config: MazeAiConfig):
+    def __init__(self, config: MazeAIConfig):
         self.config = config
 
     def train(self):

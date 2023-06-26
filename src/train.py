@@ -1,5 +1,4 @@
 import config
-from model import model
 from datasets import load_dataset
 from torch import cuda
 from transformers import \
@@ -60,6 +59,7 @@ if __name__ == '__main__':
         save_total_limit=3,
         optim="adamw_torch",
     )
+
 
     trainer = Trainer(
         model=model,

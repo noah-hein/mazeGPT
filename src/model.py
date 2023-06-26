@@ -1,18 +1,35 @@
-import config
+from config import MazeAIConfig
 from transformers import \
     PreTrainedTokenizerFast, \
-    AutoConfig, GPT2LMHeadModel
+    GPT2LMHeadModel, GPT2Config
 
-# Load in the pretrained tokenizer
-tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
-tokenizer.pad_token = config.PAD_TOKEN
-tokenizer.mask_token = config.MASK_TOKEN
 
-# Define the model
-model_config = AutoConfig.from_pretrained(
-    "gpt2",
-    vocab_size=len(tokenizer),
-    bos_token_id=tokenizer.bos_token_id,
-    eos_token_id=tokenizer.eos_token_id,
-)
-model = GPT2LMHeadModel(model_config)
+class MazeAIModel(GPT2LMHeadModel):
+    # ==================================================================================================================
+    #       Constructor
+    # ==================================================================================================================
+
+    def __init__(self, config: MazeAIConfig):
+        self.config = config
+        self.tokenizer = self._load_tokenizer()
+        self.model_config = self._build_model_config()
+        super().__init__(self.model_config)
+
+    # ==================================================================================================================
+    #       Private Methods
+    # ==================================================================================================================
+
+    def _build_model_config(self):
+        tokenizer = self.tokenizer
+        return GPT2Config.from_pretrained(
+            "gpt2",
+            vocab_size=len(tokenizer),
+            bos_token_id=tokenizer.bos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )
+
+    def _load_tokenizer(self):
+        tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.config.TOKENIZER_FILE_PATH)
+        tokenizer.pad_token = self.config.PAD_TOKEN
+        tokenizer.mask_token = self.config.MASK_TOKEN
+        return tokenizer

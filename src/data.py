@@ -3,15 +3,15 @@ import pathlib
 import shutil
 
 from maze import Maze, MazeFactory
-from config import MazeAiConfig
+from config import MazeAIConfig
 
 
-class MazeAiData:
+class MazeAIData:
     # ==================================================================================================================
     #       Constructor
     # ==================================================================================================================
 
-    def __init__(self, config: MazeAiConfig):
+    def __init__(self, config: MazeAIConfig):
         self.config = config
         self.maze_files: dict[str, list[Maze]] = {}
         self.maze_factory = self.setup_maze_factory()
