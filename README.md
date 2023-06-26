@@ -77,6 +77,26 @@ Since this is a very simple recurrent neural network,
 it operates in a linear fashion (Instead of in a higher dimension).
 The maze can now be interpreted as a string of tokens, nice!
 
+#### Example
+##### Image
+![Encoded Maze Image](/media/encoded_maze_example.png)
+##### Matrix
+```text
+[ 1 1 1 1 1 1 1 1 1 1 1 ]
+[ 1 0 0 0 0 0 0 0 1 0 1 ]
+[ 1 0 1 0 1 1 1 0 1 0 1 ]
+[ 1 0 1 0 0 0 1 0 1 0 1 ]
+[ 1 0 1 1 1 0 1 0 1 0 1 ]
+[ 1 0 1 0 1 0 1 0 1 0 1 ]
+[ 1 0 1 0 1 0 1 1 1 0 1 ]
+[ 1 0 1 0 1 0 0 0 1 0 1 ]
+[ 1 0 1 0 1 0 1 0 1 0 1 ]
+[ 1 0 0 0 1 0 1 0 0 0 1 ]
+[ 1 1 1 1 1 1 1 1 1 1 1 ]
+```
+##### Encoding
+111111111112100000001012101011101012101000101012101110101012101010101012101010111012101010001012101010101012100010100012111111111112
+
 ## Getting Started
 TODO
 

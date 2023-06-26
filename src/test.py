@@ -4,9 +4,11 @@ from maze.algorithms import *
 
 if __name__ == '__main__':
     maze = Maze()
-    maze.generator = Prims(10, 10)
+    maze.generator = AldousBroder(5, 5)
     maze.generate()
 
+    print(maze.__repr__())
+    print(maze.grid)
     maze.display_maze()
 
     # # Import tokenizer and model
