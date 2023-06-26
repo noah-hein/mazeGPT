@@ -8,7 +8,7 @@ if __name__ == '__main__':
     # Choose the config
     config = MazeAIConfig()
 
-    # Generate the training mazes
+    # Generate the training binary_tree
     data = MazeAIData(config)
     data.generate()
 

@@ -80,13 +80,13 @@ class Maze:
         2. For each maze, maze a series of entrances.
         3. To eliminate boring entrance choices, select only the entrances
             that yield the longest solution to a given maze.
-        4. Repeat steps 1 through 3 for several mazes.
-        5. Order the mazes based on a reduction function applied to their maximal
+        4. Repeat steps 1 through 3 for several binary_tree.
+        5. Order the binary_tree based on a reduction function applied to their maximal
             solutions. By default, this reducer will return the solution length.
-        6. Based on the 'difficulty' parameter, select one of the mazes.
+        6. Based on the 'difficulty' parameter, select one of the binary_tree.
 
         Args:
-            repeat (int): How many mazes do you want to maze?
+            repeat (int): How many binary_tree do you want to maze?
             entrances (int): How many different entrance combinations do you want to try?
             difficulty (float): How difficult do you want the final maze to be (zero to one).
             reducer (function): How do you want to determine solution difficulty (default is length).
@@ -94,7 +94,7 @@ class Maze:
         """
         assert (0.0 <= difficulty <= 1.0), "Maze difficulty must be between 0 to 1."
 
-        # maze different mazes
+        # maze different binary_tree
         mazes = []
         for _ in range(repeat):
             self.generate()
@@ -116,7 +116,7 @@ class Maze:
             # for each maze, find the longest solution
             mazes.append(max(this_maze, key=lambda k: len(k["solutions"])))
 
-        # sort the mazes by the length of their solution
+        # sort the binary_tree by the length of their solution
         mazes = sorted(mazes, key=lambda k: reducer(k["solutions"][0]))
 
         # based on optional parameter, choose the maze of the correct difficulty

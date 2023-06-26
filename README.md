@@ -4,12 +4,9 @@ Does some maze generation and stuff. Working on this because I'm bored.
 ![Transformer](/media/transformer.jpg)
 
 ## Abstract
-There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
-The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
-
-The idea is to generate thousands of mazes with a variety of algorithms and make a transformer model learn them all.
-By doing this the model will be able to make original maze incorporating a variety of algorithms.
-This would hopefully take the best of all algorithms and mimic a more human like design pattern.
+Recursive language models specifically transformers are very good at generating out semi-related strings.
+The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
+continuous structure.
 
 ## Representing a Maze
 The easiest approach to representing a maze is with graph theory!
@@ -31,7 +28,14 @@ For storage purposes we will represent the structure as a two-dimensional matrix
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
 
 ## The Problem
+There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
+The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
+
+
+The idea would be to generate and train the network on thousands of mazes.
+By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
+The end goal is to make a more human like design pattern, one without a fingerprint.
 
 ## Transformers?
 

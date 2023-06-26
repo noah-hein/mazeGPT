@@ -29,7 +29,7 @@ class MazeFactory:
     # ==================================================================================================================
 
     def generate(self, number_of_mazes: int):
-        # Start generating the mazes
+        # Start generating the binary_tree
         mazes: list[Maze] = []
         for i in range(number_of_mazes):
             # Create new random maze
@@ -60,7 +60,7 @@ class MazeFactory:
     def _generate_single(self, seed: int, algorithm) -> Maze:
         """
         Creates a single new maze.
-        These mazes are built upon the class private member maze parameters.
+        These binary_tree are built upon the class private member maze parameters.
         """
         # Create the Maze
         new_maze = Maze(seed)

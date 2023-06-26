@@ -48,7 +48,7 @@ class MazeAIData:
 
         for width in range(config.MIN_WIDTH, config.MAX_WIDTH + 1):
             for height in range(config.MIN_HEIGHT, config.MAX_HEIGHT + 1):
-                # Generate the mazes
+                # Generate the binary_tree
                 maze_factory.width = width
                 maze_factory.height = height
                 new_mazes = maze_factory.generate(config.NUMBER_OF_MAZES_PER_DIMENSION)
@@ -59,7 +59,7 @@ class MazeAIData:
                 maze_factory.print_table_break()
 
     def save_maze_files(self):
-        print("Saving mazes to file(s)...")
+        print("Saving binary_tree to file(s)...")
         for maze_file_name, maze_list in self.maze_files.items():
             self.save_mazes_to_file(maze_file_name, maze_list)
 
