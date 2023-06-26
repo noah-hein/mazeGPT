@@ -3,6 +3,12 @@ Does some maze generation and stuff. Working on this because I'm bored.
 
 ![Transformer](/media/transformer.jpg)
 
+# Table of Contents
+1. [Abstract](## Abstract)
+2. [Representation](## Representing a Maze)
+3. [Problem](## The Problem)
+4. [Tokenizer](## Tokenizer)
+
 ## Abstract
 Recursive language models specifically transformers are very good at generating out semi-related strings.
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
@@ -45,9 +51,6 @@ The idea would be to generate and train the network on thousands of mazes.
 By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
 The end goal is to make a more human like design pattern, one without a fingerprint.
 
-## Transformers?
-
-
 ## Tokenizer
 So you might be asking "How the hell do you represent a graph with characters?"
 
@@ -69,10 +72,6 @@ or add another token to represent empty space, this way mazes of different shape
 Since this is a very simple recurrent neural network, 
 it operates in a linear fashion (Instead of in a higher dimension).
 The maze can now be interpreted as a string of tokens, nice!
-
-```math
-begin{matrix} a & b \\ c & d \end{matrix}$
-```
 
 
 
