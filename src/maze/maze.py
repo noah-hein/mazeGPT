@@ -4,14 +4,17 @@ import random
 
 
 class Maze:
-    # ==================================================================================================================
-    #       Constructor
-    # ==================================================================================================================
+    """
+    This is a derivative from the source https://github.com/john-science/mazelib
 
-    """This is a primary object meant to hold a rectangular, 2D maze.
+    This is a primary object meant to hold a rectangular, 2D maze.
     This object includes the methods used to maze and solve the maze,
     as well as the start and end points.
     """
+
+    # ==================================================================================================================
+    #       Constructor
+    # ==================================================================================================================
 
     def __init__(self, seed=None, width=None, height=None):
         self.generator = None

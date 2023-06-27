@@ -1,6 +1,6 @@
 import numpy as np
 from random import choice
-from maze.maze_gen_algo import MazeGenAlgo
+from src.maze import MazeGenAlgo
 
 
 class BinaryTree(MazeGenAlgo):
