@@ -1,7 +1,7 @@
 import random
 from random import randint
 from .maze import Maze
-from maze.algorithms import *
+from .algorithms import *
 
 
 class MazeFactory:
