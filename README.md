@@ -14,8 +14,11 @@ All this thing knows is mazes.
   * 📤 [Tokenizer](docs/INTRODUCTION.md#-tokenizer)
 * 🔧 [Getting Started](docs/GETTING_STARTED.md)
 
-## 🔧 Getting Started
+## 🔧 Quickstart
 TODO
+
+## Authors
+- Noah Hein ([@noah-hein](https://github.com/noah-hein))
 
 
 
