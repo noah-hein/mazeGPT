@@ -1,0 +1,72 @@
+import random
+import numpy as np
+from matplotlib import pyplot as plt
+
+from algorithms.backtracking import BacktrackingAlgorithm
+
+
+class Maze:
+    NEWLINE_CHARACTER = "2"
+
+    # ==================================================================================================================
+    #       Constructor
+    # ==================================================================================================================
+
+    def __init__(self, width=None, height=None, seed=None):
+        self.grid = []
+        self.algorithm = None
+        self.width = width
+        self.height = height
+        self.randomize_seed(seed)
+
+    # ==================================================================================================================
+    #       Public Methods
+    # ==================================================================================================================
+
+    @staticmethod
+    def randomize_seed(seed):
+        if seed is not None:
+            random.seed(seed)
+            np.random.seed(seed)
+
+    def generate(self):
+        # Ensure an algorithm was selected
+        if self.algorithm is None:
+            raise Exception("Algorithm for new maze generation not selected")
+        self.algorithm.set_dimensions(self.width, self.height)
+        self.grid = self.algorithm.generate()
+
+    def display_maze(self):
+        plt.figure(figsize=(10, 5))
+        plt.imshow(self.grid, cmap=plt.cm.binary, interpolation='nearest')
+        plt.xticks([]), plt.yticks([])
+        plt.show()
+
+    # ==================================================================================================================
+    #       Class Methods
+    # ==================================================================================================================
+
+    def to_string(self):
+        string_rep = ""
+        for row in self.grid:
+            row_string = "".join(map(str, row)) + self.NEWLINE_CHARACTER
+            string_rep += row_string
+        return string_rep
+
+    def __str__(self):
+        return self.to_string()
+
+    def __repr__(self):
+        return self.to_string()
+
+if __name__ == '__main__':
+    test = Maze()
+    test.width = 10
+    test.height = 10
+    test.algorithm = BacktrackingAlgorithm()
+    test.generate()
+
+    test.display_maze()
+
+    print(test)
+
