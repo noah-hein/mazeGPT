@@ -1,7 +1,7 @@
 import random
 from random import randint
+from .algorithms.prims import PrimsAlgorithm
 from .maze import Maze
-from .algorithms import *
 
 
 class MazeFactory:
@@ -22,7 +22,7 @@ class MazeFactory:
     def __init__(self):
         self.width = 5
         self.height = 5
-        self.algorithms = [Prims]
+        self.algorithms = [PrimsAlgorithm]
 
     # ==================================================================================================================
     #       Public Methods

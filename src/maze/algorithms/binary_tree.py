@@ -1,37 +1,37 @@
 import numpy as np
 from random import choice
-from src.maze import MazeGenAlgo
+from maze.maze_algo import MazeAlgorithm
 
 
-class BinaryTree(MazeGenAlgo):
-    """For every cell in the grid, knock down a wall either North or West."""
+class BinaryTreeAlgorithm(MazeAlgorithm):
+    """
+    Approach:
+        A binary tree maze is a standard orthogonal maze where each cell always has a passage leading up or leading
+        left, but never both. To create a binary tree maze, for each cell flip a coin to decide whether to add a
+        passage leading up or left. Always pick the same direction for cells on the boundary, and the end result will
+        be a valid simply connected maze that looks like a binary tree, with the upper left corner its root.
 
-    def __init__(self, w, h, skew=None):
-        super(BinaryTree, self).__init__(w, h)
-        skewes = {
+    References:
+        https://github.com/john-science/mazelib
+        https://en.wikipedia.org/wiki/Maze_generation_algorithm
+    """
+
+    def __init__(self):
+        super(BinaryTree, self).__init__()
+        skews = {
             "NW": [(1, 0), (0, -1)],
             "NE": [(1, 0), (0, 1)],
             "SW": [(-1, 0), (0, -1)],
             "SE": [(-1, 0), (0, 1)],
         }
-        if skew in skewes:
-            self.skew = skewes[skew]
-        else:
-            key = choice(list(skewes.keys()))
-            self.skew = skewes[key]
+        key = choice(list(skews.keys()))
+        self.skew = skews[key]
 
     def generate(self):
-        """highest-level method that implements the maze-generating algorithm
-
-        Returns:
-            np.array: returned matrix
-        """
-        # create empty grid, with walls
-        grid = np.empty((self.H, self.W), dtype=np.int8)
+        grid = np.empty((self.blockHeight, self.blockWidth), dtype=np.int8)
         grid.fill(1)
-
-        for row in range(1, self.H, 2):
-            for col in range(1, self.W, 2):
+        for row in range(1, self.blockHeight, 2):
+            for col in range(1, self.blockWidth, 2):
                 grid[row][col] = 0
                 neighbor_row, neighbor_col = self._find_neighbor(row, col)
                 grid[neighbor_row][neighbor_col] = 0
@@ -39,22 +39,13 @@ class BinaryTree(MazeGenAlgo):
         return grid
 
     def _find_neighbor(self, current_row, current_col):
-        """Find a neighbor in the skewed direction.
-
-        Args:
-            current_row (int): row number
-            current_col (int): col number
-        Returns:
-            tuple: position of the randomly-chosen neighbor
-        """
         neighbors = []
         for b_row, b_col in self.skew:
             neighbor_row = current_row + b_row
             neighbor_col = current_col + b_col
-            if 0 < neighbor_row < (self.H - 1):
-                if 0 < neighbor_col < (self.W - 1):
+            if 0 < neighbor_row < (self.blockHeight - 1):
+                if 0 < neighbor_col < (self.blockWidth - 1):
                     neighbors.append((neighbor_row, neighbor_col))
-
         if len(neighbors) == 0:
             return current_row, current_col
         else:

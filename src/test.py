@@ -4,7 +4,7 @@ from maze.algorithms import *
 
 if __name__ == '__main__':
     maze = Maze()
-    maze.generator = AldousBroder(5, 5)
+    maze.generator = AldousBroderAlgorithm()
     maze.generate()
 
     print(maze.__repr__())

@@ -1,57 +1,57 @@
 import numpy as np
-from random import choice, randrange
-from src.maze.maze_gen_algo import MazeGenAlgo
+from maze.maze_algo import MazeAlgorithm
 
 
-class AldousBroder(MazeGenAlgo):
+class AldousBroderAlgorithm(MazeAlgorithm):
     """
-    1. Choose a random cell.
-    2. Choose a random neighbor of the current cell and visit it. If the neighbor has not
-        yet been visited, add the traveled edge to the spanning tree.
-    3. Repeat step 2 until all cells have been visited.
+    Approach:
+        The Aldous-Broder algorithm also produces uniform spanning trees.
+        However, it is one of the least efficient maze algorithms.
+
+    Algorithm:
+        1. Pick a random cell as the current cell and mark it as visited.
+        2. While there are unvisited cells:
+            1. Pick a random neighbour.
+            2. If the chosen neighbour has not been visited:
+                1. Remove the wall between the current cell and the chosen neighbour.
+                2. Mark the chosen neighbour as visited.
+            3. Make the chosen neighbour the current cell.
+
+    References:
+        https://github.com/john-science/mazelib
+        https://en.wikipedia.org/wiki/Maze_generation_algorithm#Aldous-Broder_algorithm
     """
 
-    def __init__(self, h, w):
-        super(AldousBroder, self).__init__(h, w)
+    def __init__(self):
+        super(AldousBroderAlgorithm, self).__init__()
 
     def generate(self):
-        """highest-level method that implements the maze-generating algorithm
-
-        Returns:
-            np.array: returned matrix
-        """
-        # create empty grid, with walls
-        grid = np.empty((self.H, self.W), dtype=np.int8)
+        # Initialize empty grid
+        grid = np.empty((self.blockHeight, self.blockWidth), dtype=np.int8)
         grid.fill(1)
 
-        crow = randrange(1, self.H, 2)
-        ccol = randrange(1, self.W, 2)
-        grid[crow][ccol] = 0
+        # Start with a random cell in the grid
+        row, column = self._pick_random_cell()
+        grid[row][column] = 0
+
         num_visited = 1
-
-        while num_visited < self.h * self.w:
-            # find neighbors
-            neighbors = self._find_neighbors(crow, ccol, grid, True)
-
-            # how many neighbors have already been visited?
-            if len(neighbors) == 0:
-                # mark random neighbor as current
-                (crow, ccol) = choice(self._find_neighbors(crow, ccol, grid))
-                continue
-
-            # loop through neighbors
-            for nrow, ncol in neighbors:
-                if grid[nrow][ncol] > 0:
-                    # open up wall to new neighbor
-                    grid[(nrow + crow) // 2][(ncol + ccol) // 2] = 0
-                    # mark neighbor as visited
-                    grid[nrow][ncol] = 0
-                    # bump the number visited
-                    num_visited += 1
-                    # current becomes new neighbor
-                    crow = nrow
-                    ccol = ncol
-                    # break loop
-                    break
-
+        while num_visited < self.height * self.width:
+            neighbors = self._find_neighbors(row, column, grid, True)
+            if not neighbors:
+                row, column = self._pick_random_neighbor(row, column, grid)
+            else:
+                row, column, num_visited = self._process_neighbors(row, column, neighbors, grid, num_visited)
         return grid
+
+    @staticmethod
+    def _process_neighbors(row, column, neighbors, grid, num_visited):
+        for nrow, ncol in neighbors:
+            if grid[nrow, ncol] > 0:
+                grid[(nrow + row) // 2, (ncol + column) // 2] = 0
+                grid[nrow, ncol] = 0
+                num_visited += 1
+                row = nrow
+                column = ncol
+                break
+        return row, column, num_visited
+

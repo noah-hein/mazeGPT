@@ -1,6 +1,6 @@
 import os
 from transformers import TrainingArguments
-from maze.algorithms import *
+from maze import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
 class MazeAIConfig:
@@ -9,10 +9,10 @@ class MazeAIConfig:
     # ==================================================================================================================
 
     ALLOWED_ALGORITHMS = [
-        BinaryTree,
-        AldousBroder,
-        Prims,
-        BacktrackingGenerator
+        BinaryTreeAlgorithm,
+        AldousBroderAlgorithm,
+        PrimsAlgorithm,
+        BacktrackingAlgorithm
     ]
 
     NUMBER_OF_MAZES_PER_DIMENSION = 100000
