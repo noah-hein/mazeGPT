@@ -1,0 +1,9 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Hein"
+  given-names: "Noah"
+title: "mazeGPT"
+version: 2.0.4
+date-released: 2023-23-06
+url: "https://github.com/noah-hein/mazeGPT"
