@@ -12,8 +12,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/noah-hein/mazeGPT?style=social)](https://github.com/noah-hein/mazeGPT/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/noah-hein/mazeGPT?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/noah-hein/mazeGPT/watchers/)
 
+#### Disclaimers
 Does some maze generation and stuff. Working on this because I'm bored.
-All this thing knows is mazes.
+All this thing knows is mazes. By no means am I a master of machine learning. 
+Hugging face and OpenAI are the ones to thank here.
 
 ![Transformer](/media/transformer_meme.jpg)
 
