@@ -1,8 +1,4 @@
-<p align="center">
-  <picture>
-    <img alt="mazeGPT Logo" src="media/logo.png" width="400" height="125" style="max-width: 100%;">
-  </picture>
-</p>
+![MazeGPT](media/logo_black.png)
 
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 

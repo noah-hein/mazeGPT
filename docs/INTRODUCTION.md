@@ -9,9 +9,9 @@ The problem with these algorithms is that even with noise and different seeds, r
 
 |                       Prims                        |                             Binary Tree                              |
 |:--------------------------------------------------:|:--------------------------------------------------------------------:|
-| ![Prims Maze Example 1](../media/prims/prims1.png) | ![Binary Tree Maze Example 1](../media/binary_tree/binary_tree1.png) |
-| ![Prims Maze Example 2](../media/prims/prims2.png) | ![Binary Tree Maze Example 2](../media/binary_tree/binary_tree2.png) |
-| ![Prims Maze Example 3](../media/prims/prims3.png) | ![Binary Tree Maze Example 3](../media/binary_tree/binary_tree3.png) |
+| ![Prims Maze Example 1](../media/examples/prims/prims1.png) | ![Binary Tree Maze Example 1](../media/examples/binary_tree/binary_tree1.png) |
+| ![Prims Maze Example 2](../media/examples/prims/prims2.png) | ![Binary Tree Maze Example 2](../media/examples/binary_tree/binary_tree2.png) |
+| ![Prims Maze Example 3](../media/examples/prims/prims3.png) | ![Binary Tree Maze Example 3](../media/examples/binary_tree/binary_tree3.png) |
 
 As you might begin to see, the used algorithms almost have a unique characteristic to them.
 To the human eye these patterns become easily aparent at a distance. I've noticed this effect still holding
@@ -25,7 +25,7 @@ The end goal is to make a more human like design pattern, one without a fingerpr
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
-![Maze Graph](../media/maze_as_graph.png)
+![Maze Graph](../media/docs/maze_as_graph.png)
 
 The focus of this project will be around perfect mazes. A perfect maze is the same as a spanning tree.
 In fact several already existing algorithms use this principal for generation.
@@ -35,7 +35,7 @@ Perfect Maze Definition:
 - No unfilled spaces (within the bounds)
 - No matter where you start / end, there should only be one path
 
-![Perfect vs Not Perfect Maze](../media/perfect_versus_not_perfect.png)
+![Perfect vs Not Perfect Maze](../media/docs/perfect_versus_not_perfect.png)
 
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
@@ -58,7 +58,7 @@ The maze can now be interpreted as a string of tokens, nice!
 
 #### Example
 ##### Image
-![Encoded Maze Image](../media/encoded_maze_example.png)
+![Encoded Maze Image](../media/docs/encoded_maze_example.png)
 ##### Matrix
 ```text
 [ 1 1 1 1 1 1 1 1 1 1 1 ]
