@@ -17,7 +17,11 @@ Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes. By no means am I a master of machine learning. 
 Hugging face and OpenAI are the ones to thank here.
 
-![Transformer](/media/transformer_meme.jpg)
+|                                    |                                |
+|:----------------------------------:|:------------------------------:|
+| ![Inception](/media/inception.jpg) | ![Shining](/media/shining.jpg) |
+|                                    |                                |
+
 
 # 🔍 Table of Contents
 * 🌎 [Introduction](#introduction)
