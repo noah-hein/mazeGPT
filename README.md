@@ -8,10 +8,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/noah-hein/mazeGPT.svg)](https://github.com/noah-hein/mazeGPT/commits/master)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/noah-hein/mazeGPT)](https://GitHub.com/noah-hein/mazeGPT/pull/)
 
-
-[![GitHub stars](https://img.shields.io/github/stars/noah-hein/mazeGPT?style=social)](https://github.com/noah-hein/mazeGPT/stargazers)
-[![GitHub watchers](https://img.shields.io/github/watchers/noah-hein/mazeGPT?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/noah-hein/mazeGPT/watchers/)
-
 #### Disclaimers
 Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes. By no means am I a master of machine learning. 
