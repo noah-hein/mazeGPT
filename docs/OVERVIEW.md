@@ -1,4 +1,4 @@
-## 📗 Introduction
+## 📗 Overview
 Recursive language models specifically transformers are very good at generating out semi-related strings.
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
 continuous structure.
