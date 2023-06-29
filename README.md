@@ -1,4 +1,4 @@
-![MazeGPT](media/logo_black.png)
+![MazeGPT](media/logo.svg)
 
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 
