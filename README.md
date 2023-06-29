@@ -15,7 +15,7 @@
 #### Disclaimers
 Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes. By no means am I a master of machine learning. 
-Hugging face and OpenAI are the ones to thank here.
+Hugging face and OpenAI are the ones to thank. They are doing the heaving lifting here.
 
 |                                    |                                |
 |:----------------------------------:|:------------------------------:|
