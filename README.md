@@ -22,7 +22,6 @@ Hugging face and OpenAI are the ones to thank here.
 | ![Inception](/media/inception.jpg) | ![Shining](/media/shining.jpg) |
 |                                    |                                |
 
-
 # 🔍 Table of Contents
 * 🌎 [Introduction](#introduction)
 * ⏩ [Quickstart](#-quickstart)
