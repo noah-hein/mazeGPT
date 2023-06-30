@@ -1,6 +1,6 @@
 import numpy as np
 from random import randrange
-from maze.maze_algo import MazeAlgorithm
+from src.maze.maze_algo import MazeAlgorithm
 
 
 class PrimsAlgorithm(MazeAlgorithm):
@@ -23,7 +23,7 @@ class PrimsAlgorithm(MazeAlgorithm):
     """
 
     def __init__(self):
-        super(Prims, self).__init__()
+        super(PrimsAlgorithm, self).__init__()
 
     def generate(self):
         # create empty grid

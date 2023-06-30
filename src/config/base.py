@@ -1,6 +1,6 @@
 import os
 from transformers import TrainingArguments
-from maze import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
+from src.maze.algorithms import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
 class MazeAIConfig:
@@ -78,7 +78,7 @@ class MazeAIConfig:
         gradient_accumulation_steps=8,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=16,
-        fp16=True,
+        fp16=False,
 
         # gradient_checkpointing=True,
         save_total_limit=3,

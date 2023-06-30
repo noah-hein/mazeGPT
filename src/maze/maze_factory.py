@@ -62,9 +62,10 @@ class MazeFactory:
         Creates a single new maze.
         These binary_tree are built upon the class private member maze parameters.
         """
-        # Create the Maze
         new_maze = Maze(seed)
-        new_maze.generator = algorithm(self.height, self.width)
+        new_maze.width = self.width
+        new_maze.height = self.height
+        new_maze.algorithm = algorithm()
         new_maze.generate()
         return new_maze
 

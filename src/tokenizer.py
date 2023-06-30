@@ -1,6 +1,6 @@
 from transformers import PreTrainedTokenizerFast
-from config import MazeAIConfig
 from tokenizers.implementations import ByteLevelBPETokenizer
+from src.config.base import MazeAIConfig
 
 
 class MazeAITokenizer(ByteLevelBPETokenizer):

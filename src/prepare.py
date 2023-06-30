@@ -1,11 +1,11 @@
 from datasets import load_dataset
 
-from config import MazeAIConfig
-from data import MazeAIData
-from tokenizer import MazeAITokenizer
+from src.config.base import MazeAIConfig
+from src.data import MazeAIData
+from src.tokenizer import MazeAITokenizer
 
 
-def prepare():
+def prepare(test=""):
     """
     Builds dataset of mazes for training the model.
     Uses built data to then generate a tokenizer.

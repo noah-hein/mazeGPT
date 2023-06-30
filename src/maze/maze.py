@@ -1,7 +1,6 @@
 import random
 import numpy as np
 from matplotlib import pyplot as plt
-from maze2.algorithms.prims import Prims
 
 
 class Maze:

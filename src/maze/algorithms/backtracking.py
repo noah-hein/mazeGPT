@@ -1,5 +1,5 @@
 import numpy as np
-from maze.maze_algo import MazeAlgorithm
+from src.maze.maze_algo import MazeAlgorithm
 
 
 class BacktrackingAlgorithm(MazeAlgorithm):

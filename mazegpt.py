@@ -1,4 +1,5 @@
 import click
+from src.prepare import prepare as prepare_handler
 
 
 @click.group()
@@ -7,12 +8,11 @@ def cli():
 
 
 @click.command()
-@click.option('--count', default=1, help='Number of greetings.')
-@click.option('--name', prompt='Your name', help='The person to greet.')
-def hello(count, name):
-    print("Hello World!")
+@click.option("--config", default="/src/config/base.py", help="The selected configuration class")
+def prepare(config):
+    prepare_handler(config)
 
 
-cli.add_command(hello)
+cli.add_command(prepare)
 if __name__ == '__main__':
     cli()

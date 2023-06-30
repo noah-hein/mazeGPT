@@ -3,8 +3,9 @@ import pathlib
 import shutil
 
 from datasets import load_dataset
-from maze import Maze, MazeFactory
-from config import MazeAIConfig
+from src.config.base import MazeAIConfig
+from src.maze.maze import Maze
+from src.maze.maze_factory import MazeFactory
 
 
 class MazeAIData:

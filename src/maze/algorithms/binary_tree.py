@@ -1,6 +1,6 @@
 import numpy as np
 from random import choice
-from maze.maze_algo import MazeAlgorithm
+from src.maze.maze_algo import MazeAlgorithm
 
 
 class BinaryTreeAlgorithm(MazeAlgorithm):
@@ -17,7 +17,7 @@ class BinaryTreeAlgorithm(MazeAlgorithm):
     """
 
     def __init__(self):
-        super(BinaryTree, self).__init__()
+        super(BinaryTreeAlgorithm, self).__init__()
         skews = {
             "NW": [(1, 0), (0, -1)],
             "NE": [(1, 0), (0, 1)],
