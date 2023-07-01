@@ -2,7 +2,6 @@ import os
 import pathlib
 import shutil
 
-from datasets import load_dataset
 from src.config.default import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
@@ -26,9 +25,6 @@ class MazeAIData:
         self.clear_data_folder()
         self.generate_maze_files()
         self.save_maze_files()
-
-    def load(self):
-        return load_dataset(self.config.DATA_DIRECTORY)
 
     def setup_maze_factory(self):
         maze_factory = MazeFactory()

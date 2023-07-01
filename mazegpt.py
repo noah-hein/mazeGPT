@@ -2,7 +2,7 @@ import click
 from typing import Type
 from src.config.default import MazeAIConfig
 from src.prepare import prepare as prepare_handler
-from src.train import train as train_handler
+from src.train import MazeAITrainer
 
 AVAILABLE_CONFIGS: dict[str, Type[MazeAIConfig]] = {
     "default": MazeAIConfig
@@ -23,7 +23,7 @@ def prepare(config):
 @click.command(help="Starts training the selected model with from the dataset and tokenizer")
 @click.option("--config", default="default", help="The selected configuration class")
 def train(config):
-    train_handler(AVAILABLE_CONFIGS[config]())
+    MazeAITrainer(AVAILABLE_CONFIGS[config]())
 
 
 cli.add_command(prepare)

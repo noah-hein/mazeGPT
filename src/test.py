@@ -1,5 +1,5 @@
-from maze import Maze
-from maze.algorithms import *
+from src.maze.maze import Maze
+from src.maze.algorithms import *
 
 
 if __name__ == '__main__':

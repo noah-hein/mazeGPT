@@ -1,7 +1,7 @@
 from datasets import load_dataset
+from tokenizers.implementations import ByteLevelBPETokenizer
 from src.config.default import MazeAIConfig
 from src.data import MazeAIData
-from src.tokenizer import MazeAITokenizer
 
 
 def prepare(config: MazeAIConfig):
@@ -16,9 +16,17 @@ def prepare(config: MazeAIConfig):
 
     # Build the tokenizer based on data
     training_data = load_dataset(config.DATA_DIRECTORY)["train"]
-    tokenizer = MazeAITokenizer(config)
-    tokenizer.train_from_data(training_data)
-    tokenizer.save_to_file()
+    tokenizer = ByteLevelBPETokenizer()
+    tokenizer.train_from_iterator(
+        training_data,
+        vocab_size=0,
+        show_progress=False,
+        special_tokens=config.SPECIAL_TOKENS
+    )
+
+    # Save tokenizer to a file
+    print("Saving tokenizer at " + config.TOKENIZER_FILENAME)
+    tokenizer.save(config.TOKENIZER_FILE_PATH)
 
 
 if __name__ == '__main__':
