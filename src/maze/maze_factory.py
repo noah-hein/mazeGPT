@@ -39,7 +39,7 @@ class MazeFactory:
 
             # Add and print maze
             mazes.append(new_maze)
-            self._print_maze_info(i, 1, algorithm)
+            self._print_maze_info(i, seed, algorithm)
         return mazes
 
     def print_table_break(self):

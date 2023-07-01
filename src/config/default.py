@@ -14,13 +14,14 @@ class MazeAIConfig:
         BacktrackingAlgorithm
     ]
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 100000
+    NUMBER_OF_MAZES_PER_DIMENSION = 50000
     TRAINING_PERCENT = 0.9
 
-    MIN_HEIGHT = 5
-    MAX_HEIGHT = 5
-    MIN_WIDTH = 5
-    MAX_WIDTH = 5
+    MIN_WIDTH = 3
+    MIN_HEIGHT = 3
+
+    MAX_WIDTH = 10
+    MAX_HEIGHT = 10
 
     # ==================================================================================================================
     #       Folder / File Names
