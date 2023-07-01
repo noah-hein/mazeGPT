@@ -1,19 +1,15 @@
 from datasets import load_dataset
-
-from src.config.base import MazeAIConfig
+from src.config.default import MazeAIConfig
 from src.data import MazeAIData
 from src.tokenizer import MazeAITokenizer
 
 
-def prepare(test=""):
+def prepare(config: MazeAIConfig):
     """
     Builds dataset of mazes for training the model.
     Uses built data to then generate a tokenizer.
     Both dataset and tokenizer are saved to the output folder.
     """
-    # Choose the config
-    config = MazeAIConfig()
-
     # Generate the training binary_tree
     data = MazeAIData(config)
     data.generate()
@@ -29,4 +25,5 @@ if __name__ == '__main__':
     """
     Allows the client to run the prepare script without the cli.
     """
-    prepare()
+    default_config = MazeAIConfig()
+    prepare(default_config)

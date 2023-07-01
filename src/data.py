@@ -3,7 +3,7 @@ import pathlib
 import shutil
 
 from datasets import load_dataset
-from src.config.base import MazeAIConfig
+from src.config.default import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
 
