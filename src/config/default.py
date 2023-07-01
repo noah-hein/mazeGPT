@@ -32,7 +32,8 @@ class MazeAIConfig:
 
     DATA_FILENAME = "dataset.txt"
     TOKENIZER_FILENAME = "tokenizer.json"
-    SELECTED_MODEL = "checkpoint-7030"
+    CHECKPOINT_MODEL = "checkpoint-7030"
+    USE_CHECKPOINT = False
 
     # ==================================================================================================================
     #       Paths
@@ -42,7 +43,7 @@ class MazeAIConfig:
     OUTPUT_PATH = os.path.join(ROOT_PATH, OUTPUT_DIRECTORY_NAME)
 
     MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, MODEL_DIRECTORY_NAME)
-    MODEL_PATH = os.path.join(MODEL_DIRECTORY, SELECTED_MODEL)
+    MODEL_PATH = os.path.join(MODEL_DIRECTORY, CHECKPOINT_MODEL)
 
     DATA_DIRECTORY = os.path.join(OUTPUT_PATH, DATA_DIRECTORY_NAME)
     TOKENIZER_FILE_PATH = os.path.join(OUTPUT_DIRECTORY_NAME, TOKENIZER_FILENAME)
@@ -57,5 +58,3 @@ class MazeAIConfig:
         PAD_TOKEN,
         MASK_TOKEN
     ]
-
-    CHECKPOINT = None
