@@ -1,4 +1,4 @@
-from config import MazeAIConfig
+from src.config.default import MazeAIConfig
 from transformers import \
     PreTrainedTokenizerFast, \
     GPT2LMHeadModel, GPT2Config

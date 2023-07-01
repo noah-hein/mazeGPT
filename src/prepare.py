@@ -22,8 +22,5 @@ def prepare(config: MazeAIConfig):
 
 
 if __name__ == '__main__':
-    """
-    Allows the client to run the prepare script without the cli.
-    """
-    default_config = MazeAIConfig()
-    prepare(default_config)
+    """Allows the you to run the 'prepare' script without the CLI"""
+    prepare(MazeAIConfig())

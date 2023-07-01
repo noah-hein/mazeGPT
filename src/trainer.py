@@ -1,8 +1,8 @@
 from datasets import load_dataset
-from config import MazeAIConfig
-from model import MazeAIModel
-from tokenizer import MazeAITokenizer
-from util import determine_train_device
+from src.config.default import MazeAIConfig
+from src.model import MazeAIModel
+from src.tokenizer import MazeAITokenizer
+from src.util import determine_train_device
 from transformers import \
     DataCollatorForLanguageModeling, \
     Trainer
