@@ -1,4 +1,5 @@
 import os
+from transformers import TrainingArguments
 from src.maze.algorithms import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
@@ -59,3 +60,30 @@ class MazeAIConfig:
     ]
 
     CHECKPOINT = None
+
+    # ==================================================================================================================
+    #       Training
+    # ==================================================================================================================
+
+    TEST_SIZE = 0.1
+    FRAGMENT_LENGTH = 1000
+    TRAINING_ARGS = TrainingArguments(
+        output_dir=MODEL_DIRECTORY,
+        evaluation_strategy="steps",
+        overwrite_output_dir=True,
+        num_train_epochs=10,
+        save_steps=10,
+        logging_steps=10,
+        logging_strategy="steps",
+
+        # learning_rate=5e-5,
+        # weight_decay=0.1,
+        gradient_accumulation_steps=8,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=16,
+        fp16=False,
+
+        # gradient_checkpointing=True,
+        save_total_limit=3,
+        optim="adamw_torch",
+    )
