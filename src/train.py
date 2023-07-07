@@ -1,8 +1,7 @@
 from datasets import load_dataset
 from src.config.default import MazeAIConfig
 from src.util import determine_train_device
-from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, DataCollatorForLanguageModeling, \
-    TrainingArguments, Trainer
+from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, DataCollatorForLanguageModeling, Trainer
 
 
 class MazeAITrainer(Trainer):
@@ -18,10 +17,10 @@ class MazeAITrainer(Trainer):
         self.TOKENIZER = self._tokenizer()
         self.DATA_COLLATOR = self._data_collator()
         self.MODEL = self._model()
-        self.TRAINING_ARGS = self._trainer_args()
+        self.TRAINING_ARGS = self.config.TRAINING_ARGS
 
         # Split the dataset
-        dataset = load_dataset(config.DATA_DIRECTORY, split='train').train_test_split(test_size=0.1)
+        dataset = load_dataset(config.DATA_DIRECTORY, split='train').train_test_split(test_size=config.TEST_SIZE)
         train_dataset = dataset["train"].map(self._encode, batched=True)
         eval_dataset = dataset["test"].map(self._encode, batched=True)
 
@@ -43,9 +42,9 @@ class MazeAITrainer(Trainer):
     def _encode(self, unencoded_dataset):
         return self.TOKENIZER(
             unencoded_dataset["text"],
-            truncation=True,
-            max_length=512,
-            return_special_tokens_mask=True
+            max_length=self.config.FRAGMENT_LENGTH,
+            return_special_tokens_mask=True,
+            truncation=True
         )
 
     def _model(self) -> GPT2LMHeadModel:
@@ -70,28 +69,6 @@ class MazeAITrainer(Trainer):
             tokenizer=self.TOKENIZER,
             mlm=True,
             mlm_probability=0.2
-        )
-
-    def _trainer_args(self) -> TrainingArguments:
-        return TrainingArguments(
-            output_dir=self.config.MODEL_DIRECTORY,
-            evaluation_strategy="steps",
-            overwrite_output_dir=True,
-            num_train_epochs=10,
-            save_steps=10,
-            logging_steps=10,
-            logging_strategy="steps",
-
-            # learning_rate=5e-5,
-            # weight_decay=0.1,
-            gradient_accumulation_steps=8,
-            per_device_train_batch_size=8,
-            per_device_eval_batch_size=16,
-            fp16=False,
-
-            # gradient_checkpointing=True,
-            save_total_limit=3,
-            optim="adamw_torch",
         )
 
 
