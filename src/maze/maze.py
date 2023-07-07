@@ -52,7 +52,8 @@ class Maze:
     # ==================================================================================================================
 
     def to_string(self):
-        string_rep = ""
+        header = "[" + self.width.__str__() + "x" + self.height.__str__() + "]"
+        string_rep = header + " "
         for row in self.grid:
             row_string = "".join(map(str, row)) + self.NEWLINE_CHARACTER
             string_rep += row_string

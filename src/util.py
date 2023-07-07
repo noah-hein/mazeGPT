@@ -5,7 +5,7 @@ from torch import cuda
 def determine_train_device():
     device = "cuda" if cuda.is_available() else "cpu"
     cuda.empty_cache()
-    print("Using your (" + device + ") to train")
+    print("Using (" + device + ") to train")
 
 
 def print_gpu_utilization():

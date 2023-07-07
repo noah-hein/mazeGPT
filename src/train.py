@@ -48,20 +48,17 @@ class MazeAITrainer(Trainer):
         )
 
     def _model(self) -> GPT2LMHeadModel:
-        checkpoint = self.config.CHECKPOINT
-        has_checkpoint = self.config.CHECKPOINT is not None
-        model = checkpoint if has_checkpoint else GPT2LMHeadModel(
-                GPT2Config.from_pretrained(
-                    "gpt2",
-                    vocab_size=len(self.TOKENIZER),
-                    bos_token_id=self.TOKENIZER.bos_token_id,
-                    eos_token_id=self.TOKENIZER.eos_token_id,
-                )
-            )
-        return model
+        model_config = GPT2Config.from_pretrained(
+            "gpt2",
+            vocab_size=len(self.TOKENIZER),
+            bos_token_id=self.TOKENIZER.bos_token_id,
+            eos_token_id=self.TOKENIZER.eos_token_id,
+        )
+        if self.config.USE_CHECKPOINT:
+            model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=self.config.MODEL_PATH)
+        return GPT2LMHeadModel(model_config)
 
     def _tokenizer(self) -> PreTrainedTokenizerFast:
-        print(self.config.TOKENIZER_FILE_PATH)
         tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.config.TOKENIZER_FILE_PATH)
         tokenizer.pad_token = self.config.PAD_TOKEN
         tokenizer.mask_token = self.config.MASK_TOKEN
