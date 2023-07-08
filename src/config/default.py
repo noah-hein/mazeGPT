@@ -77,10 +77,10 @@ class MazeAIConfig:
 
         # learning_rate=5e-5,
         # weight_decay=0.1,
-        gradient_accumulation_steps=8,
+        gradient_accumulation_steps=32,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=16,
-        fp16=False,
+        fp16=True,
 
         # gradient_checkpointing=True,
         save_total_limit=3,
