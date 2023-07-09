@@ -5,6 +5,7 @@ import shutil
 from src.config.default import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
+from tqdm import tqdm
 
 
 class MazeAIData:
@@ -29,7 +30,6 @@ class MazeAIData:
     def setup_maze_factory(self):
         maze_factory = MazeFactory()
         maze_factory.algorithms = self.config.ALLOWED_ALGORITHMS
-        maze_factory.print_header()
         return maze_factory
 
     def clear_data_folder(self):
@@ -43,6 +43,8 @@ class MazeAIData:
         maze_factory = self.maze_factory
         maze_files = self.maze_files
 
+        # Create mazes for every dimension
+        print("Generating Mazes")
         for width in range(config.MIN_WIDTH, config.MAX_WIDTH + 1):
             for height in range(config.MIN_HEIGHT, config.MAX_HEIGHT + 1):
                 # Generate the binary_tree
@@ -53,7 +55,6 @@ class MazeAIData:
                 # Save maze to temporary dictionary
                 maze_data_filename: str = width.__str__() + "x" + height.__str__() + ".txt"
                 maze_files[maze_data_filename] = new_mazes
-                maze_factory.print_table_break()
 
     def save_maze_files(self):
         print("Saving binary_tree to file(s)...")

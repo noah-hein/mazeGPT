@@ -1,4 +1,5 @@
 import random
+from tqdm import tqdm
 from random import randint
 from .algorithms.prims import PrimsAlgorithm
 from .maze import Maze
@@ -11,9 +12,6 @@ class MazeFactory:
 
     MIN_SEED = 0
     MAX_SEED = 1000000
-
-    TABLE_FORMAT = "| {: >10} | {: >10} | {: >25} | {: >20} |"
-    TABLE_HEADER = TABLE_FORMAT.format("i", "dimensions", "algorithm", "seed")
 
     # ==================================================================================================================
     #       Constructor
@@ -29,25 +27,19 @@ class MazeFactory:
     # ==================================================================================================================
 
     def generate(self, number_of_mazes: int):
+        # Build progress bar
+        dimension_string = self.width.__str__() + "x" + self.height.__str__()
+        progress_bar = tqdm(range(number_of_mazes), desc=dimension_string, leave=False)
+
         # Start generating the binary_tree
         mazes: list[Maze] = []
-        for i in range(number_of_mazes):
+        for _ in progress_bar:
             # Create new random maze
             seed = randint(self.MIN_SEED, self.MAX_SEED)
             algorithm = self._random_maze_algorthm()
             new_maze = self._generate_single(seed, algorithm)
-
-            # Add and print maze
             mazes.append(new_maze)
-            self._print_maze_info(i, seed, algorithm)
         return mazes
-
-    def print_table_break(self):
-        print(len(self.TABLE_HEADER) * "-")
-
-    def print_header(self):
-        print(self.TABLE_HEADER)
-        self.print_table_break()
 
     # ==================================================================================================================
     #       Private Methods
@@ -68,13 +60,3 @@ class MazeFactory:
         new_maze.algorithm = algorithm()
         new_maze.generate()
         return new_maze
-
-    def _print_maze_info(self, index: int, seed: int, algorithm):
-        maze_description = "| {: >10} | {: >10} | {: >25} | {: >20} |"
-        maze_description = maze_description.format(
-            index.__str__(),
-            self.width.__str__() + "x" + self.height.__str__(),
-            algorithm.__name__,
-            seed
-        )
-        print(maze_description)

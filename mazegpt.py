@@ -13,7 +13,7 @@ def cli(ctx):
     """
     CLI for easily interacting with the different mazeGPT scripts.
     """
-    if ctx.invoked_subcommand is None:
+    if ctx.invoked_subcommand is None:  # Only Display logo for help command
         logo = colorama.Fore.GREEN + pyfiglet.figlet_format("MazeGPT") + colorama.Style.RESET_ALL
         click.echo(logo)
         click.echo(ctx.get_help())

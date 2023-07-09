@@ -10,8 +10,8 @@ While this is not mandatory, it significantly simplifies the process of initiali
 
 To create a virtual environment named 'venv', execute the command shown below.
 ```bash
-$ python -m venv venv       # Creates virtual env
-$ .\venv\Scripts\activate   # Activate venv
+python -m venv venv       # Creates virtual env
+.\venv\Scripts\activate   # Activate venv
 ```
 
 #### GPU Support (Optional)
@@ -26,14 +26,14 @@ on a CPU.
 To install the GPU variant vist [PyTorch Getting Started](https://pytorch.org/get-started/locally/)
 
 ```bash
-# Example command for PyTorch CUDA 11.8 Windows
-$ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# Example command for installing PyTorch CUDA 11.8 Windows
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
 #### Installing Dependencies
 To install all the required dependencies run the following.
 ```bash
-$ pip install .
+pip install -r requirements.txt
 ```
 
 ### Usage
@@ -68,9 +68,9 @@ As stated above you can extend the configuration and provide your own.
 To run the modules simply do
 ```bash
 # Examples
-$ python -m src.prepare
-$ python -m src.train
-$ python -m src.sample
+python -m src.prepare
+python -m src.train
+python -m src.sample
 ```
 
 #### CLI
@@ -80,5 +80,5 @@ different configurations via the CLI per script.
 
 To run the CLI use the following command
 ```bash
-$ python mazegpt.py
+python mazegpt.py
 ```
