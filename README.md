@@ -25,9 +25,13 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 # 🔍 Table of Contents
 * 🌅 [Introduction](#introduction)
 * ⏩ [Getting Started](#-getting-started)
-  * [Virtual Environment (Optional)](#virtual-environment-optional) 
-  * [GPU Support (Optional)](#gpu-support-optional)
-  * [Installing Dependencies](#installing-dependencies)
+  * [Installation](#installation)
+    * [Virtual Environment (Optional)](#virtual-environment-optional) 
+    * [GPU Support (Optional)](#gpu-support-optional)
+    * [Installing Dependencies](#installing-dependencies)
+  * [Usage](#usage)
+    * [Script](#scripts)
+    * [CLI](#cli)
 * 🎓 [Authors](#-authors)
 * 📗 [Overview](docs/OVERVIEW.md#-overview)
   * 🌌 [Why](docs/OVERVIEW.md#-why)
@@ -55,21 +59,23 @@ Below are the steps you should follow in order to set up the project environment
 If you are familiar with venv and PyTorch the installation section can be skipped.
 
 #### Virtual Environment (Optional)
-I recommend creating a virtual python environment to contain the dependencies for the project. Although this is not
-required, it will make bootstrapping the project far easier.
+For this project, it's advisable to create a Python virtual environment to manage the project's dependencies. 
+While this is not mandatory, it significantly simplifies the process of initializing the project.
 
-Run the following to create an environment named venv
+To create a virtual environment named 'venv', execute the command shown below.
 ```bash
 python -m venv venv       # Creates virtual env
 .\venv\Scripts\activate   # Activate venv
 ```
 
 #### GPU Support (Optional)
-This project primary uses Huggingface Transformers to handle configure a lot of the model / training logic.
-Under the hood it is using PyTorch (this could be changed for Tensorflow). Torch must be installed to run the trainer.
+This project primarily utilizes Huggingface Transformers for the configuration of numerous model and training logic 
+aspects. The underlying framework is PyTorch, although it could be substituted with Tensorflow if preferred. 
+It's crucial to have PyTorch installed to operate the trainer.
 
-By default, the CPU variant of PyTorch will be installed when bootstrapping. If you have a GPU I highly recommend
-using it. Transformer models are not fast with a CPU.
+Upon setup, the CPU variant of PyTorch is the default installation. However, if you have access to a GPU, its use is 
+strongly recommended. Due to their intensive computational requirements, Transformer models perform slowly when executed 
+on a CPU.
 
 To install the GPU variant vist [PyTorch Getting Started](https://pytorch.org/get-started/locally/)
 
@@ -87,11 +93,11 @@ pip install .
 ### Usage
 
 #### Config
-Each script within the project requires the MazeAIConfig. This class can be extended and modified to suite your needs.
-Visit the config module to see the default example.
+Every script in the project relies on the `MazeAIConfig` class. This class is customizable and can be extended according 
+to your requirements. To view the default example, navigate to the config module.
 
-When creating a config make sure to add it to the [mazegpt.py](/mazegpt.py) AVAILABLE_CONFIGS dictionary so it is
-accessible to the [CLI](#cli)
+When creating a new configuration, remember to add it to the AVAILABLE_CONFIGS dictionary in [mazegpt.py](/mazegpt.py). 
+Doing so ensures that the configuration becomes accessible to the [CLI](#cli).
 
 ```python
 AVAILABLE_CONFIGS: dict[str, Type[MazeAIConfig]] = {
@@ -121,11 +127,15 @@ python -m src.train
 python -m src.sample
 ```
 
-
 #### CLI
 For simplicity each project script has been wrapped in a simplistic [CLI](/mazegpt.py) from the 
 [Click](https://click.palletsprojects.com/en/8.1.x/) library. The benefit from doing this is the ability to select
-different configuration via the CLI per script.
+different configurations via the CLI per script.
+
+To run the CLI use the following command
+```bash
+python mazegpt.py
+```
 
 
 
