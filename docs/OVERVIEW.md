@@ -1,9 +1,9 @@
-## 📗 Overview
+## 🌌 Overview
 Recursive language models specifically transformers are very good at generating out semi-related strings.
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
 continuous structure.
 
-### 🌌 Why
+### 🧩 Why
 There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
 The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
