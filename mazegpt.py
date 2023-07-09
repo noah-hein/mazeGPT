@@ -7,11 +7,16 @@ from src.prepare import prepare as prepare_handler
 from src.train import MazeAITrainer
 
 
-@click.group()
-def cli():
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
     """
     CLI for easily interacting with the different mazeGPT scripts.
     """
+    if ctx.invoked_subcommand is None:
+        logo = colorama.Fore.GREEN + pyfiglet.figlet_format("MazeGPT") + colorama.Style.RESET_ALL
+        click.echo(logo)
+        click.echo(ctx.get_help())
     pass
 
 
@@ -32,8 +37,5 @@ cli.add_command(train)
 
 
 if __name__ == '__main__':
-    click.clear()
     colorama.init()
-    logo = pyfiglet.figlet_format("MazeGPT")
-    print(colorama.Fore.GREEN, logo, colorama.Style.RESET_ALL)
     cli()
