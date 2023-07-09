@@ -17,10 +17,10 @@ class MazeAITrainer(Trainer):
         self.TOKENIZER = self._tokenizer()
         self.DATA_COLLATOR = self._data_collator()
         self.MODEL = self._model()
-        self.TRAINING_ARGS = self.config.TRAINING_ARGS
+        self.TRAINING_ARGS = self.config.training_args()
 
         # Split the dataset
-        dataset = load_dataset(config.DATA_DIRECTORY, split='train').train_test_split(test_size=config.TEST_SIZE)
+        dataset = load_dataset(config.data_directory(), split='train').train_test_split(test_size=config.TEST_SIZE)
         train_dataset = dataset["train"].map(self._encode, batched=True)
         eval_dataset = dataset["test"].map(self._encode, batched=True)
 
@@ -36,7 +36,7 @@ class MazeAITrainer(Trainer):
 
         # Start training
         if config.USE_CHECKPOINT:
-            self.train(self.config.MODEL_PATH)
+            self.train(self.config.model_path())
         else:
             self.train()
 
@@ -60,11 +60,11 @@ class MazeAITrainer(Trainer):
             eos_token_id=self.TOKENIZER.eos_token_id,
         )
         if self.config.USE_CHECKPOINT:
-            model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=self.config.MODEL_PATH)
+            model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=self.config.model_path())
         return GPT2LMHeadModel(model_config)
 
     def _tokenizer(self) -> PreTrainedTokenizerFast:
-        tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.config.TOKENIZER_FILE_PATH)
+        tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.config.tokenizer_path())
         tokenizer.pad_token = self.config.PAD_TOKEN
         tokenizer.mask_token = self.config.MASK_TOKEN
         return tokenizer

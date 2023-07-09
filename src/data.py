@@ -33,7 +33,7 @@ class MazeAIData:
         return maze_factory
 
     def clear_data_folder(self):
-        data_path = self.config.DATA_DIRECTORY
+        data_path = self.config.data_directory()
         if os.path.isdir(data_path):
             shutil.rmtree(data_path)
         os.makedirs(data_path, exist_ok=True)
@@ -65,8 +65,8 @@ class MazeAIData:
         config = self.config
 
         # Create output for file
-        pathlib.Path(config.DATA_DIRECTORY).mkdir(parents=True, exist_ok=True)
-        file_path = os.path.join(config.DATA_DIRECTORY, filename)
+        pathlib.Path(config.data_directory()).mkdir(parents=True, exist_ok=True)
+        file_path = os.path.join(config.data_directory(), filename)
 
         # Delete previous file
         if os.path.isfile(file_path):

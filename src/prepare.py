@@ -15,7 +15,7 @@ def prepare(config: MazeAIConfig):
     data.generate()
 
     # Build the tokenizer based on data
-    training_data = load_dataset(config.DATA_DIRECTORY)["train"]
+    training_data = load_dataset(config.data_directory())["train"]
     tokenizer = ByteLevelBPETokenizer()
     tokenizer.train_from_iterator(
         training_data,
@@ -26,7 +26,7 @@ def prepare(config: MazeAIConfig):
 
     # Save tokenizer to a file
     print("Saving tokenizer at " + config.TOKENIZER_FILENAME)
-    tokenizer.save(config.TOKENIZER_FILE_PATH)
+    tokenizer.save(config.tokenizer_path())
 
 
 if __name__ == '__main__':

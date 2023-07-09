@@ -37,19 +37,6 @@ class MazeAIConfig:
     USE_CHECKPOINT = False
 
     # ==================================================================================================================
-    #       Paths
-    # ==================================================================================================================
-
-    ROOT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    OUTPUT_PATH = os.path.join(ROOT_PATH, OUTPUT_DIRECTORY_NAME)
-
-    MODEL_DIRECTORY = os.path.join(OUTPUT_PATH, MODEL_DIRECTORY_NAME)
-    MODEL_PATH = os.path.join(MODEL_DIRECTORY, CHECKPOINT_MODEL)
-
-    DATA_DIRECTORY = os.path.join(OUTPUT_PATH, DATA_DIRECTORY_NAME)
-    TOKENIZER_FILE_PATH = os.path.join(OUTPUT_DIRECTORY_NAME, TOKENIZER_FILENAME)
-
-    # ==================================================================================================================
     #       Tokenizer
     # ==================================================================================================================
 
@@ -66,23 +53,46 @@ class MazeAIConfig:
 
     TEST_SIZE = 0.1
     FRAGMENT_LENGTH = 1000
-    TRAINING_ARGS = TrainingArguments(
-        output_dir=MODEL_DIRECTORY,
-        evaluation_strategy="steps",
-        overwrite_output_dir=True,
-        num_train_epochs=10,
-        save_steps=10,
-        logging_steps=10,
-        logging_strategy="steps",
 
-        # learning_rate=5e-5,
-        # weight_decay=0.1,
-        gradient_accumulation_steps=32,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=16,
-        fp16=False,
+    def training_args(self):
+        return TrainingArguments(
+            output_dir=self.model_directory(),
+            evaluation_strategy="steps",
+            overwrite_output_dir=True,
+            num_train_epochs=10,
+            save_steps=10,
+            logging_steps=10,
+            logging_strategy="steps",
 
-        # gradient_checkpointing=True,
-        save_total_limit=3,
-        optim="adamw_torch",
-    )
+            # learning_rate=5e-5,
+            # weight_decay=0.1,
+            gradient_accumulation_steps=32,
+            per_device_train_batch_size=8,
+            per_device_eval_batch_size=16,
+            fp16=False,
+
+            # gradient_checkpointing=True,
+            save_total_limit=3,
+            optim="adamw_torch",
+        )
+
+    # ==================================================================================================================
+    #       Public Methods
+    # ==================================================================================================================
+
+    def output_path(self):
+        root_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        return os.path.join(root_path, self.OUTPUT_DIRECTORY_NAME)
+
+    def model_directory(self):
+        return os.path.join(self.output_path(), self.MODEL_DIRECTORY_NAME)
+
+    def model_path(self):
+        return os.path.join(self.model_directory(), self.CHECKPOINT_MODEL)
+
+    def data_directory(self):
+        return os.path.join(self.output_path(), self.DATA_DIRECTORY_NAME)
+
+    def tokenizer_path(self):
+        return os.path.join(self.OUTPUT_DIRECTORY_NAME, self.TOKENIZER_FILENAME)
+

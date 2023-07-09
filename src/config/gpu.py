@@ -20,23 +20,24 @@ class GpuConfig(MazeAIConfig):
     #       Training
     # ==================================================================================================================
 
-    TRAINING_ARGS = TrainingArguments(
-        output_dir=MazeAIConfig.MODEL_DIRECTORY,
-        evaluation_strategy="steps",
-        overwrite_output_dir=True,
-        num_train_epochs=10,
-        save_steps=10,
-        logging_steps=10,
-        logging_strategy="steps",
+    def training_args(self):
+        return TrainingArguments(
+            output_dir=self.model_directory(),
+            evaluation_strategy="steps",
+            overwrite_output_dir=True,
+            num_train_epochs=10,
+            save_steps=10,
+            logging_steps=10,
+            logging_strategy="steps",
 
-        # learning_rate=5e-5,
-        # weight_decay=0.1,
-        gradient_accumulation_steps=32,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=16,
-        fp16=True,
+            # learning_rate=5e-5,
+            # weight_decay=0.1,
+            gradient_accumulation_steps=32,
+            per_device_train_batch_size=8,
+            per_device_eval_batch_size=16,
+            fp16=True,
 
-        # gradient_checkpointing=True,
-        save_total_limit=3,
-        optim="adamw_torch",
+            # gradient_checkpointing=True,
+            save_total_limit=3,
+            optim="adamw_torch",
     )
