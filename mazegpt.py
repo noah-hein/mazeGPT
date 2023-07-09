@@ -1,4 +1,5 @@
 import click
+import pyfiglet
 from typing import Type
 from src.config.default import MazeAIConfig
 from src.prepare import prepare as prepare_handler
@@ -11,6 +12,9 @@ AVAILABLE_CONFIGS: dict[str, Type[MazeAIConfig]] = {
 
 @click.group()
 def cli():
+    """
+    CLI for easily interacting with the different mazeGPT scripts.
+    """
     pass
 
 
@@ -31,4 +35,6 @@ cli.add_command(train)
 
 
 if __name__ == '__main__':
+    logo = pyfiglet.figlet_format("MazeGPT")
+    print(logo)
     cli()
