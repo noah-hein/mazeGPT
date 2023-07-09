@@ -15,13 +15,13 @@ class MazeAIConfig:
         BacktrackingAlgorithm
     ]
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 50000
+    NUMBER_OF_MAZES_PER_DIMENSION = 100000
     TRAINING_PERCENT = 0.9
 
     MIN_HEIGHT = 3
-    MAX_HEIGHT = 6
+    MAX_HEIGHT = 3
     MIN_WIDTH = 3
-    MAX_WIDTH = 6
+    MAX_WIDTH = 3
 
     # ==================================================================================================================
     #       Folder / File Names
@@ -80,7 +80,7 @@ class MazeAIConfig:
         gradient_accumulation_steps=32,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=16,
-        fp16=True,
+        fp16=False,
 
         # gradient_checkpointing=True,
         save_total_limit=3,
