@@ -1,13 +1,10 @@
 import click
 import pyfiglet
-from typing import Type
-from src.config.default import MazeAIConfig
+import colorama
+
+from src.config.available_configs import AVAILABLE_CONFIGS
 from src.prepare import prepare as prepare_handler
 from src.train import MazeAITrainer
-
-AVAILABLE_CONFIGS: dict[str, Type[MazeAIConfig]] = {
-    "default": MazeAIConfig
-}
 
 
 @click.group()
@@ -35,6 +32,8 @@ cli.add_command(train)
 
 
 if __name__ == '__main__':
+    click.clear()
+    colorama.init()
     logo = pyfiglet.figlet_format("MazeGPT")
-    print(logo)
+    print(colorama.Fore.GREEN, logo, colorama.Style.RESET_ALL)
     cli()
