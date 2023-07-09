@@ -1,5 +1,5 @@
 from transformers import TrainingArguments
-from config.default import MazeAIConfig
+from src.config.default import MazeAIConfig
 
 
 class GpuConfig(MazeAIConfig):
@@ -12,6 +12,9 @@ class GpuConfig(MazeAIConfig):
     MAX_HEIGHT = 6
     MIN_WIDTH = 3
     MAX_WIDTH = 6
+
+    CHECKPOINT_MODEL = "checkpoint-180"
+    USE_CHECKPOINT = True
 
     # ==================================================================================================================
     #       Training

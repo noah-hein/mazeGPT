@@ -33,7 +33,7 @@ class MazeAIConfig:
 
     DATA_FILENAME = "dataset.txt"
     TOKENIZER_FILENAME = "tokenizer.json"
-    CHECKPOINT_MODEL = "checkpoint-7030"
+    CHECKPOINT_MODEL = "checkpoint-180"
     USE_CHECKPOINT = False
 
     # ==================================================================================================================

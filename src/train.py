@@ -33,7 +33,12 @@ class MazeAITrainer(Trainer):
             eval_dataset=eval_dataset,
             model=self.MODEL
         )
-        self.train()
+
+        # Start training
+        if config.USE_CHECKPOINT:
+            self.train(self.config.MODEL_PATH)
+        else:
+            self.train()
 
     # ==================================================================================================================
     #       Private Methods
