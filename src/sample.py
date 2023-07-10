@@ -1,15 +1,36 @@
+import random
+
+from transformers import PreTrainedTokenizerFast, GPT2LMHeadModel, pipeline, set_seed
+from src.config.default import MazeAIConfig
 from src.maze.maze import Maze
-from src.maze.algorithms import *
+
+
+def sample(config: MazeAIConfig):
+    # Import tokenizer and model
+    print(config.tokenizer_path())
+    tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.tokenizer_path())
+    model = GPT2LMHeadModel.from_pretrained(config.model_path(), local_files_only=True)
+    generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
+    set_seed(random.randint(0, 100000))
+
+    # Set up the new maze
+    maze = Maze()
+    maze.width = 3
+    maze.height = 3
+    maze_length = maze.char_length()
+
+    # Create maze tag
+    tag = "[" + maze.width.__str__() + "x" + maze.height.__str__() + "] "
+    max_len = len(tag) + maze_length
+
+    maze_string = generator(tag, max_length=max_len)
+    print(maze_string)
+
+
 
 
 if __name__ == '__main__':
-    maze = Maze()
-    maze.generator = AldousBroderAlgorithm()
-    maze.generate()
-
-    print(maze.__repr__())
-    print(maze.grid)
-    maze.display_maze()
+    sample(MazeAIConfig())
 
     # # Import tokenizer and model
     # tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)

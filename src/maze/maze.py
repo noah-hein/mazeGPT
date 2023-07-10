@@ -47,6 +47,12 @@ class Maze:
         plt.xticks([]), plt.yticks([])
         plt.show()
 
+    def char_length(self):
+        width_len = 2 * self.width + 1
+        height_len = 2 * (self.height + 1)
+        return width_len * height_len
+
+
     # ==================================================================================================================
     #       Class Methods
     # ==================================================================================================================
@@ -64,15 +70,4 @@ class Maze:
 
     def __repr__(self):
         return self.to_string()
-
-if __name__ == '__main__':
-    test = Maze()
-    test.width = 10
-    test.height = 10
-    test.algorithm = Prims()
-    test.generate()
-
-    test.display_maze()
-
-    print(test)
 

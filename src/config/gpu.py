@@ -13,12 +13,14 @@ class GpuConfig(MazeAIConfig):
     MIN_WIDTH = 3
     MAX_WIDTH = 6
 
-    CHECKPOINT_MODEL = "checkpoint-180"
-    USE_CHECKPOINT = True
+    CHECKPOINT_MODEL = "checkpoint-6550"
+    USE_CHECKPOINT = False
 
     # ==================================================================================================================
     #       Training
     # ==================================================================================================================
+
+    FRAGMENT_LENGTH = 25
 
     def training_args(self):
         return TrainingArguments(
@@ -40,4 +42,5 @@ class GpuConfig(MazeAIConfig):
             # gradient_checkpointing=True,
             save_total_limit=3,
             optim="adamw_torch",
-    )
+        )
+

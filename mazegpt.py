@@ -4,6 +4,7 @@ import colorama
 
 from src.config.available_configs import AVAILABLE_CONFIGS
 from src.prepare import prepare as prepare_handler
+from src.sample import sample as sample_handler
 from src.train import MazeAITrainer
 
 
@@ -32,8 +33,15 @@ def train(config):
     MazeAITrainer(AVAILABLE_CONFIGS[config]())
 
 
+@click.command(help="Builds an example maze with the provided model")
+@click.option("--config", default="default", help="The selected configuration class")
+def sample(config):
+    sample_handler(AVAILABLE_CONFIGS[config]())
+
+
 cli.add_command(prepare)
 cli.add_command(train)
+cli.add_command(sample)
 
 
 if __name__ == '__main__':
