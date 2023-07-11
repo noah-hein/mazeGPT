@@ -13,14 +13,12 @@ class GpuConfig(MazeAIConfig):
     MIN_WIDTH = 5
     MAX_WIDTH = 5
 
-    CHECKPOINT_MODEL = "checkpoint-6550"
+    CHECKPOINT_MODEL = "checkpoint-1840"
     USE_MODEL = False
 
     # ==================================================================================================================
     #       Training
     # ==================================================================================================================
-
-    FRAGMENT_LENGTH = 25
 
     def training_args(self):
         return TrainingArguments(

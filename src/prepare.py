@@ -14,13 +14,20 @@ def prepare(config: MazeAIConfig):
     data = MazeAIData(config)
     data.generate()
 
-    # Build the tokenizer based on data
+    # Get training data for tokenizer
     training_data = load_dataset(config.data_directory())["train"]
     tokenizer = ByteLevelBPETokenizer()
+
+    # Create iterator for moving through training data
+    batch_range = range(0, len(training_data), config.BATCH_SIZE)
+    batch_iterator = (training_data[i: i + config.BATCH_SIZE]["text"] for i in batch_range)
+
+    # Train the tokenizer
     tokenizer.train_from_iterator(
-        training_data,
+        batch_iterator,
+        min_frequency=config.TOKENIZER_MIN_FREQUENCY,
+        show_progress=True,
         vocab_size=config.VOCAB_SIZE,
-        show_progress=False,
         special_tokens=config.SPECIAL_TOKENS
     )
 

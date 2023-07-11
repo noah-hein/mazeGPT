@@ -23,7 +23,7 @@ def sample(config: MazeAIConfig):
     tag = "[" + maze.width.__str__() + "x" + maze.height.__str__() + "] "
     max_len = len(tag) + maze_length
 
-    maze_string = generator(tag, max_length=max_len)
+    maze_string = generator(tag + "111111111112", max_length=max_len)
     print(maze_string)
 
 

@@ -41,7 +41,11 @@ class MazeAIConfig:
     #       Tokenizer
     # ==================================================================================================================
 
-    VOCAB_SIZE = 10
+    VOCAB_SIZE = 1000
+    FRAGMENT_LENGTH = 1000
+    TOKENIZER_MIN_FREQUENCY = 25
+    BATCH_SIZE = 1000
+
     PAD_TOKEN = "[PAD]"
     MASK_TOKEN = "[MASK]"
     SPECIAL_TOKENS = [
@@ -54,7 +58,6 @@ class MazeAIConfig:
     # ==================================================================================================================
 
     TEST_SIZE = 0.1
-    FRAGMENT_LENGTH = 1000
 
     def training_args(self):
         return TrainingArguments(

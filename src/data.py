@@ -5,7 +5,6 @@ import shutil
 from src.config.default import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
-from tqdm import tqdm
 
 
 class MazeAIData:
