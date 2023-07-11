@@ -19,7 +19,7 @@ def prepare(config: MazeAIConfig):
     tokenizer = ByteLevelBPETokenizer()
     tokenizer.train_from_iterator(
         training_data,
-        vocab_size=1000,
+        vocab_size=config.VOCAB_SIZE,
         show_progress=False,
         special_tokens=config.SPECIAL_TOKENS
     )

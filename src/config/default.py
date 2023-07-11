@@ -34,12 +34,14 @@ class MazeAIConfig:
     DATA_FILENAME = "dataset.txt"
     TOKENIZER_FILENAME = "tokenizer.json"
     CHECKPOINT_MODEL = "checkpoint-180"
-    USE_CHECKPOINT = False
+    USE_MODEL = False
+    RESUME_FROM_CHECKPOINT = False
 
     # ==================================================================================================================
     #       Tokenizer
     # ==================================================================================================================
 
+    VOCAB_SIZE = 10
     PAD_TOKEN = "[PAD]"
     MASK_TOKEN = "[MASK]"
     SPECIAL_TOKENS = [

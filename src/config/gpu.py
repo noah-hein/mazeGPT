@@ -7,14 +7,14 @@ class GpuConfig(MazeAIConfig):
     #       Maze Data
     # ==================================================================================================================
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 50000
-    MIN_HEIGHT = 3
-    MAX_HEIGHT = 6
-    MIN_WIDTH = 3
-    MAX_WIDTH = 6
+    NUMBER_OF_MAZES_PER_DIMENSION = 100000
+    MIN_HEIGHT = 5
+    MAX_HEIGHT = 5
+    MIN_WIDTH = 5
+    MAX_WIDTH = 5
 
     CHECKPOINT_MODEL = "checkpoint-6550"
-    USE_CHECKPOINT = False
+    USE_MODEL = False
 
     # ==================================================================================================================
     #       Training
