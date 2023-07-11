@@ -22,13 +22,17 @@ def prepare(config: MazeAIConfig):
     batch_range = range(0, len(training_data), config.BATCH_SIZE)
     batch_iterator = (training_data[i: i + config.BATCH_SIZE]["text"] for i in batch_range)
 
+    # Build special tokens list
+    dimension_tokens = data.dimension_tokens()
+    special_tokens = config.SPECIAL_TOKENS + dimension_tokens
+
     # Train the tokenizer
     tokenizer.train_from_iterator(
         batch_iterator,
-        min_frequency=config.TOKENIZER_MIN_FREQUENCY,
         show_progress=True,
+        min_frequency=config.TOKENIZER_MIN_FREQUENCY,
         vocab_size=config.VOCAB_SIZE,
-        special_tokens=config.SPECIAL_TOKENS
+        special_tokens=special_tokens
     )
 
     # Save tokenizer to a file

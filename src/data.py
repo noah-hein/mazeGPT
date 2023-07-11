@@ -77,3 +77,14 @@ class MazeAIData:
         with open(file_path, 'w') as file:
             for maze in mazes:
                 file.write(maze.__repr__() + "\n")
+
+    def dimension_tokens(self):
+        config = self.config
+        tokens = []
+        for width in range(config.MIN_WIDTH, config.MAX_WIDTH + 1):
+            for height in range(config.MIN_HEIGHT, config.MAX_HEIGHT + 1):
+                token = "[" + width.__str__() + "x" + height.__str__() + "]"
+                tokens.append(token)
+        return tokens
+
+
