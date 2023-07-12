@@ -53,6 +53,16 @@ class Maze:
         return width_len * height_len
 
 
+    def parse_string(self, string: str):
+        result = "".join(filter(str.isnumeric, string))
+        lines = result.split("2")
+        grid = []
+        for line in lines:
+            nodes = list(map(int, list(line)))
+            if len(nodes) > 0:
+                grid.append(nodes)
+        self.grid = np.array(grid)
+
     # ==================================================================================================================
     #       Class Methods
     # ==================================================================================================================

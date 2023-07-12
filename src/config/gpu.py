@@ -13,7 +13,7 @@ class GpuConfig(MazeAIConfig):
     MIN_WIDTH = 5
     MAX_WIDTH = 5
 
-    CHECKPOINT_MODEL = "checkpoint-360"
+    CHECKPOINT_MODEL = "checkpoint-4320"
     USE_MODEL = False
 
     # ==================================================================================================================
