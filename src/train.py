@@ -36,7 +36,7 @@ class MazeAITrainer(Trainer):
 
         # Start training
         if config.USE_MODEL:
-            self.train(self.config.model_path(), resume_from_checkpoint=config.RESUME_FROM_CHECKPOINT)
+            self.train(self.config.model_path())
         else:
             self.train()
 

@@ -35,7 +35,6 @@ class MazeAIConfig:
     TOKENIZER_FILENAME = "tokenizer.json"
     CHECKPOINT_MODEL = "checkpoint-180"
     USE_MODEL = False
-    RESUME_FROM_CHECKPOINT = False
 
     # ==================================================================================================================
     #       Tokenizer
@@ -43,8 +42,8 @@ class MazeAIConfig:
 
     VOCAB_SIZE = 1000
     FRAGMENT_LENGTH = 1000
-    TOKENIZER_MIN_FREQUENCY = 25
-    BATCH_SIZE = 1000
+    TOKENIZER_MIN_FREQUENCY = 30000
+    BATCH_SIZE = 10000
 
     PAD_TOKEN = "[PAD]"
     MASK_TOKEN = "[MASK]"
