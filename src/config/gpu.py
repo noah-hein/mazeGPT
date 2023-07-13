@@ -13,8 +13,8 @@ class GpuConfig(MazeAIConfig):
     MIN_WIDTH = 5
     MAX_WIDTH = 5
 
-    CHECKPOINT_MODEL = "checkpoint-4320"
-    USE_MODEL = False
+    CHECKPOINT_MODEL = "checkpoint-1900"
+    USE_MODEL = True
 
     # ==================================================================================================================
     #       Tokenizer
@@ -49,5 +49,6 @@ class GpuConfig(MazeAIConfig):
             # gradient_checkpointing=True,
             save_total_limit=3,
             optim="adamw_torch",
+            report_to=["wandb"]
         )
 

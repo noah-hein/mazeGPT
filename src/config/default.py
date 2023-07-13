@@ -16,7 +16,7 @@ class MazeAIConfig:
     ]
 
     NUMBER_OF_MAZES_PER_DIMENSION = 100000
-    TRAINING_PERCENT = 0.9
+    TEST_PERCENT = 0.1
 
     MIN_HEIGHT = 3
     MAX_HEIGHT = 3
@@ -55,10 +55,8 @@ class MazeAIConfig:
     ]
 
     # ==================================================================================================================
-    #       Training
+    #       Public Methods
     # ==================================================================================================================
-
-    TEST_SIZE = 0.1
 
     def training_args(self):
         return TrainingArguments(
@@ -81,10 +79,6 @@ class MazeAIConfig:
             save_total_limit=3,
             optim="adamw_torch",
         )
-
-    # ==================================================================================================================
-    #       Public Methods
-    # ==================================================================================================================
 
     def output_path(self):
         root_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))

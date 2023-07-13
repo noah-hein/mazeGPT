@@ -1,6 +1,7 @@
 import click
 import pyfiglet
 import colorama
+from dotenv import load_dotenv
 
 from src.config.available_configs import AVAILABLE_CONFIGS
 from src.prepare import prepare as prepare_handler
@@ -45,5 +46,6 @@ cli.add_command(sample)
 
 
 if __name__ == '__main__':
+    load_dotenv()
     colorama.init()
     cli()

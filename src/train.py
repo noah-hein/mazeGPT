@@ -20,7 +20,7 @@ class MazeAITrainer(Trainer):
         self.TRAINING_ARGS = self.config.training_args()
 
         # Split the dataset
-        dataset = load_dataset(config.data_directory(), split='train').train_test_split(test_size=config.TEST_SIZE)
+        dataset = load_dataset(config.data_directory(), split='train').train_test_split(test_size=config.TEST_PERCENT)
         train_dataset = dataset["train"].map(self._encode, batched=True)
         eval_dataset = dataset["test"].map(self._encode, batched=True)
 
