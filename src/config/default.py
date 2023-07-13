@@ -47,9 +47,11 @@ class MazeAIConfig:
 
     PAD_TOKEN = "[PAD]"
     MASK_TOKEN = "[MASK]"
+    END_TOKEN = "[END]"
     SPECIAL_TOKENS = [
         PAD_TOKEN,
-        MASK_TOKEN
+        MASK_TOKEN,
+        END_TOKEN
     ]
 
     # ==================================================================================================================

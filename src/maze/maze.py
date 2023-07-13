@@ -69,11 +69,12 @@ class Maze:
 
     def to_string(self):
         header = "[" + self.width.__str__() + "x" + self.height.__str__() + "]"
+        footer = "[END]"
         string_rep = header + ""
         for row in self.grid:
             row_string = "".join(map(str, row)) + self.NEWLINE_CHARACTER
             string_rep += row_string
-        return string_rep
+        return string_rep + footer
 
     def __str__(self):
         return self.to_string()
