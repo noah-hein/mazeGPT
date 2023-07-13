@@ -19,3 +19,13 @@ def print_summary(result):
     print(f"Time: {result.metrics['train_runtime']:.2f}")
     print(f"Samples/second: {result.metrics['train_samples_per_second']:.2f}")
     print_gpu_utilization()
+
+
+def bordered(text):
+    lines = text.splitlines()
+    width = max(len(s) for s in lines)
+    res = ['┌' + '─' * width + '┐']
+    for s in lines:
+        res.append('│' + (s + ' ' * width)[:width] + '│')
+    res.append('└' + '─' * width + '┘')
+    return '\n'.join(res)

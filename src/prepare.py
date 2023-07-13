@@ -2,6 +2,7 @@ from datasets import load_dataset
 from tokenizers.implementations import ByteLevelBPETokenizer
 from src.config.default import MazeAIConfig
 from src.data import MazeAIData
+from src.util import bordered
 
 
 def prepare(config: MazeAIConfig):
@@ -11,12 +12,16 @@ def prepare(config: MazeAIConfig):
     Both dataset and tokenizer are saved to the output folder.
     """
     # Generate the training binary_tree
+    print(bordered("Generating Mazes"))
     data = MazeAIData(config)
     data.generate()
+    print()
 
     # Get training data for tokenizer
+    print(bordered("Load Mazes For Training"))
     training_data = load_dataset(config.data_directory())["train"]
     tokenizer = ByteLevelBPETokenizer()
+    print()
 
     # Create iterator for moving through training data
     batch_range = range(0, len(training_data), config.BATCH_SIZE)
@@ -27,6 +32,7 @@ def prepare(config: MazeAIConfig):
     special_tokens = config.SPECIAL_TOKENS + dimension_tokens
 
     # Train the tokenizer
+    print(bordered("Training Tokenizer"))
     tokenizer.train_from_iterator(
         batch_iterator,
         show_progress=True,

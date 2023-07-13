@@ -43,7 +43,6 @@ class MazeAIData:
         maze_files = self.maze_files
 
         # Create mazes for every dimension
-        print("Generating Mazes")
         for width in range(config.MIN_WIDTH, config.MAX_WIDTH + 1):
             for height in range(config.MIN_HEIGHT, config.MAX_HEIGHT + 1):
                 # Generate the binary_tree
