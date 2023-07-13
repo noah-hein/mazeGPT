@@ -35,7 +35,7 @@ class MazeAITrainer(Trainer):
         )
 
         # Start training
-        if config.USE_MODEL:
+        if self.config.has_model():
             self.train(self.config.model_path())
         else:
             self.train()
@@ -59,7 +59,7 @@ class MazeAITrainer(Trainer):
             bos_token_id=self.TOKENIZER.bos_token_id,
             eos_token_id=self.TOKENIZER.eos_token_id,
         )
-        if self.config.USE_MODEL:
+        if self.config.has_model():
             model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=self.config.model_path())
         return GPT2LMHeadModel(model_config)
 

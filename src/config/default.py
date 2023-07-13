@@ -33,8 +33,7 @@ class MazeAIConfig:
 
     DATA_FILENAME = "dataset.txt"
     TOKENIZER_FILENAME = "tokenizer.json"
-    CHECKPOINT_MODEL = "checkpoint-4320"
-    USE_MODEL = False
+    CHECKPOINT_MODEL = ""
 
     # ==================================================================================================================
     #       Tokenizer
@@ -58,7 +57,7 @@ class MazeAIConfig:
     #       Public Methods
     # ==================================================================================================================
 
-    def training_args(self):
+    def training_args(self) -> TrainingArguments:
         return TrainingArguments(
             output_dir=self.model_directory(),
             evaluation_strategy="steps",
@@ -80,19 +79,22 @@ class MazeAIConfig:
             optim="adamw_torch",
         )
 
-    def output_path(self):
+    def has_model(self) -> bool:
+        return len(self.CHECKPOINT_MODEL) > 0
+
+    def output_path(self) -> str:
         root_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
         return os.path.join(root_path, self.OUTPUT_DIRECTORY_NAME)
 
-    def model_directory(self):
+    def model_directory(self) -> str:
         return os.path.join(self.output_path(), self.MODEL_DIRECTORY_NAME)
 
-    def model_path(self):
+    def model_path(self) -> str:
         return os.path.join(self.model_directory(), self.CHECKPOINT_MODEL)
 
-    def data_directory(self):
+    def data_directory(self) -> str:
         return os.path.join(self.output_path(), self.DATA_DIRECTORY_NAME)
 
-    def tokenizer_path(self):
+    def tokenizer_path(self) -> str:
         return os.path.join(self.OUTPUT_DIRECTORY_NAME, self.TOKENIZER_FILENAME)
 

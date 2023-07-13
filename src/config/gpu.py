@@ -12,9 +12,7 @@ class GpuConfig(MazeAIConfig):
     MAX_HEIGHT = 5
     MIN_WIDTH = 5
     MAX_WIDTH = 5
-
-    CHECKPOINT_MODEL = "checkpoint-1900"
-    USE_MODEL = False
+    #CHECKPOINT_MODEL = "checkpoint-1900"
 
     # ==================================================================================================================
     #       Tokenizer
