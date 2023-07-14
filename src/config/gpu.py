@@ -7,12 +7,12 @@ class GpuConfig(MazeAIConfig):
     #       Maze Data
     # ==================================================================================================================
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 500000
+    NUMBER_OF_MAZES_PER_DIMENSION = 250000
     MIN_HEIGHT = 5
     MAX_HEIGHT = 5
     MIN_WIDTH = 5
     MAX_WIDTH = 5
-    #CHECKPOINT_MODEL = "checkpoint-1900"
+    CHECKPOINT_MODEL = "checkpoint-110"
 
     # ==================================================================================================================
     #       Tokenizer
@@ -20,7 +20,7 @@ class GpuConfig(MazeAIConfig):
 
     VOCAB_SIZE = 1000
     FRAGMENT_LENGTH = 1000
-    TOKENIZER_MIN_FREQUENCY = 500000
+    TOKENIZER_MIN_FREQUENCY = 250000
     BATCH_SIZE = 10000
 
     # ==================================================================================================================
