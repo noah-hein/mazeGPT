@@ -16,20 +16,15 @@ def sample(config: MazeAIConfig):
     maze = Maze()
     maze.width = 5
     maze.height = 5
-    maze_length = maze.char_length()
-
-    # maze.parse_string("111111111112100000100012111110101012100010001012111010111012100000000012111111101112100000101012101110101012101000001012111111111112")
-    # maze.display_maze()
-
-    # Create maze tag
-    tag = "[" + maze.width.__str__() + "x" + maze.height.__str__() + "]"
-    max_len = len(tag) + maze_length
-    print(max_len)
 
     #
-    maze_string = generator(tag + "111111111112", max_length=max_len)
-    print(maze_string.__str__())
-    print(len(maze_string.__str__()))
+    maze_start_sequence = config.START_TOKEN + "1" * (maze.width * 2 + 1) + config.NEWLINE_TOKEN
+    #maze_string = generator("3111111111112", max_new_tokens=1)
+    #maze_string = maze_string[0]["generated_text"]
+
+
+    print(maze_start_sequence)
+
 
 
 
