@@ -12,13 +12,13 @@ class GpuConfig(MazeAIConfig):
     MAX_HEIGHT = 5
     MIN_WIDTH = 5
     MAX_WIDTH = 5
-    CHECKPOINT_MODEL = "checkpoint-110"
+    CHECKPOINT_MODEL = "checkpoint-2380"
 
     # ==================================================================================================================
     #       Tokenizer
     # ==================================================================================================================
 
-    VOCAB_SIZE = 1000
+    VOCAB_SIZE = 10
     FRAGMENT_LENGTH = 1000
     TOKENIZER_MIN_FREQUENCY = 250000
     BATCH_SIZE = 10000
@@ -39,7 +39,7 @@ class GpuConfig(MazeAIConfig):
 
             # learning_rate=5e-5,
             # weight_decay=0.1,
-            gradient_accumulation_steps=1,
+            gradient_accumulation_steps=16,
             per_device_train_batch_size=32,
             per_device_eval_batch_size=40,
             fp16=True,

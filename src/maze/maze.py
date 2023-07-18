@@ -68,8 +68,8 @@ class Maze:
     # ==================================================================================================================
 
     def to_string(self):
-        header = "[" + self.width.__str__() + "x" + self.height.__str__() + "]"
-        footer = "[END]"
+        header = "3"
+        footer = "4"
         string_rep = header + ""
         for row in self.grid:
             row_string = "".join(map(str, row)) + self.NEWLINE_CHARACTER
