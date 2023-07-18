@@ -16,14 +16,24 @@ def sample(config: MazeAIConfig):
     maze = Maze()
     maze.width = 5
     maze.height = 5
+    max_length = maze.char_length() + 2
 
     #
     maze_start_sequence = config.START_TOKEN + "1" * (maze.width * 2 + 1) + config.NEWLINE_TOKEN
+    maze_string = maze_start_sequence
+
+    for i in range(max_length):
+        maze_string = generator(maze_string, max_new_tokens=1, max_length=max_length)[0]["generated_text"]
+        new_token = maze_string[-1]
+
+        print(maze_string)
+
+
+
+
+
     #maze_string = generator("3111111111112", max_new_tokens=1)
     #maze_string = maze_string[0]["generated_text"]
-
-
-    print(maze_start_sequence)
 
 
 

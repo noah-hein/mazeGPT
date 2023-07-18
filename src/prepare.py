@@ -28,8 +28,8 @@ def prepare(config: MazeAIConfig):
     batch_iterator = (training_data[i: i + config.BATCH_SIZE]["text"] for i in batch_range)
 
     # Build special tokens list
-    # dimension_tokens = data.dimension_tokens()
-    special_tokens = config.SPECIAL_TOKENS
+    dimension_tokens = data.dimension_tokens()
+    special_tokens = config.SPECIAL_TOKENS + dimension_tokens
 
     # Train the tokenizer
     print(bordered("Training Tokenizer"))

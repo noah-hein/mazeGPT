@@ -5,13 +5,11 @@ from matplotlib import pyplot as plt
 
 class Maze:
     """
-
-
+    Generic representation of a maze. Mostly inspired from the maze-lib repository.
+    Mazelib hasn't been updated to python 3.11
     References:
         https://github.com/john-science/mazelib
     """
-
-    NEWLINE_CHARACTER = "2"
 
     # ==================================================================================================================
     #       Constructor
@@ -68,11 +66,11 @@ class Maze:
     # ==================================================================================================================
 
     def to_string(self):
-        header = "3"
-        footer = "4"
+        header = "[" + self.width.__str__() + "x" + self.height.__str__() + "]"
+        footer = "[END]"
         string_rep = header + ""
         for row in self.grid:
-            row_string = "".join(map(str, row)) + self.NEWLINE_CHARACTER
+            row_string = "".join(map(str, row))
             string_rep += row_string
         return string_rep + footer
 
