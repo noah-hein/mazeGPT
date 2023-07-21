@@ -39,20 +39,14 @@ class MazeAIConfig:
     #       Tokenizer
     # ==================================================================================================================
 
-    VOCAB_SIZE = 10
+    VOCAB_SIZE = 1000
     FRAGMENT_LENGTH = 1000
-    TOKENIZER_MIN_FREQUENCY = 300000
+    TOKENIZER_MIN_FREQUENCY = 100000
     BATCH_SIZE = 10000
 
     PAD_TOKEN = "[PAD]"
     MASK_TOKEN = "[MASK]"
-    END_TOKEN = "[END]"
-    EMPTY_TOKEN = "0"
-    WALL_TOKEN = "1"
     SPECIAL_TOKENS = [
-        EMPTY_TOKEN,
-        WALL_TOKEN,
-        END_TOKEN,
         PAD_TOKEN,
         MASK_TOKEN
     ]

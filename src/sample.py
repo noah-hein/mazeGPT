@@ -19,21 +19,15 @@ def sample(config: MazeAIConfig):
     max_length = maze.char_length() + 2
 
     #
-    maze_start_sequence = config.START_TOKEN + "1" * (maze.width * 2 + 1) + config.NEWLINE_TOKEN
+    maze_start_sequence = "<|5x5|>"
     maze_string = maze_start_sequence
 
     for i in range(max_length):
-        maze_string = generator(maze_string, max_new_tokens=1, max_length=max_length)[0]["generated_text"]
-        new_token = maze_string[-1]
-
+        maze_string = generator(maze_string, max_new_tokens=1)[0]["generated_text"]
         print(maze_string)
+        if "<|end|>" in maze_string:
+            break
 
-
-
-
-
-    #maze_string = generator("3111111111112", max_new_tokens=1)
-    #maze_string = maze_string[0]["generated_text"]
 
 
 

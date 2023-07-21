@@ -7,7 +7,7 @@ class GpuConfig(MazeAIConfig):
     #       Maze Data
     # ==================================================================================================================
 
-    NUMBER_OF_MAZES_PER_DIMENSION = 250000
+    NUMBER_OF_MAZES_PER_DIMENSION = 200000
     MIN_HEIGHT = 5
     MAX_HEIGHT = 5
     MIN_WIDTH = 5
@@ -18,9 +18,9 @@ class GpuConfig(MazeAIConfig):
     #       Tokenizer
     # ==================================================================================================================
 
-    VOCAB_SIZE = 10
+    VOCAB_SIZE = 100000
     FRAGMENT_LENGTH = 1000
-    TOKENIZER_MIN_FREQUENCY = 250000
+    TOKENIZER_MIN_FREQUENCY = 100000
     BATCH_SIZE = 10000
 
     # ==================================================================================================================
@@ -39,7 +39,7 @@ class GpuConfig(MazeAIConfig):
 
             # learning_rate=5e-5,
             # weight_decay=0.1,
-            gradient_accumulation_steps=16,
+            gradient_accumulation_steps=8,
             per_device_train_batch_size=32,
             per_device_eval_batch_size=40,
             fp16=True,
