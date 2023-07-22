@@ -3,6 +3,7 @@ import pyfiglet
 import colorama
 from dotenv import load_dotenv
 
+from src.config.default import MazeAIConfig
 from src.config.available_configs import AVAILABLE_CONFIGS
 from src.prepare import prepare as prepare_handler
 from src.sample import sample as sample_handler
@@ -38,6 +39,34 @@ def train(config):
 @click.option("--config", default="default", help="The selected configuration class")
 def sample(config):
     sample_handler(AVAILABLE_CONFIGS[config]())
+
+
+# def commandWithConfigFile(config_file_param_name):
+#
+#     class CustomCommandClass(click.Command):
+#
+#         def invoke(self, ctx):
+#             config_file = ctx.params[config_file_param_name]
+#             if config_file is not None:
+#
+#                 config_data = AVAILABLE_CONFIGS[config_file]()
+#                 for param, value in ctx.params.items():
+#                     if value is None and param in config_data:
+#                         ctx.params[param] = config_data[param]
+#
+#             return super(CustomCommandClass, self).invoke(ctx)
+#
+#     return CustomCommandClass
+
+
+# @click.command(cls=commandWithConfigFile('config_file'))
+# @click.argument("arg")
+# @click.option("--opt")
+# @click.option("--config", type=click.Path())
+# def test(arg, opt, config_file):
+#     print("arg: {}".format(arg))
+#     print("opt: {}".format(opt))
+#     print("config_file: {}".format(config_file))
 
 
 cli.add_command(prepare)
