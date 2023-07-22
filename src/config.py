@@ -5,6 +5,10 @@ from transformers import TrainingArguments
 from src.maze.algorithms import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
+
+
+
+
 class MazeAIConfig:
     # ==================================================================================================================
     #       Maze Data
@@ -78,23 +82,3 @@ class MazeAIConfig:
             save_total_limit=3,
             optim="adamw_torch",
         )
-
-    def has_model(self) -> bool:
-        return len(self.CHECKPOINT_MODEL) > 0
-
-    def output_path(self) -> str:
-        root_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-        return os.path.join(root_path, self.OUTPUT_DIRECTORY_NAME)
-
-    def model_directory(self) -> str:
-        return os.path.join(self.output_path(), self.MODEL_DIRECTORY_NAME)
-
-    def model_path(self) -> str:
-        return os.path.join(self.model_directory(), self.CHECKPOINT_MODEL)
-
-    def data_directory(self) -> str:
-        return os.path.join(self.output_path(), self.DATA_DIRECTORY_NAME)
-
-    def tokenizer_path(self) -> str:
-        return os.path.join(self.OUTPUT_DIRECTORY_NAME, self.TOKENIZER_FILENAME)
-
