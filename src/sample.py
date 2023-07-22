@@ -38,8 +38,8 @@ if __name__ == '__main__':
     sample(MazeAIConfig())
 
     # # Import tokenizer and model
-    # tokenizer = PreTrainedTokenizerFast(tokenizer_file=config.TOKENIZER_FILE_PATH)
-    # model = GPT2LMHeadModel.from_pretrained(config.MODEL_PATH, local_files_only=True)
+    # tokenizer = PreTrainedTokenizerFast(tokenizer_file=conf.TOKENIZER_FILE_PATH)
+    # model = GPT2LMHeadModel.from_pretrained(conf.MODEL_PATH, local_files_only=True)
     # generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
     # set_seed(random.randint(0, 100000))
     #

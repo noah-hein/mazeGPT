@@ -24,19 +24,19 @@ def cli(ctx):
 
 
 @click.command(help="Builds a dataset of mazes and trains a tokenizer from it")
-@click.option("--config", default="default", help="The selected configuration class")
+@click.option("--conf", default="default", help="The selected configuration class")
 def prepare(config):
     prepare_handler(AVAILABLE_CONFIGS[config]())
 
 
 @click.command(help="Starts training the selected model with from the dataset and tokenizer")
-@click.option("--config", default="default", help="The selected configuration class")
+@click.option("--conf", default="default", help="The selected configuration class")
 def train(config):
     MazeAITrainer(AVAILABLE_CONFIGS[config]())
 
 
 @click.command(help="Builds an example maze with the provided model")
-@click.option("--config", default="default", help="The selected configuration class")
+@click.option("--conf", default="default", help="The selected configuration class")
 def sample(config):
     sample_handler(AVAILABLE_CONFIGS[config]())
 
@@ -62,7 +62,7 @@ def sample(config):
 # @click.command(cls=commandWithConfigFile('config_file'))
 # @click.argument("arg")
 # @click.option("--opt")
-# @click.option("--config", type=click.Path())
+# @click.option("--conf", type=click.Path())
 # def test(arg, opt, config_file):
 #     print("arg: {}".format(arg))
 #     print("opt: {}".format(opt))
