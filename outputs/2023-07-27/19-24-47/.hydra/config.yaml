@@ -1,4 +1,5 @@
-checkpoint: ''
+model:
+  checkpoint: ''
 maze:
   height:
     min: 3

@@ -118,7 +118,7 @@ hydra:
     override_dirname: ''
     id: ???
     num: ???
-    config_name: null
+    config_name: default
     env_set: {}
     env_copy: []
     config:
@@ -134,10 +134,13 @@ hydra:
     - path: hydra.conf
       schema: pkg
       provider: hydra
+    - path: C:\Users\noahh\Desktop\maze-ai\conf
+      schema: file
+      provider: main
     - path: ''
       schema: structured
       provider: schema
-    output_dir: C:\Users\noahh\Desktop\maze-ai\outputs\2023-07-21\23-43-09
+    output_dir: C:\Users\noahh\Desktop\maze-ai\outputs\2023-07-27\19-35-21
     choices:
       hydra/env: default
       hydra/callbacks: null

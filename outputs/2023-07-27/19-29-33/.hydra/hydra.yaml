@@ -140,7 +140,7 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: C:\Users\noahh\Desktop\maze-ai\outputs\2023-07-21\23-43-51
+    output_dir: C:\Users\noahh\Desktop\maze-ai\outputs\2023-07-27\19-29-33
     choices:
       hydra/env: default
       hydra/callbacks: null
