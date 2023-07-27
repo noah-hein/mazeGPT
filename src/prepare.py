@@ -1,11 +1,8 @@
-import hydra
 from datasets import load_dataset
 from tokenizers.implementations import ByteLevelBPETokenizer
-
 from src.new_config import MazeAIConfig
-from src.paths import Paths
 from src.data import MazeAIData
-from src.util import bordered
+from src.util import bordered, rooted
 
 
 def prepare(config: MazeAIConfig):
@@ -20,11 +17,9 @@ def prepare(config: MazeAIConfig):
     data.generate()
     print()
 
-    paths = Paths(config)
-
     # Get training data for tokenizer
     print(bordered("Load Mazes For Training"))
-    training_data = load_dataset(paths.data_directory())["train"]
+    training_data = load_dataset(rooted(config.output.data))["train"]
     tokenizer = ByteLevelBPETokenizer()
     print()
 
@@ -48,7 +43,7 @@ def prepare(config: MazeAIConfig):
 
     # Save tokenizer to a file
     print("Saving tokenizer at " + config.output.tokenizer)
-    tokenizer.save(paths.tokenizer_path())
+    tokenizer.save(rooted(config.output.tokenizer))
 
 # if __name__ == '__main__':
 #     prepare(MazeAIConfig)

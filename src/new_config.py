@@ -18,9 +18,9 @@ class MazeConfig:
 @dataclass
 class OutputConfig:
     dir: str = "out"
-    model: str = "models"
-    data: str = "data"
-    tokenizer: str = "tokenizer.json"
+    model: str = "out/models"
+    data: str = "out/data"
+    tokenizer: str = "out/tokenizer.json"
 
 
 @dataclass

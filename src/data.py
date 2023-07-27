@@ -2,10 +2,10 @@ import os
 import pathlib
 import shutil
 
-from src.paths import Paths
 from src.new_config import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
+from src.util import rooted
 
 
 class MazeAIData:
@@ -17,7 +17,6 @@ class MazeAIData:
         self.config = config
         self.maze_files: dict[str, list[Maze]] = {}
         self.maze_factory = MazeFactory()
-        self.paths = Paths(config)
 
     # ==================================================================================================================
     #       Public Methods
@@ -29,7 +28,7 @@ class MazeAIData:
         self.save_maze_files()
 
     def clear_data_folder(self):
-        data_path = self.paths.data_directory()
+        data_path = rooted(self.config.output.data)
         if os.path.isdir(data_path):
             shutil.rmtree(data_path)
         os.makedirs(data_path, exist_ok=True)
@@ -62,11 +61,10 @@ class MazeAIData:
             self.save_mazes_to_file(maze_file_name, maze_list)
 
     def save_mazes_to_file(self, filename: str, mazes: list[Maze]):
-        config = self.config
-
         # Create output for file
-        pathlib.Path(self.paths.data_directory()).mkdir(parents=True, exist_ok=True)
-        file_path = os.path.join(self.paths.data_directory(), filename)
+        data_directory = rooted(self.config.output.data)
+        pathlib.Path(data_directory).mkdir(parents=True, exist_ok=True)
+        file_path = os.path.join(data_directory, filename)
 
         # Delete previous file
         if os.path.isfile(file_path):
