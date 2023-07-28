@@ -3,6 +3,7 @@ import colorama
 import pyfiglet
 from dotenv import load_dotenv
 
+from src.sample import MazeAISampler
 from src.prepare import MazeAIPrepare
 from src.config import MazeAIConfig
 from src.train import MazeAITrainer
@@ -18,7 +19,8 @@ def maze_gpt(config: MazeAIConfig) -> None:
     # Select Action Script
     actions = {
         "prepare": MazeAIPrepare,
-        "train": MazeAITrainer
+        "train": MazeAITrainer,
+        "sample": MazeAISampler
     }
     actions[config.action](config)
 
