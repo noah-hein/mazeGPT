@@ -44,7 +44,7 @@ class TokenizerConfig:
 
 
 class TrainingConfig(TrainingArguments):
-    output_dir = "farts"
+    output_dir = "out/models"
     evaluation_strategy = "steps"
     overwrite_output_dir = True
     num_train_epochs = 10

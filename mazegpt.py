@@ -2,7 +2,6 @@ import hydra
 import colorama
 import pyfiglet
 from dotenv import load_dotenv
-from omegaconf import OmegaConf
 
 from src.prepare import MazeAIPrepare
 from src.config import MazeAIConfig
