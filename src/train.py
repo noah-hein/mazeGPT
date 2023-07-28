@@ -1,7 +1,8 @@
 from datasets import load_dataset
-from src.config.default import MazeAIConfig
-from src.util import determine_train_device
-from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, DataCollatorForLanguageModeling, Trainer
+from src.new_config import MazeAIConfig
+from src.util import determine_train_device, rooted
+from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, DataCollatorForLanguageModeling, \
+    Trainer, TrainingArguments
 
 
 class MazeAITrainer(Trainer):
@@ -17,10 +18,12 @@ class MazeAITrainer(Trainer):
         self.TOKENIZER = self._tokenizer()
         self.DATA_COLLATOR = self._data_collator()
         self.MODEL = self._model()
-        self.TRAINING_ARGS = self.config.training_args()
+        training_config = self.config.training.__dict__["_parent"]["training"]
+        self.TRAINING_ARGS = TrainingArguments(**training_config)
 
         # Split the dataset
-        dataset = load_dataset(config.data_directory(), split='train').train_test_split(test_size=config.TEST_PERCENT)
+        data_dir = rooted(config.output.data)
+        dataset = load_dataset(data_dir, split='train').train_test_split(test_size=config.maze.test_percent)
         train_dataset = dataset["train"].map(self._encode, batched=True)
         eval_dataset = dataset["test"].map(self._encode, batched=True)
 
@@ -35,8 +38,8 @@ class MazeAITrainer(Trainer):
         )
 
         # Start training
-        if self.config.has_model():
-            self.train(self.config.model_path())
+        if self.has_model():
+            self.train(rooted(config.output.model))
         else:
             self.train()
 
@@ -47,7 +50,7 @@ class MazeAITrainer(Trainer):
     def _encode(self, unencoded_dataset):
         return self.TOKENIZER(
             unencoded_dataset["text"],
-            max_length=self.config.FRAGMENT_LENGTH,
+            max_length=self.config.tokenizer.fragment_length,
             return_special_tokens_mask=True,
             truncation=True
         )
@@ -59,14 +62,16 @@ class MazeAITrainer(Trainer):
             bos_token_id=self.TOKENIZER.bos_token_id,
             eos_token_id=self.TOKENIZER.eos_token_id,
         )
-        if self.config.has_model():
-            model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=self.config.model_path())
+        if self.has_model():
+            model_dir = rooted(self.config.output.model)
+            model_config = GPT2Config.from_pretrained(pretrained_model_name_or_path=model_dir)
         return GPT2LMHeadModel(model_config)
 
     def _tokenizer(self) -> PreTrainedTokenizerFast:
-        tokenizer = PreTrainedTokenizerFast(tokenizer_file=self.config.tokenizer_path())
-        tokenizer.pad_token = self.config.PAD_TOKEN
-        tokenizer.mask_token = self.config.MASK_TOKEN
+        tokenizer_path = rooted(self.config.output.tokenizer)
+        tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_path)
+        tokenizer.pad_token = self.config.tokenizer.pad_token
+        tokenizer.mask_token = self.config.tokenizer.mask_token
         return tokenizer
 
     def _data_collator(self) -> DataCollatorForLanguageModeling:
@@ -76,7 +81,5 @@ class MazeAITrainer(Trainer):
             mlm_probability=0.2
         )
 
-
-if __name__ == '__main__':
-    """Allows you to run the train script without the CLI"""
-    MazeAITrainer(MazeAIConfig())
+    def has_model(self):
+        return len(self.config.model) > 0

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from enum import Enum
 
+from transformers import TrainingArguments
+
 
 class Action(Enum):
     INFO = "info"
@@ -37,6 +39,24 @@ class TokenizerConfig:
     fragment_length: int = 1000
     min_frequency: int = 100000
     batch_size: int = 10000
+    pad_token: str = "[PAD]"
+    mask_token: str = "[MASK]"
+
+
+class TrainingConfig(TrainingArguments):
+    output_dir = "farts"
+    evaluation_strategy = "steps"
+    overwrite_output_dir = True
+    num_train_epochs = 10
+    save_steps = 10
+    logging_steps = 10
+    logging_strategy = "steps"
+    gradient_accumulation_steps = 32
+    per_device_train_batch_size = 8
+    per_device_eval_batch_size = 16
+    fp16 = False
+    save_total_limit = 3
+    optim = "adamw_torch"
 
 
 @dataclass
@@ -46,18 +66,4 @@ class MazeAIConfig:
     maze: MazeConfig = field(default_factory=MazeConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
     tokenizer: TokenizerConfig = field(default_factory=TokenizerConfig)
-    # training: TrainingArguments = TrainingArguments(
-    #         output_dir="out",
-    #         evaluation_strategy="steps",
-    #         overwrite_output_dir=True,
-    #         num_train_epochs=10,
-    #         save_steps=10,
-    #         logging_steps=10,
-    #         logging_strategy="steps",
-    #         gradient_accumulation_steps=32,
-    #         per_device_train_batch_size=8,
-    #         per_device_eval_batch_size=16,
-    #         fp16=False,
-    #         save_total_limit=3,
-    #         optim="adamw_torch",
-    #     )
+    training: TrainingArguments = field(default_factory=TrainingConfig)

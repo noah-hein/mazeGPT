@@ -13,11 +13,11 @@ model: ""
 
 maze:
   height:
-    min: 3
-    max: 3
+    min: 5
+    max: 5
   width:
-    min: 3
-    max: 3
+    min: 5
+    max: 5
   test_percent: 0.1
   number_per_dimension: 100000
 
@@ -43,8 +43,9 @@ training:
   save_steps: 10
   logging_steps: 10
   logging_strategy: steps
-  gradient_accumulation_steps: 32
-  per_device_train_batch_size: 8
-  per_device_eval_batch_size: 16
+  gradient_accumulation_steps: 8
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 40
   save_total_limit: 3
+  fp16: True
   optim: adamw_torch

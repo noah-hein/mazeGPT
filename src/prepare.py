@@ -55,6 +55,7 @@ class MazeAIPrepare:
             show_progress=True,
             min_frequency=tokenizer_config.min_frequency,
             vocab_size=tokenizer_config.vocab_size,
+            special_tokens=[tokenizer_config.pad_token, tokenizer_config.mask_token]
         )
 
     def save_tokenizer(self):

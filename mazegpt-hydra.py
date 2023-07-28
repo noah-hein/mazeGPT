@@ -8,7 +8,7 @@ from src.train import MazeAITrainer
 @hydra.main(version_base=None, config_path="conf", config_name="default")
 def maze_gpt(config: MazeAIConfig) -> None:
     actions = {
-        "info": MazeAIPrepare,
+        "prepare": MazeAIPrepare,
         "train": MazeAITrainer
     }
     actions[config.action](config)
