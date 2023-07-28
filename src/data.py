@@ -56,7 +56,7 @@ class MazeAIData:
                 maze_files[maze_data_filename] = new_mazes
 
     def save_maze_files(self):
-        print("Saving binary_tree to file(s)...")
+        print("Saving mazes to file(s)...")
         for maze_file_name, maze_list in self.maze_files.items():
             self.save_mazes_to_file(maze_file_name, maze_list)
 

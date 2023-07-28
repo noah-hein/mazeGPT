@@ -8,8 +8,8 @@ hydra:
   run:
     dir: .
 
-model:
-  checkpoint: ""
+action: "INFO"
+model: ""
 
 maze:
   height:

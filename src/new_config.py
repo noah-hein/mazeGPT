@@ -1,4 +1,12 @@
 from dataclasses import dataclass, field
+from enum import Enum
+
+
+class Action(Enum):
+    INFO = 1
+    PREPARE = 2
+    TRAIN = 3
+    SAMPLE = 4
 
 
 @dataclass
@@ -33,6 +41,8 @@ class TokenizerConfig:
 
 @dataclass
 class MazeAIConfig:
+    action: Action = Action.INFO
+    model: str = ""
     maze: MazeConfig = field(default_factory=MazeConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
     tokenizer: TokenizerConfig = field(default_factory=TokenizerConfig)
