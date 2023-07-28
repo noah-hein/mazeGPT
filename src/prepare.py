@@ -1,6 +1,6 @@
 from datasets import load_dataset
 from tokenizers.implementations import ByteLevelBPETokenizer
-from src.new_config import MazeAIConfig
+from src.config import MazeAIConfig
 from src.data import MazeAIData
 from src.util import bordered, rooted
 

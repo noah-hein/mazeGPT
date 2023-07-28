@@ -1,5 +1,5 @@
 from datasets import load_dataset
-from src.new_config import MazeAIConfig
+from src.config import MazeAIConfig
 from src.util import determine_train_device, rooted
 from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, DataCollatorForLanguageModeling, \
     Trainer, TrainingArguments

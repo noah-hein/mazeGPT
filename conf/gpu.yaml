@@ -28,7 +28,7 @@ output:
   tokenizer: out/tokenizer.json
 
 tokenizer:
-  vocab_size: 1000
+  vocab_size: 100
   fragment_length: 1000
   min_frequency: 100000
   batch_size: 10000

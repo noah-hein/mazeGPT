@@ -2,7 +2,7 @@ import os
 import pathlib
 import shutil
 
-from src.new_config import MazeAIConfig
+from src.config import MazeAIConfig
 from src.maze.maze import Maze
 from src.maze.maze_factory import MazeFactory
 from src.util import rooted

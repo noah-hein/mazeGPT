@@ -1,5 +1,5 @@
 import os
-from src.new_config import MazeAIConfig
+from src.config import MazeAIConfig
 
 
 
