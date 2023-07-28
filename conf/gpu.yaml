@@ -19,7 +19,7 @@ maze:
     min: 5
     max: 5
   test_percent: 0.1
-  number_per_dimension: 100000
+  number_per_dimension: 200000
 
 output:
   dir: out
@@ -28,7 +28,7 @@ output:
   tokenizer: out/tokenizer.json
 
 tokenizer:
-  vocab_size: 100
+  vocab_size: 1000
   fragment_length: 1000
   min_frequency: 100000
   batch_size: 10000
@@ -41,11 +41,11 @@ training:
 #  overwrite_output_dir: True
 #  num_train_epochs: 10
 #  save_steps: 10
-#  logging_steps: 10
+  logging_steps: 10
 #  logging_strategy: steps
 #  gradient_accumulation_steps: 1
 #  per_device_train_batch_size: 32
 #  per_device_eval_batch_size: 40
-#  save_total_limit: 3
+  save_total_limit: 3
   fp16: True
   optim: adamw_torch
