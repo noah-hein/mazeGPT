@@ -3,10 +3,10 @@ from enum import Enum
 
 
 class Action(Enum):
-    INFO = 1
-    PREPARE = 2
-    TRAIN = 3
-    SAMPLE = 4
+    INFO = "info"
+    PREPARE = "prepare"
+    TRAIN = "train"
+    SAMPLE = "sample"
 
 
 @dataclass

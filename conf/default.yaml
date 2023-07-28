@@ -8,7 +8,7 @@ hydra:
   run:
     dir: .
 
-action: "INFO"
+action: "info"
 model: ""
 
 maze:
