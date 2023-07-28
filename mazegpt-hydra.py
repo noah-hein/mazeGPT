@@ -5,7 +5,7 @@ from src.new_config import MazeAIConfig
 from src.train import MazeAITrainer
 
 
-@hydra.main(version_base=None, config_path="conf", config_name="default")
+@hydra.main(version_base=None, config_path="conf", config_name="gpu")
 def maze_gpt(config: MazeAIConfig) -> None:
     actions = {
         "prepare": MazeAIPrepare,
