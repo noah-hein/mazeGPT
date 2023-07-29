@@ -19,7 +19,7 @@ maze:
     min: 5
     max: 5
   test_percent: 0.1
-  number_per_dimension: 200000
+  number_per_dimension: 100000
 
 output:
   dir: out

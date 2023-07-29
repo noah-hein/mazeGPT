@@ -28,7 +28,6 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 * ⏩ [Quickstart](#-quickstart)
   * [Installation](#installation)
   * [CLI](#cli)
-* 🏢 [Structure](docs/STRUCTURE.md#-structure)
 * 🎓 [Authors](#-authors)
 
 ## 🌅 Introduction
@@ -69,7 +68,7 @@ The end goal is to make a more human like design pattern, one without a fingerpr
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
-![Maze Graph](../media/docs/maze_as_graph.png)
+![Maze Graph](./media/docs/maze_as_graph.png)
 
 The focus of this project will be around perfect mazes. A perfect maze is the same as a spanning tree.
 In fact several already existing algorithms use this principal for generation.
@@ -79,7 +78,7 @@ Perfect Maze Definition:
 - No unfilled spaces (within the bounds)
 - No matter where you start / end, there should only be one path
 
-![Perfect vs Not Perfect Maze](../media/docs/perfect_versus_not_perfect.png)
+![Perfect vs Not Perfect Maze](./media/docs/perfect_versus_not_perfect.png)
 
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
