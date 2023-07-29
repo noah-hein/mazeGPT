@@ -23,8 +23,8 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 |                                    |                                |
 
 # 🔍 Table of Contents
-* 🌅 [Introduction](#introduction)
-* 🌌 [Overview](#overview)
+* 🌅 [Introduction](#-introduction)
+* 🌌 [Overview](#-overview)
 * ⏩ [Quickstart](#-quickstart)
   * [Installation](#installation)
   * [CLI](#cli)
@@ -218,7 +218,6 @@ Visually shows the model being used to generate a new maze
 ```bash
 # Reference the model in use
 $ python .\mazegpt.py 'action=sample' 'model=out/models/checkpoint-67500'
-
 ```
 
 ## 🎓 Authors

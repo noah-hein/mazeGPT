@@ -13,13 +13,13 @@ model: ""
 
 maze:
   height:
-    min: 5
+    min: 3
     max: 5
   width:
-    min: 5
+    min: 3
     max: 5
   test_percent: 0.1
-  number_per_dimension: 100000
+  number_per_dimension: 50000
 
 output:
   dir: out

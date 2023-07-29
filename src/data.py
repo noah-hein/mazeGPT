@@ -44,15 +44,16 @@ class MazeAIData:
         height = maze_config.height
 
         # Create mazes for every dimension
-        for width in range(width.min, width.max + 1):
-            for height in range(height.min, height.max + 1):
+        print(range(height.min, height.max + 1))
+        for w in range(width.min, width.max + 1):
+            for h in range(height.min, height.max + 1):
                 # Generate the binary_tree
-                maze_factory.width = width
-                maze_factory.height = height
+                maze_factory.width = w
+                maze_factory.height = h
                 new_mazes = maze_factory.generate(maze_config.number_per_dimension)
 
                 # Save maze to temporary dictionary
-                maze_data_filename: str = width.__str__() + "x" + height.__str__() + ".txt"
+                maze_data_filename: str = w.__str__() + "x" + h.__str__() + ".txt"
                 maze_files[maze_data_filename] = new_mazes
 
     def save_maze_files(self):
