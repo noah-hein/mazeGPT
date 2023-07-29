@@ -132,7 +132,7 @@ While this is not mandatory, it significantly simplifies the process of initiali
 To create a virtual environment named 'venv', execute the command shown below.
 ```bash
 python -m venv venv       # Creates virtual env
-.\venv\Scripts\activate   # Activate venv
+$ .\venv\Scripts\activate   # Activate venv
 ```
 
 #### GPU Support (Optional)
@@ -148,13 +148,13 @@ To install the GPU variant vist [PyTorch Getting Started](https://pytorch.org/ge
 
 ```bash
 # Example command for installing PyTorch CUDA 11.8 Windows
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+$ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
 #### Installing Dependencies
 To install all the required dependencies run the following.
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 ### CLI
