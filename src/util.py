@@ -29,3 +29,8 @@ def bordered(text):
         res.append('│' + (s + ' ' * width)[:width] + '│')
     res.append('└' + '─' * width + '┘')
     return '\n'.join(res)
+
+
+def rooted(path: str):
+    root_path = os.path.dirname(os.path.dirname(__file__))
+    return os.path.abspath(os.path.join(root_path, path))

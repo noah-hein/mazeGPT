@@ -46,10 +46,16 @@ class Maze:
         plt.show()
 
     def char_length(self):
-        width_len = 2 * self.width + 1
-        height_len = 2 * (self.height + 1)
-        return width_len * height_len
+        return self.char_width() * self.char_height()
 
+    def char_width(self):
+        return 2 * self.width + 1
+
+    def char_height(self):
+        return 2 * self.height + 1
+
+    def init_zero(self):
+        self.grid = np.zeros((self.char_height(), self.char_width()))
 
     def parse_string(self, string: str):
         result = "".join(filter(str.isnumeric, string))

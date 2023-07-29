@@ -1,8 +1,8 @@
 import random
 from tqdm import tqdm
 from random import randint
-from .algorithms.prims import PrimsAlgorithm
 from .maze import Maze
+from src.maze.algorithms import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
 class MazeFactory:
@@ -20,7 +20,12 @@ class MazeFactory:
     def __init__(self):
         self.width = 5
         self.height = 5
-        self.algorithms = [PrimsAlgorithm]
+        self.algorithms = [
+            BinaryTreeAlgorithm,
+            AldousBroderAlgorithm,
+            PrimsAlgorithm,
+            BacktrackingAlgorithm
+        ]
 
     # ==================================================================================================================
     #       Public Methods

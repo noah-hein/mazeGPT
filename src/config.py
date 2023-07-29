@@ -1,84 +1,69 @@
-import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from enum import Enum
 
 from transformers import TrainingArguments
-from src.maze.algorithms import AldousBroderAlgorithm, PrimsAlgorithm, BacktrackingAlgorithm, BinaryTreeAlgorithm
 
 
+class Action(Enum):
+    INFO = "info"
+    PREPARE = "prepare"
+    TRAIN = "train"
+    SAMPLE = "sample"
 
 
+@dataclass
+class DimensionConfig:
+    min: int = 3
+    max: int = 3
 
 
+@dataclass
+class MazeConfig:
+    height: DimensionConfig = field(default_factory=DimensionConfig)
+    width: DimensionConfig = field(default_factory=DimensionConfig)
+    test_percent: float = 0.1
+    number_per_dimension: int = 100000
+
+
+@dataclass
+class OutputConfig:
+    dir: str = "out"
+    model: str = "out/models"
+    data: str = "out/data"
+    tokenizer: str = "out/tokenizer.json"
+
+
+@dataclass
+class TokenizerConfig:
+    vocab_size: int = 1000
+    fragment_length: int = 1000
+    min_frequency: int = 100000
+    batch_size: int = 10000
+    pad_token: str = "[PAD]"
+    mask_token: str = "[MASK]"
+
+
+class TrainingConfig(TrainingArguments):
+    output_dir = "out/models"
+    evaluation_strategy = "steps"
+    overwrite_output_dir = True
+    num_train_epochs = 10
+    save_steps = 10
+    logging_steps = 10
+    logging_strategy = "steps"
+    gradient_accumulation_steps = 32
+    per_device_train_batch_size = 8
+    per_device_eval_batch_size = 16
+    fp16 = False
+    save_total_limit = 3
+    optim = "adamw_torch"
+
+
+@dataclass
 class MazeAIConfig:
-    # ==================================================================================================================
-    #       Maze Data
-    # ==================================================================================================================
-
-    ALLOWED_ALGORITHMS = [
-        BinaryTreeAlgorithm,
-        AldousBroderAlgorithm,
-        PrimsAlgorithm,
-        BacktrackingAlgorithm
-    ]
-
-    NUMBER_OF_MAZES_PER_DIMENSION: int = 100000
-    TEST_PERCENT: float = 0.1
-
-    MIN_HEIGHT: int = 3
-    MAX_HEIGHT: int = 3
-    MIN_WIDTH: int = 3
-    MAX_WIDTH: int = 3
-
-    # ==================================================================================================================
-    #       Folder / File Names
-    # ==================================================================================================================
-
-    OUTPUT_DIRECTORY_NAME = "out"
-    MODEL_DIRECTORY_NAME = "models"
-    DATA_DIRECTORY_NAME = "data"
-
-    DATA_FILENAME = "dataset.txt"
-    TOKENIZER_FILENAME = "tokenizer.json"
-    CHECKPOINT_MODEL = ""
-
-    # ==================================================================================================================
-    #       Tokenizer
-    # ==================================================================================================================
-
-    VOCAB_SIZE = 1000
-    FRAGMENT_LENGTH = 1000
-    TOKENIZER_MIN_FREQUENCY = 100000
-    BATCH_SIZE = 10000
-
-    PAD_TOKEN = "[PAD]"
-    MASK_TOKEN = "[MASK]"
-    SPECIAL_TOKENS = [
-        PAD_TOKEN,
-        MASK_TOKEN
-    ]
-
-    # ==================================================================================================================
-    #       Public Methods
-    # ==================================================================================================================
-
-    def training_args(self) -> TrainingArguments:
-        return TrainingArguments(
-            output_dir=self.model_directory(),
-            evaluation_strategy="steps",
-            overwrite_output_dir=True,
-            num_train_epochs=10,
-            save_steps=10,
-            logging_steps=10,
-            logging_strategy="steps",
-
-            # learning_rate=5e-5,
-            # weight_decay=0.1,
-            gradient_accumulation_steps=32,
-            per_device_train_batch_size=8,
-            per_device_eval_batch_size=16,
-            fp16=False,
-
-            # gradient_checkpointing=True,
-            save_total_limit=3,
-            optim="adamw_torch",
-        )
+    action: Action = Action.INFO
+    model: str = ""
+    maze: MazeConfig = field(default_factory=MazeConfig)
+    output: OutputConfig = field(default_factory=OutputConfig)
+    tokenizer: TokenizerConfig = field(default_factory=TokenizerConfig)
+    training: TrainingArguments = field(default_factory=TrainingConfig)
