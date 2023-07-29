@@ -1,6 +1,4 @@
 import random
-from array import array
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -21,50 +19,47 @@ class MazeAISampler:
         set_seed(random.randint(0, 100000))
 
         # Set up the new maze
-        maze = Maze()
-        maze.width = 5
-        maze.height = 5
-        maze.init_zero()
-        max_length = maze.char_length() + 2
+        self.maze = Maze()
+        self.maze.width = 5
+        self.maze.height = 5
+        self.maze.init_zero()
+        max_length = self.maze.char_length() + 2
 
-        #
+        # Create start tokens
         maze_start_sequence = "<|5x5|>"
-        maze_string = maze_start_sequence
+        self.maze_string = maze_start_sequence
 
-        j = 0
-        for i in range(max_length):
-            #
-            next_token = self.next_token(maze_string)
-            maze_string += next_token
+        # Animate the maze generation
+        self.j = 0
+        fig = plt.figure()
+        ani = animation.FuncAnimation(fig, self.update, frames=max_length, interval=100)
+        plt.show()
+        self.maze.display_maze()
 
-            if "<|end|>" in maze_string:
-                break
+    def update(self, frame):
+        # Generate next token in sequence
+        next_token = self.next_token(self.maze_string)
+        self.maze_string += next_token
+        print(self.maze_string)
 
-            characters = list(next_token)
-            for c in characters:
-                if c in ("0", "1"):
-                    row_index, col_index = np.unravel_index(j, maze.grid.shape)
-                    maze.grid[row_index][col_index] = c
-                    j = j + 1
+        # Stop generating if the animation finishes
+        if "<|end|>" in self.maze_string:
+            plt.close()
+
+        # Parse the next tokens and update maze
+        characters = list(next_token)
+        for c in characters:
+            if c in ("0", "1"):
+                row_index, col_index = np.unravel_index(self.j, self.maze.grid.shape)
+                self.maze.grid[row_index][col_index] = c
+                self.j = self.j + 1
+
+                plt.imshow(self.maze.grid, cmap='binary', interpolation='none')
+                plt.title(f"Frame {frame}")
 
     def next_token(self, maze_string):
         maze_string_length = len(maze_string)
         maze_string = self.generator(maze_string, max_new_tokens=1)[0]["generated_text"]
         next_token = maze_string[maze_string_length:]
         return next_token
-
-    def iterate_through_matrix(self, matrix, index):
-        rows = len(matrix)
-        cols = len(matrix[0])
-        row = index // rows
-        col = index % cols
-        return row, col
-
-    # def update_figure(self):
-    #     return []
-    #
-    # def display_maze(self):
-    #     fig = plt.figure()
-    #     im = plt.imshow(arr[0], animated=True)
-    #     ani = animation.FuncAnimation(fig, updatefig,  blit=True)
 
