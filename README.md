@@ -206,12 +206,14 @@ These mazes are built based on the settings from the provided `configuration`.
 ```bash
 $ python .\mazegpt.py 'action=prepare'
 ```
+![Prepare GIF](media/gifs/preapre.gif)
 
 ##### Train
 Starts the training of the ML algorithm. Outputs the models to the designated folder
 ```bash
 $ python .\mazegpt.py 'action=train'
 ```
+![Prepare GIF](media/gifs/train.gif)
 
 ##### Sample
 Visually shows the model being used to generate a new maze
