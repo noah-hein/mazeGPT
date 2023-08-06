@@ -19,22 +19,25 @@ class MazeAISampler:
         set_seed(random.randint(0, 100000))
 
         # Set up the new maze
+        width = config.sample.width
+        height = config.sample.height
         self.maze = Maze()
-        self.maze.width = 5
-        self.maze.height = 5
+        self.maze.width = width
+        self.maze.height = height
         self.maze.init_zero()
         max_length = self.maze.char_length() + 2
 
         # Create start tokens
-        maze_start_sequence = "<|5x5|>"
+        maze_start_sequence = "<|{}x{}|>".format(width, height)
         self.maze_string = maze_start_sequence
 
         # Animate the maze generation
         self.j = 0
         fig = plt.figure()
         ani = animation.FuncAnimation(fig, self.update, frames=max_length, interval=100)
-        plt.show()
-        self.maze.display_maze()
+        if config.sample.show_animation:
+            plt.show()
+            self.maze.display_maze()
 
     def update(self, frame):
         # Generate next token in sequence

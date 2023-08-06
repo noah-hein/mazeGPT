@@ -49,3 +49,8 @@ training:
 #  overwrite_output_dir: True
 #  num_train_epochs: 10
 #  save_steps: 10
+
+sample:
+  width: 5
+  height: 5
+  show_animation: True

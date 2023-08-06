@@ -43,6 +43,13 @@ class TokenizerConfig:
     mask_token: str = "[MASK]"
 
 
+@dataclass
+class SampleConfig:
+    width: int = 5
+    height: int = 5
+    show_animation: bool = True
+
+
 class TrainingConfig(TrainingArguments):
     output_dir = "out/models"
     evaluation_strategy = "steps"
@@ -67,3 +74,4 @@ class MazeAIConfig:
     output: OutputConfig = field(default_factory=OutputConfig)
     tokenizer: TokenizerConfig = field(default_factory=TokenizerConfig)
     training: TrainingArguments = field(default_factory=TrainingConfig)
+    sample: SampleConfig = field(default_factory=SampleConfig)
