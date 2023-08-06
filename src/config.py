@@ -47,7 +47,6 @@ class TokenizerConfig:
 class SampleConfig:
     width: int = 5
     height: int = 5
-    show_animation: bool = True
 
 
 class TrainingConfig(TrainingArguments):

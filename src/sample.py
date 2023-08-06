@@ -35,9 +35,8 @@ class MazeAISampler:
         self.j = 0
         fig = plt.figure()
         ani = animation.FuncAnimation(fig, self.update, frames=max_length, interval=100)
-        if config.sample.show_animation:
-            plt.show()
-            self.maze.display_maze()
+        plt.show()
+        self.maze.display_maze()
 
     def update(self, frame):
         # Generate next token in sequence
