@@ -87,7 +87,7 @@ The end goal is to make a more human like design pattern, one without a fingerpr
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
-![Maze Graph](media/png/maze_as_graph.png)
+<img src="media/png/maze_as_graph.png" alt="drawing" width="200"/>
 
 The focus of this project will be around perfect mazes. A perfect maze is the same as a spanning tree.
 In fact several already existing algorithms use this principal for generation.
@@ -261,8 +261,8 @@ able to support a lot more than just simple squares.
 | Min Width   | 5        |
 
 ### Success Examples
-![Success Example 1](media/gif/success_1.gif)
-![Success Example 2](media/gif/success_2.gif)
+<img src="media/gif/success_1.gif" alt="drawing" width="250"/>
+<img src="media/gif/success_2.gif" alt="drawing" width="250"/>
 
 ### Bigger Tokenizer The Better
 Increasing the tokenizer seems to dramatically make the maze better at building mazes, that being said it also
@@ -273,8 +273,8 @@ Depending on how long you train the maze, sometimes failure samples can show up.
 cycle within the maze, or two or more segments that are not connected. Continuing on it might be worth investigating an
 optimizer that rewards fully complete mazes, instead of solely relying on the dataset.
 
-![Failure Example 1](media/png/failure_1.png)
-![Failure Example 1](media/png/failure_2.png)
+<img src="media/png/failure_1.png" alt="drawing" width="200"/>
+<img src="media/png/failure_2.png" alt="drawing" width="200"/>
 
 Even though there were failures, for only training in an hour I would say the results were not bad.
 
