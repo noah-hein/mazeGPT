@@ -22,9 +22,10 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 
 ---
 
-<font size='100'>Table of Contents</font>
+## 📖 Table of Contents
 <!-- TOC -->
   * [📋 Disclaimers](#-disclaimers)
+  * [📖 Table of Contents](#-table-of-contents)
   * [🌅 Introduction](#-introduction)
   * [🌌 Overview](#-overview)
     * [Why](#why)
@@ -51,8 +52,6 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
   * [🚀 Future Plans](#-future-plans)
   * [🎓 Authors](#-authors)
 <!-- TOC -->
-
----
 
 ## 🌅 Introduction
 ["Attention Is All You Need"](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) 
@@ -287,15 +286,11 @@ optimizer that rewards fully complete mazes, instead of solely relying on the da
 
 Even though there were failures, for only training in an hour I would say the results were not bad.
 
----
-
 ## 🚀 Future Plans
 - Reward model for complete mazes
 - Get more compute and train for a while
 - Test out multiple dimensions
 - Maybe expand beyond square mazes
-
----
 
 ## 🎓 Authors
 - Noah Hein ([@noah-hein](https://github.com/noah-hein))
