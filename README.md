@@ -20,6 +20,9 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 ![Inception](/media/jpg/inception.jpg)
 ![Shining](/media/jpg/shining.jpg)
 
+---
+
+<font size='100'>Table of Contents</font>
 <!-- TOC -->
   * [📋 Disclaimers](#-disclaimers)
   * [🌅 Introduction](#-introduction)
@@ -48,6 +51,8 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
   * [🚀 Future Plans](#-future-plans)
   * [🎓 Authors](#-authors)
 <!-- TOC -->
+
+---
 
 ## 🌅 Introduction
 ["Attention Is All You Need"](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) 
@@ -137,6 +142,8 @@ The maze can now be interpreted as a string of tokens, nice!
 ```
 ##### Encoding
 <|5x5|>1111111111110000000101101011101011010001010110111010101101010101011010101110110101000101101010101011000101000111111111111<|end|>
+
+---
 
 ## ⏩ Quickstart
 ### Installation
@@ -242,6 +249,8 @@ $ python .\mazegpt.py 'action=sample' 'model=out/models/checkpoint-67500'
 ```
 ![Sample](media/gif/sample.gif)
 
+---
+
 ## 📈 Results
 It turns out that the model actually does make mazes as predicted.
 After training a model only on 5x5 mazes for ~1 hour it does seem to make mazes.
@@ -278,11 +287,15 @@ optimizer that rewards fully complete mazes, instead of solely relying on the da
 
 Even though there were failures, for only training in an hour I would say the results were not bad.
 
+---
+
 ## 🚀 Future Plans
 - Reward model for complete mazes
 - Get more compute and train for a while
 - Test out multiple dimensions
 - Maybe expand beyond square mazes
+
+---
 
 ## 🎓 Authors
 - Noah Hein ([@noah-hein](https://github.com/noah-hein))
