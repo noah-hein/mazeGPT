@@ -8,7 +8,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/noah-hein/mazeGPT.svg)](https://github.com/noah-hein/mazeGPT/commits/master)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/noah-hein/mazeGPT)](https://GitHub.com/noah-hein/mazeGPT/pull/)
 
-#### Disclaimers
+## 📋 Disclaimers
 Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes. By no means am I a master of machine learning. 
 Hugging face and OpenAI are the ones to thank. They are doing the heaving lifting here.
@@ -17,19 +17,37 @@ Lots of inspiration from [NanoGPT](https://github.com/karpathy/nanoGPT)
 and [Andrej Apathy's](https://github.com/karpathy) 
 great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 
-|                                    |                                |
-|:----------------------------------:|:------------------------------:|
-| ![Inception](/media/jpg/inception.jpg) | ![Shining](/media/jpg/shining.jpg) |
-|                                    |                                |
+![Inception](/media/jpg/inception.jpg)
+![Shining](/media/jpg/shining.jpg)
 
-# 🔍 Table of Contents
-* 🌅 [Introduction](#-introduction)
-* 🌌 [Overview](#-overview)
-* ⏩ [Quickstart](#-quickstart)
-  * [Installation](#installation)
-  * [CLI](#cli)
-* 📈 [Results](#-results)
-* 🎓 [Authors](#-authors)
+<!-- TOC -->
+  * [📋 Disclaimers](#-disclaimers)
+  * [🌅 Introduction](#-introduction)
+  * [🌌 Overview](#-overview)
+    * [Why](#why)
+    * [Representing a Maze](#representing-a-maze)
+    * [Tokenizer](#tokenizer)
+      * [Example](#example)
+        * [Image](#image)
+        * [Matrix](#matrix)
+        * [Encoding](#encoding)
+  * [⏩ Quickstart](#-quickstart)
+    * [Installation](#installation)
+      * [Virtual Environment (Optional)](#virtual-environment-optional)
+      * [GPU Support (Optional)](#gpu-support-optional)
+      * [Installing Dependencies](#installing-dependencies)
+    * [CLI](#cli)
+      * [Actions](#actions)
+        * [Prepare](#prepare)
+        * [Train](#train)
+        * [Sample](#sample)
+  * [📈 Results](#-results)
+    * [Success Examples](#success-examples)
+    * [Bigger Tokenizer The Better](#bigger-tokenizer-the-better)
+    * [Failure Examples](#failure-examples)
+  * [🚀 Future Plans](#-future-plans)
+  * [🎓 Authors](#-authors)
+<!-- TOC -->
 
 ## 🌅 Introduction
 ["Attention Is All You Need"](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) 
@@ -47,7 +65,7 @@ Recursive language models specifically transformers are very good at generating 
 The purpose of this experiment is to determine if this model could be applied to a more rigid two-dimensional
 continuous structure.
 
-### 🧩 Why
+### Why
 There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
 The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
@@ -65,7 +83,7 @@ The idea would be to generate and train the network on thousands of mazes.
 By doing this, hopefully the algorithm will learn how to make different segments and their relative relationships.
 The end goal is to make a more human like design pattern, one without a fingerprint.
 
-### 📐 Representing a Maze
+### Representing a Maze
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
@@ -84,7 +102,7 @@ Perfect Maze Definition:
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
 
-### 📤 Tokenizer
+### Tokenizer
 So you might be asking "How the hell do you represent a graph with characters?"
 
 For the sake of simplicity I've decided to go with an approach similar to binary (for now)
@@ -207,14 +225,14 @@ These mazes are built based on the settings from the provided `configuration`.
 ```bash
 $ python .\mazegpt.py 'action=prepare'
 ```
-![Prepare GIF](media/gifs/preapre.gif)
+![Prepare GIF](media/gif/preapre.gif)
 
 ##### Train
 Starts the training of the ML algorithm. Outputs the models to the designated folder
 ```bash
 $ python .\mazegpt.py 'action=train'
 ```
-![Prepare GIF](media/gifs/train.gif)
+![Prepare GIF](media/gif/train.gif)
 
 ##### Sample
 Visually shows the model being used to generate a new maze
@@ -222,23 +240,49 @@ Visually shows the model being used to generate a new maze
 # Reference the model in use
 $ python .\mazegpt.py 'action=sample' 'model=out/models/checkpoint-67500'
 ```
+![Sample](media/gif/sample.gif)
 
 ## 📈 Results
 It turns out that the model actually does make mazes as predicted.
 After training a model only on 5x5 mazes for ~1 hour it does seem to make mazes.
 Right now I am further trying to determine if any overwriting is occurring (or if these are original mazes).
 
+My goal is to get to compute to run this for a bunch of different maze dimensions. Theoretically this model should be
+able to support a lot more than just simple squares.
+
+| Model Specs |          |
+|-------------|----------|
+| Steps       | 67500    |
+| Train Time  | ~1.15 hr |
+| Loss        | 1.3942   |
+| Max Height  | 5        |
+| Min Height  | 5        |
+| Max Width   | 5        |
+| Min Width   | 5        |
+
+### Success Examples
+![Success Example 1](media/gif/success_1.gif)
+![Success Example 2](media/gif/success_2.gif)
+
 ### Bigger Tokenizer The Better
 Increasing the tokenizer seems to dramatically make the maze better at building mazes, that being said it also
 increases the training time.
 
-
-### Failures
+### Failure Examples
 Depending on how long you train the maze, sometimes failure samples can show up. The most frequent I have seen is a
 cycle within the maze, or two or more segments that are not connected. Continuing on it might be worth investigating an
 optimizer that rewards fully complete mazes, instead of solely relying on the dataset.
 
-![Failure Example 1]()
+![Failure Example 1](media/png/failure_1.png)
+![Failure Example 1](media/png/failure_2.png)
+
+Even though there were failures, for only training in an hour I would say the results were not bad.
+
+## 🚀 Future Plans
+- Reward model for complete mazes
+- Get more compute and train for a while
+- Test out multiple dimensions
+- Maybe expand beyond square mazes
 
 ## 🎓 Authors
 - Noah Hein ([@noah-hein](https://github.com/noah-hein))
