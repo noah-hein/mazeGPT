@@ -19,7 +19,7 @@ maze:
     min: 5
     max: 5
   test_percent: 0.1
-  number_per_dimension: 100000
+  number_per_dimension: 200000
 
 output:
   dir: out
@@ -30,7 +30,7 @@ output:
 tokenizer:
   vocab_size: 1000
   fragment_length: 1000
-  min_frequency: 100000
+  min_frequency: 10000
   batch_size: 10000
   pad_token: "[PAD]"
   mask_token: "[MASK]"
@@ -40,8 +40,8 @@ training:
   logging_steps: 10
   save_total_limit: 3
   optim: adamw_torch
+#  logging_strategy: steps
 
 sample:
   width: 5
   height: 5
-  show_animation: True

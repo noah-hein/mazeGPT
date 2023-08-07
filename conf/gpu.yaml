@@ -53,4 +53,3 @@ training:
 sample:
   width: 5
   height: 5
-  show_animation: True

@@ -1,4 +1,4 @@
-![MazeGPT](media/logo_small.png)
+![MazeGPT](media/png/logo_small.png)
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![GitHub release](https://img.shields.io/github/release/noah-hein/mazeGPT)](https://GitHub.com/noah-hein/mazeGPT/releases/)
@@ -19,7 +19,7 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 
 |                                    |                                |
 |:----------------------------------:|:------------------------------:|
-| ![Inception](/media/inception.jpg) | ![Shining](/media/shining.jpg) |
+| ![Inception](/media/jpg/inception.jpg) | ![Shining](/media/jpg/shining.jpg) |
 |                                    |                                |
 
 # 🔍 Table of Contents
@@ -28,6 +28,7 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 * ⏩ [Quickstart](#-quickstart)
   * [Installation](#installation)
   * [CLI](#cli)
+* 📈 [Results](#-results)
 * 🎓 [Authors](#-authors)
 
 ## 🌅 Introduction
@@ -52,9 +53,9 @@ The problem with these algorithms is that even with noise and different seeds, r
 
 |                           Prims                            |                                 Binary Tree                                  |
 |:----------------------------------------------------------:|:----------------------------------------------------------------------------:|
-| ![Prims Maze Example 1](./media/examples/prims/prims1.png) | ![Binary Tree Maze Example 1](./media/examples/binary_tree/binary_tree1.png) |
-| ![Prims Maze Example 2](./media/examples/prims/prims2.png) | ![Binary Tree Maze Example 2](./media/examples/binary_tree/binary_tree2.png) |
-| ![Prims Maze Example 3](./media/examples/prims/prims3.png) | ![Binary Tree Maze Example 3](./media/examples/binary_tree/binary_tree3.png) |
+| ![Prims Maze Example 1](media/png/prims_1.png) | ![Binary Tree Maze Example 1](media/png/binary_tree1.png) |
+| ![Prims Maze Example 2](media/png/prims_2.png) | ![Binary Tree Maze Example 2](media/png/binary_tree2.png) |
+| ![Prims Maze Example 3](media/png/prims_3.png) | ![Binary Tree Maze Example 3](media/png/binary_tree3.png) |
 
 As you might begin to see, the used algorithms almost have a unique characteristic to them.
 To the human eye these patterns become easily aparent at a distance. I've noticed this effect still holding
@@ -68,7 +69,7 @@ The end goal is to make a more human like design pattern, one without a fingerpr
 The easiest approach to representing a maze is with graph theory!
 Each node in the graph can be thought of as a junction within the maze.
 
-![Maze Graph](./media/docs/maze_as_graph.png)
+![Maze Graph](media/png/maze_as_graph.png)
 
 The focus of this project will be around perfect mazes. A perfect maze is the same as a spanning tree.
 In fact several already existing algorithms use this principal for generation.
@@ -78,7 +79,7 @@ Perfect Maze Definition:
 - No unfilled spaces (within the bounds)
 - No matter where you start / end, there should only be one path
 
-![Perfect vs Not Perfect Maze](./media/docs/perfect_versus_not_perfect.png)
+![Perfect vs Not Perfect Maze](media/png/perfect_versus_not_perfect.png)
 
 For storage purposes we will represent the structure as a two-dimensional matrix.
 Each node in the maze (excluding the metadata nodes) can be represented as a 0 or 1.
@@ -101,7 +102,7 @@ The maze can now be interpreted as a string of tokens, nice!
 
 #### Example
 ##### Image
-![Encoded Maze Image](./media/docs/encoded_maze_example.png)
+![Encoded Maze Image](media/png/encoded_maze_example.png)
 ##### Matrix
 ```text
 [ 1 1 1 1 1 1 1 1 1 1 1 ]
@@ -221,6 +222,23 @@ Visually shows the model being used to generate a new maze
 # Reference the model in use
 $ python .\mazegpt.py 'action=sample' 'model=out/models/checkpoint-67500'
 ```
+
+## 📈 Results
+It turns out that the model actually does make mazes as predicted.
+After training a model only on 5x5 mazes for ~1 hour it does seem to make mazes.
+Right now I am further trying to determine if any overwriting is occurring (or if these are original mazes).
+
+### Bigger Tokenizer The Better
+Increasing the tokenizer seems to dramatically make the maze better at building mazes, that being said it also
+increases the training time.
+
+
+### Failures
+Depending on how long you train the maze, sometimes failure samples can show up. The most frequent I have seen is a
+cycle within the maze, or two or more segments that are not connected. Continuing on it might be worth investigating an
+optimizer that rewards fully complete mazes, instead of solely relying on the dataset.
+
+![Failure Example 1]()
 
 ## 🎓 Authors
 - Noah Hein ([@noah-hein](https://github.com/noah-hein))
