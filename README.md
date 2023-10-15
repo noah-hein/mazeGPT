@@ -11,7 +11,7 @@
 ## 📋 Disclaimers
 Does some maze generation and stuff. Working on this because I'm bored.
 All this thing knows is mazes. By no means am I a master of machine learning. 
-Hugging face and OpenAI are the ones to thank. They are doing the heaving lifting here.
+Hugging face and OpenAI are the ones to thank. They are doing the heavy lifting here.
 
 Lots of inspiration from [NanoGPT](https://github.com/karpathy/nanoGPT) 
 and [Andrej Apathy's](https://github.com/karpathy) 
