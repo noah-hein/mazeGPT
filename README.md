@@ -46,8 +46,7 @@ great [video](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 ["Attention Is All You Need"](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) 
 was a ground break paper in the world of machine learning in 2017.
 The idea of a transformer has dramatically helped reduced the train time while improving the consistency
-of attention across long periods of recurrent generation. The company [OpenAI](https://openai.com/) has two models ChatGPT and DALL·E both implementing transformers to achieve 
-incredible results. 
+of attention across long periods of recurrent generation.
 
 The objective of this research project was to implement a transformer model for generating mazes. 
 While there are numerous existing maze algorithms that perform well, they tend to produce recurrent patterns despite 
