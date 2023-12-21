@@ -58,7 +58,7 @@ The purpose of this experiment is to determine if this model could be applied to
 continuous structure.
 
 ### Why
-There are plenty of maze algorithms already out there that do a decent job at generating perfect maze.
+There are plenty of maze algorithms already out there that do a decent job at generating a perfect maze.
 The problem with these algorithms is that even with noise and different seeds, recognizable patterns form.
 
 |                           Prims                            |                                 Binary Tree                                  |
